@@ -2,7 +2,7 @@
 
 Checks Jade and Stylus for orphaned classes.
 
-[![build status](https://secure.travis-ci.org/benedfit/stylperjade.png)](http://travis-ci.org/benedfit/stylperjade)
+[![Build Status](https://travis-ci.org/benedfit/stylperjade.svg)](https://travis-ci.org/benedfit/stylperjade)
 
 
 ## Credits
