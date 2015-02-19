@@ -1,7 +1,7 @@
 {
   "name": "stylperjade",
   "version": "0.0.1",
-  "description": "Checks Jade and Stylus for orphaned classes",
+  "description": "Checks Stylus against Jade for orphaned classes",
   "author": "Ben Edwards <hello@benedfit.com>",
   "license": "BSD",
   "tags": [
