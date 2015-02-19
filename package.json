@@ -1,0 +1,39 @@
+{
+  "name": "stylperjade",
+  "version": "0.0.1",
+  "description": "Checks Jade and Stylus for orphaned classes",
+  "author": "Ben Edwards <hello@benedfit.com>",
+  "license": "BSD",
+  "tags": [
+    "jade",
+    "stylus",
+    "uncss"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:benedfit/stylperjade"
+  },
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org"
+  },
+  "main": "./stylperjade",
+  "scripts": {
+    "lint": "jshint .",
+    "checkStyle": "jscs .",
+    "pretest": "npm run lint && npm run checkStyle",
+    "test": "mocha"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "dependencies": {
+    "jade-lexer": "0.0.3",
+    "jade-parser": "0.0.2",
+    "jade-walk": "0.0.1"
+  },
+  "devDependencies": {
+    "jscs": "^1.9.0",
+    "jshint": "^2.5.5",
+    "mocha": "^1.21.4"
+  }
+}
