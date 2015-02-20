@@ -1,6 +1,8 @@
 # Stylperjade (pronounced: <a href="http://www.fromtexttospeech.com/texttospeech_output_files/0551594001424423586/4996907.mp3" target="_blank">/stʌɪl pəˈreɪd/</a>)
 
-Checks Stylus against Jade for orphaned classes.
+> Very experimental
+
+Checks Jade against CSS, and vice versa, for orphaned classes.
 
 [![Build Status](https://travis-ci.org/benedfit/stylperjade.svg)](https://travis-ci.org/benedfit/stylperjade)
 
