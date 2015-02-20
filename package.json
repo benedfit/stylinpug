@@ -1,6 +1,6 @@
 {
   "name": "stylperjade",
-  "version": "0.0.1",
+  "version": "0.0.1-alpha.1",
   "description": "Checks Jade against CSS, and vice versa, for orphaned classes",
   "author": "Ben Edwards <hello@benedfit.com>",
   "license": "BSD",
@@ -20,7 +20,7 @@
   "scripts": {
     "lint": "jshint .",
     "checkStyle": "jscs .",
-    "pretestSkip": "npm run lint && npm run checkStyle",
+    "pretest": "npm run lint && npm run checkStyle",
     "test": "mocha -R spec"
   },
   "engines": {
