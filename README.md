@@ -1,4 +1,4 @@
-# Stylperjade (pronounced: /[stʌɪl](http://click.reference.com/click/nn1ov4?clkpage=dic&clksite=dict&clkld=310:2&clkdest=http%3A%2F%2Fstatic.sfdict.com%2Fstaticrep%2Fdictaudio%2FS10%2FS1033800.mp3) [pəˈreɪd](http://click.reference.com/click/nn1ov4?clkpage=dic&clksite=dict&clkld=310:2&clkdest=http%3A%2F%2Fstatic.sfdict.com%2Fstaticrep%2Fdictaudio%2FP00%2FP0089700.mp3)/)
+# Stylperjade (pronounced: <a href="http://www.fromtexttospeech.com/texttospeech_output_files/0551594001424423586/4996907.mp3" target="_blank">/stʌɪl pəˈreɪd/</a>)
 
 Checks Stylus against Jade for orphaned classes.
 
