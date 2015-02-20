@@ -20,7 +20,7 @@
   "scripts": {
     "lint": "jshint .",
     "checkStyle": "jscs .",
-    "pretest": "npm run lint && npm run checkStyle",
+    "pretestSkip": "npm run lint && npm run checkStyle",
     "test": "mocha -R spec"
   },
   "engines": {
@@ -29,7 +29,7 @@
   "dependencies": {
     "async": "^0.9.0",
     "chalk": "^0.5.1",
-    "css-parse": "^2.0.0",
+    "css": "^2.2.0",
     "css-selector-parser": "^1.0.4",
     "glob": "^4.4.0",
     "jade-lexer": "0.0.3",
