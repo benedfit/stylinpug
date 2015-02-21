@@ -5,7 +5,7 @@
 [![Build Status](https://travis-ci.org/benedfit/stylperjade.svg)](https://travis-ci.org/benedfit/stylperjade)
 [![NPM version](https://badge.fury.io/js/stylperjade.svg)](http://badge.fury.io/js/stylperjade)
 
-> WARNING: Very experimental, and under development, don't use in a production environment.
+> WARNING: Very experimental, and [under development](https://github.com/benedfit/stylperjade/issues), don't use in a production environment.
 
 Checks Jade against CSS, and vice versa, for orphaned classes.
 
