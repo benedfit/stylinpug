@@ -12,6 +12,7 @@
     "unused",
     "selector",
     "css",
+    "stylus",
     "jade",
     "html"
   ],
