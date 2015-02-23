@@ -4,10 +4,16 @@
   "description": "Checks Jade against CSS for orphaned classes",
   "author": "Ben Edwards <hello@benedfit.com>",
   "license": "BSD",
-  "tags": [
-    "jade",
+  "keywords": [
+    "uncss",
+    "unusedcss",
+    "optimize",
+    "optimise",
+    "unused",
+    "selector",
     "css",
-    "uncss"
+    "jade",
+    "html"
   ],
   "repository": {
     "type": "git",
