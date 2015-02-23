@@ -1,6 +1,6 @@
 {
   "name": "stylperjade",
-  "version": "0.0.1-alpha.2",
+  "version": "0.0.1-alpha.3",
   "description": "Checks Jade against CSS for orphaned classes",
   "author": "Ben Edwards <hello@benedfit.com>",
   "license": "BSD",
