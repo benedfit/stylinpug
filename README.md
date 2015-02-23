@@ -7,7 +7,7 @@
 
 > WARNING: Very experimental, and [under development](https://github.com/benedfit/stylperjade/issues), don't use in a production environment.
 
-Checks Jade against CSS, and vice versa, for unused CSS classes.
+Checks Jade against CSS, and vice versa, for unused classes.
 
 ## Usage
 
