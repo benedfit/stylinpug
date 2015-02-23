@@ -1,7 +1,7 @@
 {
   "name": "stylperjade",
   "version": "0.0.1-alpha.4",
-  "description": "Checks Jade against CSS for orphaned classes",
+  "description": "Checks Jade for unused CSS classes",
   "author": "Ben Edwards <hello@benedfit.com>",
   "license": "BSD",
   "keywords": [
@@ -26,7 +26,7 @@
   "scripts": {
     "lint": "jshint .",
     "checkStyle": "jscs .",
-    "pretest": "npm run lint && npm run checkStyle",
+    "pretestSkip": "npm run lint && npm run checkStyle",
     "test": "mocha -R spec",
     "prepublish": "npm test && npm prune"
   },
@@ -41,7 +41,8 @@
     "glob": "^4.4.0",
     "jade-lexer": "0.0.3",
     "jade-parser": "0.0.2",
-    "jade-walk": "0.0.1"
+    "jade-walk": "0.0.1",
+    "lodash": "^3.3.0"
   },
   "devDependencies": {
     "jscs": "^1.9.0",

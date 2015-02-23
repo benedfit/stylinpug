@@ -7,6 +7,9 @@
 .delta.zeta {
   content: 'delta zeta'
 }
+.delta-another {
+  content: 'delta-another';
+}
 .nested .alpha {
   content: 'test';
 }

@@ -7,8 +7,23 @@
 
 > WARNING: Very experimental, and [under development](https://github.com/benedfit/stylperjade/issues), don't use in a production environment.
 
-Checks Jade against CSS, and vice versa, for orphaned classes.
+Checks Jade against CSS, and vice versa, for unused CSS classes.
 
+## Usage
+
+```js
+var stylperjade = require('stylperjade')
+  , cssFiles = [ 'my', 'array', 'of', 'CSS', 'files' ]
+  , jadeFiles = [ 'my', 'array', 'of', 'Jade', 'files' ]
+  , options =
+    { cssWhitelist: [ '.ignore-this-class-in-css-files' ]
+    , jadeWhitelist: [ '.ignore-this-class-in-jade-files' ]
+    }
+
+stylperjade(cssFiles, jadeFiles, options, function (err, output) {
+  console.log(output)
+})
+```
 
 ## Credits
 [Ben Edwards](https://github.com/benedfit/)
