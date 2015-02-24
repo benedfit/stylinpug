@@ -11,8 +11,8 @@ describe('stylperjade', function () {
       , jadeFiles = [ fixturesPath + 'test.jade' ]
 
     assert.throws(function () {
-      stylperjade(cssFiles, jadeFiles, function (err, output) {
-        assert.equal(output, null)
+      stylperjade(cssFiles, jadeFiles, function (err, results) {
+        assert.equal(results, null)
       })
     }
     , /Stylperjade: no CSS files found/)
@@ -24,8 +24,8 @@ describe('stylperjade', function () {
       , jadeFiles = [ ]
 
     assert.throws(function () {
-      stylperjade(cssFiles, jadeFiles, function (err, output) {
-        assert.equal(output, null)
+      stylperjade(cssFiles, jadeFiles, function (err, results) {
+        assert.equal(results, null)
       })
     }
     , /Stylperjade: no Jade files found/)
@@ -47,10 +47,10 @@ describe('stylperjade', function () {
     var cssFiles = [ 'nonexistent' ]
       , jadeFiles = [ fixturesPath + 'test.jade' ]
 
-      stylperjade(cssFiles, jadeFiles, function (err, output) {
+      stylperjade(cssFiles, jadeFiles, function (err, results) {
         assert(err)
         assert.equal(err, 'Stylperjade: CSS file \'nonexistent\' not found')
-        assert.equal(output, null)
+        assert.equal(results, null)
         done()
       })
   })
@@ -59,10 +59,10 @@ describe('stylperjade', function () {
     var cssFiles = [ fixturesPath + 'test.css' ]
       , jadeFiles = [ 'nonexistent' ]
 
-      stylperjade(cssFiles, jadeFiles, function (err, output) {
+      stylperjade(cssFiles, jadeFiles, function (err, results) {
         assert(err)
         assert.equal(err, 'Stylperjade: Jade file \'nonexistent\' not found')
-        assert.equal(output, null)
+        assert.equal(results, null)
         done()
       })
   })
@@ -71,15 +71,15 @@ describe('stylperjade', function () {
     var cssFiles = [ fixturesPath + 'test.css' ]
       , jadeFiles = [ fixturesPath + 'test.jade' ]
 
-    stylperjade(cssFiles, jadeFiles, function (err, output) {
+    stylperjade(cssFiles, jadeFiles, function (err, results) {
       assert(!err)
-      assert.equal(output.total, 9)
-      assert.equal(output.cssCount, 4)
-      assert.equal(output.cssClasses.indexOf('delta') !== -1, true)
-      assert.equal(output.cssClasses.indexOf('bravo') === -1, true)
-      assert.equal(output.jadeCount, 5)
-      assert.equal(output.jadeClasses.indexOf('epsilon') !== -1, true)
-      assert.equal(output.jadeClasses.indexOf('bravo') === -1, true)
+      assert.equal(results.total, 9)
+      assert.equal(results.cssCount, 4)
+      assert.equal(results.cssClasses.indexOf('delta') !== -1, true)
+      assert.equal(results.cssClasses.indexOf('bravo') === -1, true)
+      assert.equal(results.jadeCount, 5)
+      assert.equal(results.jadeClasses.indexOf('epsilon') !== -1, true)
+      assert.equal(results.jadeClasses.indexOf('bravo') === -1, true)
       done()
     })
   })
@@ -89,17 +89,17 @@ describe('stylperjade', function () {
       , jadeFiles = [ fixturesPath + 'test.jade' ]
       , options = { cssWhitelist: [ 'delta*', 'zeta' ] }
 
-    stylperjade(cssFiles, jadeFiles, options, function (err, output) {
+    stylperjade(cssFiles, jadeFiles, options, function (err, results) {
       assert(!err)
-      assert.equal(output.total, 6)
-      assert.equal(output.cssCount, 1)
-      assert.equal(output.cssClasses.indexOf('delta') === -1, true)
-      assert.equal(output.cssClasses.indexOf('delta-another') === -1, true)
-      assert.equal(output.cssClasses.indexOf('zeta') === -1, true)
-      assert.equal(output.cssClasses.indexOf('nested') !== -1, true)
-      assert.equal(output.jadeCount, 5)
-      assert.equal(output.jadeClasses.indexOf('epsilon') !== -1, true)
-      assert.equal(output.jadeClasses.indexOf('bravo') === -1, true)
+      assert.equal(results.total, 6)
+      assert.equal(results.cssCount, 1)
+      assert.equal(results.cssClasses.indexOf('delta') === -1, true)
+      assert.equal(results.cssClasses.indexOf('delta-another') === -1, true)
+      assert.equal(results.cssClasses.indexOf('zeta') === -1, true)
+      assert.equal(results.cssClasses.indexOf('nested') !== -1, true)
+      assert.equal(results.jadeCount, 5)
+      assert.equal(results.jadeClasses.indexOf('epsilon') !== -1, true)
+      assert.equal(results.jadeClasses.indexOf('bravo') === -1, true)
       done()
     })
   })
@@ -109,18 +109,18 @@ describe('stylperjade', function () {
       , jadeFiles = [ fixturesPath + 'test.jade' ]
       , options = { jadeWhitelist: [ 'js-*' ] }
 
-    stylperjade(cssFiles, jadeFiles, options, function (err, output) {
+    stylperjade(cssFiles, jadeFiles, options, function (err, results) {
       assert(!err)
-      assert.equal(output.total, 6)
-      assert.equal(output.cssCount, 4)
-      assert.equal(output.cssClasses.indexOf('delta') !== -1, true)
-      assert.equal(output.cssClasses.indexOf('bravo') === -1, true)
-      assert.equal(output.jadeCount, 2)
-      assert.equal(output.jadeClasses.indexOf('epsilon') !== -1, true)
-      assert.equal(output.jadeClasses.indexOf('bravo') === -1, true)
-      assert.equal(output.jadeClasses.indexOf('js-other-thing') === -1, true)
-      assert.equal(output.jadeClasses.indexOf('js-test') === -1, true)
-      assert.equal(output.jadeClasses.indexOf('js-thing-1') === -1, true)
+      assert.equal(results.total, 6)
+      assert.equal(results.cssCount, 4)
+      assert.equal(results.cssClasses.indexOf('delta') !== -1, true)
+      assert.equal(results.cssClasses.indexOf('bravo') === -1, true)
+      assert.equal(results.jadeCount, 2)
+      assert.equal(results.jadeClasses.indexOf('epsilon') !== -1, true)
+      assert.equal(results.jadeClasses.indexOf('bravo') === -1, true)
+      assert.equal(results.jadeClasses.indexOf('js-other-thing') === -1, true)
+      assert.equal(results.jadeClasses.indexOf('js-test') === -1, true)
+      assert.equal(results.jadeClasses.indexOf('js-thing-1') === -1, true)
       done()
     })
   })
@@ -130,8 +130,8 @@ describe('stylperjade', function () {
       , jadeFiles = glob(fixturesPath + 'skip/project1/**/*.jade', { sync: true })
       , options = {}
 
-    stylperjade(cssFiles, jadeFiles, options, function (err, output) {
-      console.log(output.report)
+    stylperjade(cssFiles, jadeFiles, options, function (err, results) {
+      console.log(results.report)
       assert(!err)
       done()
     })
@@ -142,8 +142,8 @@ describe('stylperjade', function () {
       , jadeFiles = glob(fixturesPath + 'skip/project2/**/*.jade', { sync: true })
       , options = {}
 
-    stylperjade(cssFiles, jadeFiles, options, function (err, output) {
-      console.log(output.report)
+    stylperjade(cssFiles, jadeFiles, options, function (err, results) {
+      console.log(results.report)
       assert(!err)
       done()
     })
@@ -154,8 +154,8 @@ describe('stylperjade', function () {
       , jadeFiles = glob(fixturesPath + 'skip/project3/**/*.jade', { sync: true })
       , options = {}
 
-    stylperjade(cssFiles, jadeFiles, options, function (err, output) {
-      console.log(output.report)
+    stylperjade(cssFiles, jadeFiles, options, function (err, results) {
+      console.log(results.report)
       assert(!err)
       done()
     })
