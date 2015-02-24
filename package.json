@@ -41,9 +41,11 @@
     "jade-lexer": "0.0.3",
     "jade-parser": "0.0.2",
     "jade-walk": "0.0.1",
-    "lodash": "^3.3.0"
+    "lodash": "^3.3.0",
+    "minimatch": "^2.0.1"
   },
   "devDependencies": {
+    "glob": "^4.4.0",
     "jscs": "^1.9.0",
     "jshint": "^2.5.5",
     "mocha": "^1.21.4"
