@@ -1,6 +1,6 @@
 # Stylperjade
 
-(pronounced: <a href="http://www.fromtexttospeech.com/texttospeech_output_files/0551594001424423586/4996907.mp3" target="_blank">/stʌɪl pəˈreɪd/</a>) Checks Jade against CSS, and vice versa, for unused classes.
+Pronounced: /[stʌɪl](//ssl.gstatic.com/dictionary/static/sounds/de/0/style.mp3) [pəˈreɪd](//ssl.gstatic.com/dictionary/static/sounds/de/0/parade.mp3)/ - Checks Jade against CSS, and vice versa, for unused classes.
 
 [![Build Status](https://travis-ci.org/benedfit/stylperjade.svg)](https://travis-ci.org/benedfit/stylperjade)
 [![NPM version](https://badge.fury.io/js/stylperjade.svg)](http://badge.fury.io/js/stylperjade)
