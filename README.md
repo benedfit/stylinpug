@@ -14,12 +14,18 @@ var stylperjade = require('stylperjade')
   , cssFiles = [ 'my', 'array', 'of', 'CSS', 'files' ]
   , jadeFiles = [ 'my', 'array', 'of', 'Jade', 'files' ]
   , options =
-    { cssWhitelist: [ '.ignore-this-class-in-css-files' ]
-    , jadeWhitelist: [ '.ignore-this-class-in-jade-files' ]
+    { cssWhitelist: [ '.ignore-this-class-in-css-files', '.ignore-pattern-*' ]
+    , jadeWhitelist: [ '.ignore-this-class-in-jade-files', '.ignore-pattern-*' ]
     }
 
-stylperjade(cssFiles, jadeFiles, options, function (err, output) {
-  console.log(output)
+stylperjade(cssFiles, jadeFiles, options, function (err, results) {
+  var total = results.total
+    , unusedCssClasses = results.cssClasses
+    , unusedCssClassCount = results.cssCount
+    , unusedJadeClasses = results.jadeClasses
+    , unusedJadeClassCount = results.jadeCount
+
+  console.log(results.report)
 })
 ```
 
