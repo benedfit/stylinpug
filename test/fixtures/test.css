@@ -25,3 +25,6 @@
 .omega--modifier {
   content: 'omega--modifier';
 }
+.omega + .omega {
+  content: 'omega + omega';
+}
