@@ -24,8 +24,7 @@ describe('stylperjade', function () {
       , options = {}
 
     stylperjade(cssFiles, jadeFiles, options, function (err, output) {
-      if (err) done(err)
-      console.log(output)
+      console.log(output.report)
       assert(!err)
       done()
     })
@@ -37,8 +36,7 @@ describe('stylperjade', function () {
       , options = {}
 
     stylperjade(cssFiles, jadeFiles, options, function (err, output) {
-      if (err) done(err)
-      console.log(output)
+      console.log(output.report)
       assert(!err)
       done()
     })
@@ -50,8 +48,7 @@ describe('stylperjade', function () {
       , options = {}
 
     stylperjade(cssFiles, jadeFiles, options, function (err, output) {
-      if (err) done(err)
-      console.log(output)
+      console.log(output.report)
       assert(!err)
       done()
     })
