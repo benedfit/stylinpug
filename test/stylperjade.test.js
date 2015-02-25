@@ -73,13 +73,16 @@ describe('stylperjade', function () {
 
     stylperjade(cssFiles, jadeFiles, function (err, results) {
       assert(!err)
-      assert.equal(results.total, 9)
-      assert.equal(results.cssCount, 4)
-      assert.equal(results.cssClasses.indexOf('delta') !== -1, true)
-      assert.equal(results.cssClasses.indexOf('bravo') === -1, true)
-      assert.equal(results.jadeCount, 5)
-      assert.equal(results.jadeClasses.indexOf('epsilon') !== -1, true)
-      assert.equal(results.jadeClasses.indexOf('bravo') === -1, true)
+      assert.equal(results.unusedTotal, 14)
+      assert.equal(results.unusedCssCount, 4)
+      assert.equal(results.unusedJadeCount, 10)
+      assert.equal(results.blacklistedTotal, 0)
+      assert.equal(results.unusedCssClasses.indexOf('delta--modifier') !== -1, true)
+      assert.equal(results.unusedCssClasses.indexOf('kappa') !== -1, true)
+      assert.equal(results.unusedCssClasses.indexOf('beta') === -1, true)
+      assert.equal(results.unusedJadeClasses.indexOf('epsilon') !== -1, true)
+      assert.equal(results.unusedJadeClasses.indexOf('js-alpha') !== -1, true)
+      assert.equal(results.unusedJadeClasses.indexOf('beta') === -1, true)
       done()
     })
   })
@@ -87,19 +90,15 @@ describe('stylperjade', function () {
   it('should filter out CSS classes using options.cssWhitelist', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
       , jadeFiles = [ fixturesPath + 'test.jade' ]
-      , options = { cssWhitelist: [ 'delta*', 'zeta' ] }
+      , options = { cssWhitelist: [ 'delta*', 'kappa' ] }
 
     stylperjade(cssFiles, jadeFiles, options, function (err, results) {
       assert(!err)
-      assert.equal(results.total, 6)
-      assert.equal(results.cssCount, 1)
-      assert.equal(results.cssClasses.indexOf('delta') === -1, true)
-      assert.equal(results.cssClasses.indexOf('delta-another') === -1, true)
-      assert.equal(results.cssClasses.indexOf('zeta') === -1, true)
-      assert.equal(results.cssClasses.indexOf('nested') !== -1, true)
-      assert.equal(results.jadeCount, 5)
-      assert.equal(results.jadeClasses.indexOf('epsilon') !== -1, true)
-      assert.equal(results.jadeClasses.indexOf('bravo') === -1, true)
+      assert.equal(results.unusedTotal, 12)
+      assert.equal(results.unusedCssCount, 2)
+      assert.equal(results.unusedJadeCount, 10)
+      assert.equal(results.unusedCssClasses.indexOf('delta--modifier') === -1, true)
+      assert.equal(results.unusedCssClasses.indexOf('kappa') === -1, true)
       done()
     })
   })

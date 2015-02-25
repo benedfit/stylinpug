@@ -1,30 +1,33 @@
 .alpha {
-  content: 'alpha';
+  content: '.alpha';
 }
-.alpha .echo {
-  content: 'echo';
+.alpha .eta {
+  content: '.alpha .eta';
 }
 .delta.zeta {
-  content: 'delta zeta'
+  content: '.delta.zeta'
 }
-.delta-another {
-  content: 'delta-another';
+.delta--modifier {
+  content: '.delta--modifier';
 }
-.nested .alpha {
-  content: 'test';
+.kappa .alpha {
+  content: '.kappa .alpha';
 }
 .alpha:hover {
-  content: 'hover';
+  content: '.alpha:hover';
 }
-.bravo {
-  content: 'bravo';
+.beta {
+  content: '.beta';
 }
-.omega {
-  content: 'omega';
+.lambda {
+  content: '.lambda';
 }
-.omega--modifier {
-  content: 'omega--modifier';
+.lambda--modifier {
+  content: '.lambda--modifier';
 }
-.omega + .omega {
-  content: 'omega + omega';
+.lambda + .omega {
+  content: '.lambda + .lambda';
+}
+.nu ~ .nu {
+  content: '.nu ~ .nu';
 }
