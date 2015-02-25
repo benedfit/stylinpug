@@ -1,6 +1,6 @@
 {
   "name": "stylperjade",
-  "version": "0.3.0",
+  "version": "0.2.7",
   "description": "Checks Jade for unused CSS classes",
   "author": "Ben Edwards <hello@benedfit.com>",
   "license": "ISC",
@@ -41,7 +41,7 @@
     "jade-lexer": "0.0.3",
     "jade-parser": "0.0.2",
     "jade-walk": "git://github.com/benedfit/jade-walk.git",
-    "lodash": "^3.3.0",
+    "lodash": "^3.1.0",
     "minimatch": "^2.0.1"
   },
   "devDependencies": {
