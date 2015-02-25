@@ -28,7 +28,7 @@
     "lint": "jshint .",
     "checkStyle": "jscs .",
     "pretest": "npm run lint && npm run checkStyle",
-    "test": "mocha -R spec",
+    "test": "mocha --recursive -R spec",
     "prepublish": "npm test && npm prune"
   },
   "engines": {
