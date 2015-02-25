@@ -1,5 +1,4 @@
 var assert = require('assert')
-  , glob = require('glob')
   , stylperjade = require('../lib/stylperjade')
 
 describe('stylperjade', function () {
@@ -148,42 +147,6 @@ describe('stylperjade', function () {
       assert.equal(results.blacklistedJadeClasses.indexOf('js-alpha') !== -1, true)
       assert.equal(results.blacklistedJadeClasses.indexOf('js-beta-delta') !== -1, true)
       assert.equal(results.blacklistedJadeClasses.indexOf('js-mu') !== -1, true)
-      done()
-    })
-  })
-
-  it.skip('should not error on project1 test cases', function (done) {
-    var cssFiles = glob(fixturesPath + 'skip/project1/**/*.css', { sync: true })
-      , jadeFiles = glob(fixturesPath + 'skip/project1/**/*.jade', { sync: true })
-      , options = {}
-
-    stylperjade(cssFiles, jadeFiles, options, function (err, results) {
-      console.log(results.report)
-      assert(!err)
-      done()
-    })
-  })
-
-  it.skip('should not error on project2 test cases', function (done) {
-    var cssFiles = glob(fixturesPath + 'skip/project2/**/*.css', { sync: true })
-      , jadeFiles = glob(fixturesPath + 'skip/project2/**/*.jade', { sync: true })
-      , options = {}
-
-    stylperjade(cssFiles, jadeFiles, options, function (err, results) {
-      console.log(results.report)
-      assert(!err)
-      done()
-    })
-  })
-
-  it.skip('should not error on project3 test cases', function (done) {
-    var cssFiles = glob(fixturesPath + 'skip/project3/**/*.css', { sync: true })
-      , jadeFiles = glob(fixturesPath + 'skip/project3/**/*.jade', { sync: true })
-      , options = {}
-
-    stylperjade(cssFiles, jadeFiles, options, function (err, results) {
-      console.log(results.report)
-      assert(!err)
       done()
     })
   })
