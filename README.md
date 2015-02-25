@@ -19,11 +19,16 @@ var stylperjade = require('stylperjade')
     }
 
 stylperjade(cssFiles, jadeFiles, options, function (err, results) {
-  var total = results.total
-    , unusedCssClasses = results.cssClasses
-    , unusedCssClassCount = results.cssCount
-    , unusedJadeClasses = results.jadeClasses
-    , unusedJadeClassCount = results.jadeCount
+  var blacklistedTotal = results.blacklistedTotal
+    , blacklistedCssClasses = results.blacklistedCssClasses
+    , blacklistedCssCount = results.blacklistedCssCount
+    , blacklistedJadeClasses = results.blacklistedJadeClasses
+    , blacklistedJadeCount = results.blacklistedJadeCount
+    , unusedTotal = results.unusedTotal
+    , unusedCssClasses = results.unusedCssClasses
+    , unusedCssCount = results.unusedCssCount
+    , unusedJadeClasses = results.unusedJadeClasses
+    , unusedJadeCount = results.unusedJadeCount
 
   console.log(results.report)
 })
