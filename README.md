@@ -16,6 +16,8 @@ var stylperjade = require('stylperjade')
   , options =
     { cssWhitelist: [ '.ignore-this-class-in-css-files', '.ignore-pattern-*' ]
     , jadeWhitelist: [ '.ignore-this-class-in-jade-files', '.ignore-pattern-*' ]
+    , cssBlacklist: [ '.always-report-this-class-in-css-files', '.report-pattern-*' ]
+    , jadeBlacklist: [ '.always-report-this-class-in-css-files', '.report-pattern-*' ]
     }
 
 stylperjade(cssFiles, jadeFiles, options, function (err, results) {
