@@ -110,16 +110,44 @@ describe('stylperjade', function () {
 
     stylperjade(cssFiles, jadeFiles, options, function (err, results) {
       assert(!err)
-      assert.equal(results.total, 6)
-      assert.equal(results.cssCount, 4)
-      assert.equal(results.cssClasses.indexOf('delta') !== -1, true)
-      assert.equal(results.cssClasses.indexOf('bravo') === -1, true)
-      assert.equal(results.jadeCount, 2)
-      assert.equal(results.jadeClasses.indexOf('epsilon') !== -1, true)
-      assert.equal(results.jadeClasses.indexOf('bravo') === -1, true)
-      assert.equal(results.jadeClasses.indexOf('js-other-thing') === -1, true)
-      assert.equal(results.jadeClasses.indexOf('js-test') === -1, true)
-      assert.equal(results.jadeClasses.indexOf('js-thing-1') === -1, true)
+      assert.equal(results.unusedTotal, 11)
+      assert.equal(results.unusedCssCount, 4)
+      assert.equal(results.unusedJadeCount, 7)
+      assert.equal(results.unusedJadeClasses.indexOf('js-alpha') === -1, true)
+      assert.equal(results.unusedJadeClasses.indexOf('js-beta-delta') === -1, true)
+      assert.equal(results.unusedJadeClasses.indexOf('js-mu') === -1, true)
+      done()
+    })
+  })
+
+  it('should report any CSS classes matching options.cssBlacklist', function (done) {
+    var cssFiles = [ fixturesPath + 'test.css' ]
+      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , options = { cssBlacklist: [ 'delta*', 'kappa' ] }
+
+    stylperjade(cssFiles, jadeFiles, options, function (err, results) {
+      assert(!err)
+      assert.equal(results.blacklistedTotal, 3)
+      assert.equal(results.blacklistedCssCount, 3)
+      assert.equal(results.blacklistedCssClasses.indexOf('delta') !== -1, true)
+      assert.equal(results.blacklistedCssClasses.indexOf('delta--modifier') !== -1, true)
+      assert.equal(results.blacklistedCssClasses.indexOf('kappa') !== -1, true)
+      done()
+    })
+  })
+
+  it('should report any Jade classes matching options.jadeBlacklist', function (done) {
+    var cssFiles = [ fixturesPath + 'test.css' ]
+      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , options = { jadeBlacklist: [ 'js-*' ] }
+
+    stylperjade(cssFiles, jadeFiles, options, function (err, results) {
+      assert(!err)
+      assert.equal(results.blacklistedTotal, 3)
+      assert.equal(results.blacklistedJadeCount, 3)
+      assert.equal(results.blacklistedJadeClasses.indexOf('js-alpha') !== -1, true)
+      assert.equal(results.blacklistedJadeClasses.indexOf('js-beta-delta') !== -1, true)
+      assert.equal(results.blacklistedJadeClasses.indexOf('js-mu') !== -1, true)
       done()
     })
   })
