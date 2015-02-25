@@ -1,0 +1,27 @@
+✘ Stylperjade: 3 blacklisted classes found
+
+3 blacklisted CSS classes:
+- delta
+- delta--modifier
+- kappa
+
+✘ Stylperjade: 15 unused classes found
+
+5 unused CSS classes:
+- delta--modifier
+- kappa
+- nu
+- omega
+- pi
+
+10 unused Jade classes:
+- epsilon
+- eta--modifier
+- eta--modifier-beta
+- gamma
+- js-alpha
+- js-beta-delta
+- js-mu
+- lambda__element
+- theta
+- theta--modifier
