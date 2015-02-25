@@ -5,8 +5,6 @@ Pronounced: /[stʌɪl](//ssl.gstatic.com/dictionary/static/sounds/de/0/style.mp3
 [![Build Status](https://travis-ci.org/benedfit/stylperjade.svg)](https://travis-ci.org/benedfit/stylperjade)
 [![NPM version](https://badge.fury.io/js/stylperjade.svg)](http://badge.fury.io/js/stylperjade)
 
-> WARNING: Experimental, and [under development](https://github.com/benedfit/stylperjade/issues), don't use in a production environment.
-
 ## Usage
 
 ```js
