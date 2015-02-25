@@ -74,13 +74,15 @@ describe('stylperjade', function () {
 
     stylperjade(cssFiles, jadeFiles, function (err, results) {
       assert(!err)
-      assert.equal(results.unusedTotal, 14)
-      assert.equal(results.unusedCssCount, 4)
+      assert.equal(results.unusedTotal, 15)
+      assert.equal(results.unusedCssCount, 5)
       assert.equal(results.unusedJadeCount, 10)
       assert.equal(results.blacklistedTotal, 0)
       assert.equal(results.unusedCssClasses.indexOf('delta--modifier') !== -1, true)
       assert.equal(results.unusedCssClasses.indexOf('kappa') !== -1, true)
+      assert.equal(results.unusedCssClasses.indexOf('pi') !== -1, true)
       assert.equal(results.unusedCssClasses.indexOf('beta') === -1, true)
+      assert.equal(results.unusedCssClasses.indexOf('fieldset') === -1, true)
       assert.equal(results.unusedJadeClasses.indexOf('epsilon') !== -1, true)
       assert.equal(results.unusedJadeClasses.indexOf('js-alpha') !== -1, true)
       assert.equal(results.unusedJadeClasses.indexOf('beta') === -1, true)
@@ -96,8 +98,8 @@ describe('stylperjade', function () {
 
     stylperjade(cssFiles, jadeFiles, options, function (err, results) {
       assert(!err)
-      assert.equal(results.unusedTotal, 12)
-      assert.equal(results.unusedCssCount, 2)
+      assert.equal(results.unusedTotal, 13)
+      assert.equal(results.unusedCssCount, 3)
       assert.equal(results.unusedJadeCount, 10)
       assert.equal(results.unusedCssClasses.indexOf('delta--modifier') === -1, true)
       assert.equal(results.unusedCssClasses.indexOf('kappa') === -1, true)
@@ -112,8 +114,8 @@ describe('stylperjade', function () {
 
     stylperjade(cssFiles, jadeFiles, options, function (err, results) {
       assert(!err)
-      assert.equal(results.unusedTotal, 11)
-      assert.equal(results.unusedCssCount, 4)
+      assert.equal(results.unusedTotal, 12)
+      assert.equal(results.unusedCssCount, 5)
       assert.equal(results.unusedJadeCount, 7)
       assert.equal(results.unusedJadeClasses.indexOf('js-alpha') === -1, true)
       assert.equal(results.unusedJadeClasses.indexOf('js-beta-delta') === -1, true)
