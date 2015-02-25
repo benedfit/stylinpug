@@ -1,6 +1,5 @@
 { "excludeFiles":
   [ "node_modules/**"
-  , "test/fixtures/**"
   ]
 , "requireLineFeedAtFileEnd": true
 , "disallowMultipleLineBreaks": true
