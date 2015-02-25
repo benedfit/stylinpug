@@ -1,4 +1,5 @@
 var assert = require('assert')
+  , fs = require('fs')
   , stylperjade = require('../lib/stylperjade')
 
 describe('stylperjade', function () {
@@ -69,6 +70,7 @@ describe('stylperjade', function () {
   it('should return unused CSS and Jade classes', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
       , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , expectedReport = fs.readFileSync(fixturesPath + 'test.txt')
 
     stylperjade(cssFiles, jadeFiles, function (err, results) {
       assert(!err)
@@ -82,6 +84,7 @@ describe('stylperjade', function () {
       assert.equal(results.unusedJadeClasses.indexOf('epsilon') !== -1, true)
       assert.equal(results.unusedJadeClasses.indexOf('js-alpha') !== -1, true)
       assert.equal(results.unusedJadeClasses.indexOf('beta') === -1, true)
+      assert.equal(results.report, expectedReport)
       done()
     })
   })
