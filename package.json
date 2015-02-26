@@ -38,6 +38,7 @@
     "async": "^0.9.0",
     "chalk": "^0.5.1",
     "css": "^2.2.0",
+    "css-selector-parser": "^1.0.4",
     "jade-lexer": "0.0.3",
     "jade-parser": "0.0.2",
     "jade-walk": "git://github.com/benedfit/jade-walk.git",
