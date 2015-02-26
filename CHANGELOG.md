@@ -1,3 +1,11 @@
+# v0.2.11 / 2015-02-26
+
+## Highlights
+* CSS class parsing now finds classes in media queries
+
+## Changes
+[v0.2.10...v0.2.11](https://github.com/benedfit/stylperjade/compare/v0.2.10...v0.2.11)
+
 # v0.2.10 / 2015-02-26
 
 ## Highlights
