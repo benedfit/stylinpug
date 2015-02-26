@@ -1,4 +1,4 @@
-# v0.2.10 (2015-02-26)
+# v0.2.10 / 2015-02-26
 
 ## Highlights
 * Whitelisting and Blacklisting support
