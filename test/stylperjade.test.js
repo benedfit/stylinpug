@@ -215,4 +215,49 @@ describe('stylperjade', function () {
     })
   })
 
+  it('should error if options.stylperjaderc is not found', function (done) {
+    var cssFiles = [ fixturesPath + 'test.css' ]
+      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , options = { stylperjaderc: 'nonexistent' }
+
+    assert.throws(function () {
+      stylperjade(cssFiles, jadeFiles, options, function (err, results) {
+        assert.equal(results, null)
+      })
+    }
+    , /Stylperjade: .stylperjaderc not found/)
+    done()
+  })
+
+  it('should error if options.stylperjaderc is invalid', function (done) {
+    var cssFiles = [ fixturesPath + 'test.css' ]
+      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , options = { stylperjaderc: fixturesPath + '.stylperjaderc-invalid' }
+
+    assert.throws(function () {
+      stylperjade(cssFiles, jadeFiles, options, function (err, results) {
+        assert.equal(results, null)
+      })
+    }
+    , /Stylperjade: .stylperjaderc is invalid JSON/)
+    done()
+  })
+
+  it('should load config from options.stylperjaderc', function (done) {
+    var cssFiles = [ fixturesPath + 'test.css' ]
+      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , options = { stylperjaderc: fixturesPath + '.stylperjaderc' }
+
+    stylperjade(cssFiles, jadeFiles, options, function (err, results) {
+      assert(!err)
+      assert.equal(results.unusedTotal, 9)
+      assert.equal(results.unusedCssCount, 3)
+      assert.equal(results.unusedJadeCount, 6)
+      assert.equal(results.blacklistedTotal, 7)
+      assert.equal(results.blacklistedCssCount, 2)
+      assert.equal(results.blacklistedJadeCount, 5)
+      done()
+    })
+  })
+
 })
