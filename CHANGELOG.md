@@ -1,3 +1,11 @@
+# v0.2.12 / 2015-03-02
+
+## Highlights
+* Add support for loading options via `.stylperjaderc` file
+
+## Changes
+[v0.2.11...v0.2.12](https://github.com/benedfit/stylperjade/compare/v0.2.11...v0.2.12)
+
 # v0.2.11 / 2015-02-26
 
 ## Highlights
