@@ -1,3 +1,11 @@
+# v0.2.13 / 2015-03-02
+
+## Highlights
+* Add support for comments in `.stylperjaderc` via [JSON.minify()](https://github.com/getify/JSON.minify)
+
+## Changes
+[v0.2.12...v0.2.13](https://github.com/benedfit/stylperjade/compare/v0.2.12...v0.2.13)
+
 # v0.2.12 / 2015-03-02
 
 ## Highlights
