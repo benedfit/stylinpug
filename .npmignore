@@ -3,5 +3,6 @@ test
 .jshintignore
 .jshintrc
 .npmignore
+.stylperjaderc
 .travis.yml
 CHANGELOG.md
