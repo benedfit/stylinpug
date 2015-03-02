@@ -1,4 +1,5 @@
 { "cssWhitelist":
+  /* comments are valid, and will be stripped */
   [ "delta*"
   , "kappa"
   ]
