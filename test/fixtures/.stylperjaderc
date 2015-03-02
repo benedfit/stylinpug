@@ -1,0 +1,17 @@
+{ "cssWhitelist":
+  [ "delta*"
+  , "kappa"
+  ]
+, "jadeWhitelist":
+  [ "js-*"
+  , "theta"
+  ]
+, "cssBlacklist":
+  [ "delta*"
+  ]
+, "jadeBlacklist":
+  [ "epsilon"
+  , "gamma"
+  , "eta*"
+  ]
+}

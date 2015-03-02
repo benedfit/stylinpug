@@ -22,7 +22,7 @@ describe('stylperjade', function () {
 
   it('should error if no Jade files specified', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
-      , jadeFiles = [ ]
+      , jadeFiles = []
 
     assert.throws(function () {
       stylperjade(cssFiles, jadeFiles, function (err, results) {
@@ -210,6 +210,77 @@ describe('stylperjade', function () {
       assert.equal(results.blacklistedJadeClasses.indexOf('js-alpha') !== -1, true)
       assert.equal(results.blacklistedJadeClasses.indexOf('js-beta-delta') !== -1, true)
       assert.equal(results.blacklistedJadeClasses.indexOf('js-mu') !== -1, true)
+      assert.equal(chalk.stripColor(results.report.trim()), expectedReport.trim())
+      done()
+    })
+  })
+
+  it('should error if options.stylperjaderc is not found', function (done) {
+    var cssFiles = [ fixturesPath + 'test.css' ]
+      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , options = { stylperjaderc: 'nonexistent' }
+
+    assert.throws(function () {
+      stylperjade(cssFiles, jadeFiles, options, function (err, results) {
+        assert.equal(results, null)
+      })
+    }
+    , /Stylperjade: .stylperjaderc not found/)
+    done()
+  })
+
+  it('should error if options.stylperjaderc is invalid', function (done) {
+    var cssFiles = [ fixturesPath + 'test.css' ]
+      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , options = { stylperjaderc: fixturesPath + '.stylperjaderc-invalid' }
+
+    assert.throws(function () {
+      stylperjade(cssFiles, jadeFiles, options, function (err, results) {
+        assert.equal(results, null)
+      })
+    }
+    , /Stylperjade: .stylperjaderc is invalid JSON/)
+    done()
+  })
+
+  it('should load config from options.stylperjaderc', function (done) {
+    var cssFiles = [ fixturesPath + 'test.css' ]
+      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , options = { stylperjaderc: fixturesPath + '.stylperjaderc' }
+
+    stylperjade(cssFiles, jadeFiles, options, function (err, results) {
+      assert(!err)
+      assert.equal(results.unusedTotal, 9)
+      assert.equal(results.unusedCssCount, 3)
+      assert.equal(results.unusedJadeCount, 6)
+      assert.equal(results.blacklistedTotal, 7)
+      assert.equal(results.blacklistedCssCount, 2)
+      assert.equal(results.blacklistedJadeCount, 5)
+      done()
+    })
+  })
+
+  it('should load config from .stylperjaderc in project root if no options are set', function (done) {
+    var cssFiles = [ fixturesPath + 'test.css' ]
+      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , expectedReport = fs.readFileSync(fixturesPath + 'expected-unused.txt', 'utf-8')
+
+    stylperjade(cssFiles, jadeFiles, function (err, results) {
+      assert(!err)
+      assert.equal(results.unusedTotal, 15)
+      assert.equal(results.unusedCssCount, 5)
+      assert.equal(results.unusedJadeCount, 10)
+      assert.equal(results.blacklistedTotal, 0)
+      assert.equal(results.blacklistedCssCount, 0)
+      assert.equal(results.blacklistedJadeCount, 0)
+      assert.equal(results.unusedCssClasses.indexOf('delta--modifier') !== -1, true)
+      assert.equal(results.unusedCssClasses.indexOf('kappa') !== -1, true)
+      assert.equal(results.unusedCssClasses.indexOf('pi') !== -1, true)
+      assert.equal(results.unusedCssClasses.indexOf('beta') === -1, true)
+      assert.equal(results.unusedCssClasses.indexOf('fieldset') === -1, true)
+      assert.equal(results.unusedJadeClasses.indexOf('epsilon') !== -1, true)
+      assert.equal(results.unusedJadeClasses.indexOf('js-alpha') !== -1, true)
+      assert.equal(results.unusedJadeClasses.indexOf('beta') === -1, true)
       assert.equal(chalk.stripColor(results.report.trim()), expectedReport.trim())
       done()
     })
