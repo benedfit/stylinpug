@@ -246,7 +246,7 @@ describe('stylperjade', function () {
   it('should load config from options.stylperjaderc', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
       , jadeFiles = [ fixturesPath + 'test.jade' ]
-      , options = { stylperjaderc: fixturesPath + '.stylperjaderc' }
+      , options = { stylperjaderc: fixturesPath + '.stylperjaderc-valid' }
 
     stylperjade(cssFiles, jadeFiles, options, function (err, results) {
       assert(!err)
