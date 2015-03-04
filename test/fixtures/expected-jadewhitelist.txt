@@ -4,10 +4,16 @@
 
 5 unused classes found in CSS files:
 - delta--modifier
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.css:10
 - kappa
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.css:13
 - nu
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.css:31
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.css:31
 - omega
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.css:28
 - pi
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.css:34
 
 7 unused classes found in Jade files:
 - epsilon

@@ -2,17 +2,26 @@
 
 3 blacklisted classes found in CSS files:
 - delta
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.css:7
 - delta--modifier
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.css:10
 - kappa
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.css:13
 
 ✘ Stylperjade: 15 unused classes found
 
 5 unused classes found in CSS files:
 - delta--modifier
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.css:10
 - kappa
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.css:13
 - nu
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.css:31
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.css:31
 - omega
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.css:28
 - pi
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.css:34
 
 10 unused classes found in Jade files:
 - epsilon

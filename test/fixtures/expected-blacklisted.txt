@@ -2,7 +2,9 @@
 
 2 blacklisted classes found in CSS files:
 - delta
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.css:7
 - delta--modifier
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.css:10
 
 3 blacklisted classes found in Jade files:
 - js-alpha
