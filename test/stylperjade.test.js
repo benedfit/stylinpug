@@ -3,10 +3,38 @@ var _ = require('lodash')
   , chalk = require('chalk')
   , fs = require('fs')
   , stylperjade = require('../lib/stylperjade')
+  , stylus = require('stylus')
 
 describe('stylperjade', function () {
 
   var fixturesPath = __dirname + '/fixtures/'
+
+  before(function (done) {
+    var input = fs.readFileSync(fixturesPath + 'test.styl', 'utf8')
+
+    stylus(input)
+      .set('filename', fixturesPath + 'test.css')
+      .render(function (err, output) {
+        if (err) done(err)
+        fs.writeFileSync(fixturesPath + 'test.css', output)
+        done()
+      })
+
+    stylus(input)
+      .set('filename', fixturesPath + 'test-mapped.css')
+      .set('sourcemap', { inline: true })
+      .render(function (err, output) {
+        if (err) done(err)
+        fs.writeFileSync(fixturesPath + 'test-mapped.css', output)
+        done()
+      })
+  })
+
+  after(function (done) {
+    fs.unlinkSync(fixturesPath + 'test.css')
+    fs.unlinkSync(fixturesPath + 'test-mapped.css')
+    done()
+  })
 
   it('should error if no CSS files specified', function (done) {
     var cssFiles = []
@@ -90,6 +118,20 @@ describe('stylperjade', function () {
       assert.equal(_.findIndex(results.unusedJadeClasses, 'name', 'epsilon') !== -1, true)
       assert.equal(_.findIndex(results.unusedJadeClasses, 'name', 'js-alpha') !== -1, true)
       assert.equal(_.findIndex(results.unusedJadeClasses, 'name', 'beta') === -1, true)
+      assert.equal(chalk.stripColor(results.report.trim())
+        , expectedReport.replace(/%dirname%/g, __dirname).trim()
+        , results.report)
+      done()
+    })
+  })
+
+  it('should report unused CSS and Jade classes using sourcemaps', function (done) {
+    var cssFiles = [ fixturesPath + 'test-mapped.css' ]
+      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , expectedReport = fs.readFileSync(fixturesPath + 'expected-mapped.txt', 'utf-8')
+
+    stylperjade(cssFiles, jadeFiles, function (err, results) {
+      assert(!err)
       assert.equal(chalk.stripColor(results.report.trim())
         , expectedReport.replace(/%dirname%/g, __dirname).trim()
         , results.report)

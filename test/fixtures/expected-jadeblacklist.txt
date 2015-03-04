@@ -12,16 +12,16 @@
 
 5 unused classes found in CSS files:
 - delta--modifier
-  %dirname%/fixtures/test.css:10
+  %dirname%/fixtures/test.css:14
 - kappa
-  %dirname%/fixtures/test.css:13
+  %dirname%/fixtures/test.css:17
 - nu
-  %dirname%/fixtures/test.css:31
-  %dirname%/fixtures/test.css:31
+  %dirname%/fixtures/test.css:32
+  %dirname%/fixtures/test.css:32
 - omega
-  %dirname%/fixtures/test.css:28
+  %dirname%/fixtures/test.css:26
 - pi
-  %dirname%/fixtures/test.css:34
+  %dirname%/fixtures/test.css:35
 
 10 unused classes found in Jade files:
 - epsilon

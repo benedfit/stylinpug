@@ -2,9 +2,9 @@
 
 2 blacklisted classes found in CSS files:
 - delta
-  %dirname%/fixtures/test.css:7
+  %dirname%/fixtures/test.css:11
 - delta--modifier
-  %dirname%/fixtures/test.css:10
+  %dirname%/fixtures/test.css:14
 
 3 blacklisted classes found in Jade files:
 - js-alpha

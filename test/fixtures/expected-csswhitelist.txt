@@ -4,12 +4,12 @@
 
 3 unused classes found in CSS files:
 - nu
-  %dirname%/fixtures/test.css:31
-  %dirname%/fixtures/test.css:31
+  %dirname%/fixtures/test.css:32
+  %dirname%/fixtures/test.css:32
 - omega
-  %dirname%/fixtures/test.css:28
+  %dirname%/fixtures/test.css:26
 - pi
-  %dirname%/fixtures/test.css:34
+  %dirname%/fixtures/test.css:35
 
 10 unused classes found in Jade files:
 - epsilon
