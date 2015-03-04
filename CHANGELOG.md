@@ -1,3 +1,11 @@
+# v0.3 / 2015-03-TBC
+
+## Highlights
+* Improve format of `results.report` to include file names and line numbers
+
+## Changes
+[v0.2.13...v0.3](https://github.com/benedfit/stylperjade/compare/v0.2.13...v0.3)
+
 # v0.2.13 / 2015-03-02
 
 ## Highlights
