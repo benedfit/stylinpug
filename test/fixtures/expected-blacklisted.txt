@@ -1,12 +1,15 @@
 ✘ Stylperjade: 5 blacklisted classes found
 
-2 blacklisted CSS classes:
+2 blacklisted classes found in CSS files:
 - delta
 - delta--modifier
 
-3 blacklisted Jade classes:
+3 blacklisted classes found in Jade files:
 - js-alpha
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.jade:8
 - js-beta-delta
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.jade:10
 - js-mu
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.jade:9
 
 ✔ Stylperjade: No unused classes found

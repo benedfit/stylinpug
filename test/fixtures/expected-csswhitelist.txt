@@ -2,19 +2,30 @@
 
 ✘ Stylperjade: 13 unused classes found
 
-3 unused CSS classes:
+3 unused classes found in CSS files:
 - nu
 - omega
 - pi
 
-10 unused Jade classes:
+10 unused classes found in Jade files:
 - epsilon
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.jade
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.jade:10
 - eta--modifier
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.jade:8
 - eta--modifier-beta
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.jade:8
 - gamma
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.jade
 - js-alpha
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.jade:8
 - js-beta-delta
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.jade:10
 - js-mu
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.jade:9
 - lambda__element
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.jade
 - theta
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.jade:9
 - theta--modifier
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.jade:9

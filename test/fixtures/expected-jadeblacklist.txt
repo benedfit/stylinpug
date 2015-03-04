@@ -1,27 +1,41 @@
 ✘ Stylperjade: 3 blacklisted classes found
 
-3 blacklisted Jade classes:
+3 blacklisted classes found in Jade files:
 - js-alpha
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.jade:8
 - js-beta-delta
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.jade:10
 - js-mu
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.jade:9
 
 ✘ Stylperjade: 15 unused classes found
 
-5 unused CSS classes:
+5 unused classes found in CSS files:
 - delta--modifier
 - kappa
 - nu
 - omega
 - pi
 
-10 unused Jade classes:
+10 unused classes found in Jade files:
 - epsilon
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.jade
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.jade:10
 - eta--modifier
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.jade:8
 - eta--modifier-beta
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.jade:8
 - gamma
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.jade
 - js-alpha
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.jade:8
 - js-beta-delta
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.jade:10
 - js-mu
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.jade:9
 - lambda__element
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.jade
 - theta
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.jade:9
 - theta--modifier
+  /private/var/application/Benedfit/stylperjade/test/fixtures/test.jade:9
