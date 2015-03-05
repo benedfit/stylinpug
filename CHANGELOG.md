@@ -1,4 +1,4 @@
-## v0.3.0 / 2015-03-TBC
+## v0.3.0 / 2015-03-05
 
 ### Highlights
 * Improve format of `results.report` to include file names and line numbers
