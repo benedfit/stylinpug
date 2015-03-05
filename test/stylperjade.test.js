@@ -21,18 +21,18 @@ describe('stylperjade', function () {
       })
 
     stylus(input)
-      .set('filename', fixturesPath + 'test-mapped.css')
+      .set('filename', fixturesPath + 'test-sourcemap.css')
       .set('sourcemap', { inline: true })
       .render(function (err, output) {
         if (err) done(err)
-        fs.writeFileSync(fixturesPath + 'test-mapped.css', output)
+        fs.writeFileSync(fixturesPath + 'test-sourcemap.css', output)
         done()
       })
   })
 
   after(function (done) {
     fs.unlinkSync(fixturesPath + 'test.css')
-    fs.unlinkSync(fixturesPath + 'test-mapped.css')
+    fs.unlinkSync(fixturesPath + 'test-sourcemap.css')
     done()
   })
 
@@ -125,10 +125,10 @@ describe('stylperjade', function () {
     })
   })
 
-  it('should report unused CSS and Jade classes using sourcemaps', function (done) {
-    var cssFiles = [ fixturesPath + 'test-mapped.css' ]
+  it('should report the locations of unused CSS classes using sourcemaps', function (done) {
+    var cssFiles = [ fixturesPath + 'test-sourcemap.css' ]
       , jadeFiles = [ fixturesPath + 'test.jade' ]
-      , expectedReport = fs.readFileSync(fixturesPath + 'expected-mapped.txt', 'utf-8')
+      , expectedReport = fs.readFileSync(fixturesPath + 'expected-sourcemap.txt', 'utf-8')
 
     stylperjade(cssFiles, jadeFiles, function (err, results) {
       assert(!err)
