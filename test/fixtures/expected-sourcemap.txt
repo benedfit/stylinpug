@@ -1,27 +1,19 @@
-✘ Stylperjade: 3 blacklisted classes found
-
-3 blacklisted classes found in CSS files:
-- delta
-  %dirname%/fixtures/test.css:11
-- delta--modifier
-  %dirname%/fixtures/test.css:14
-- kappa
-  %dirname%/fixtures/test.css:17
+✔ Stylperjade: No blacklisted classes found
 
 ✘ Stylperjade: 15 unused classes found
 
 5 unused classes found in CSS files:
 - delta--modifier
-  %dirname%/fixtures/test.css:14
+  %dirname%/fixtures/test-sourcemap.css:14
 - kappa
-  %dirname%/fixtures/test.css:17
+  %dirname%/fixtures/test-sourcemap.css:17
 - nu
-  %dirname%/fixtures/test.css:32
-  %dirname%/fixtures/test.css:32
+  %dirname%/fixtures/test-sourcemap.css:32
+  %dirname%/fixtures/test-sourcemap.css:32
 - omega
-  %dirname%/fixtures/test.css:26
+  %dirname%/fixtures/test-sourcemap.css:26
 - pi
-  %dirname%/fixtures/test.css:35
+  %dirname%/fixtures/test-sourcemap.css:35
 
 10 unused classes found in Jade files:
 - epsilon

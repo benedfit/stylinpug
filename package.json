@@ -1,6 +1,6 @@
 {
   "name": "stylperjade",
-  "version": "0.2.13",
+  "version": "0.3.0",
   "description": "Checks Jade for unused CSS classes",
   "author": "Ben Edwards <hello@benedfit.com>",
   "license": "ISC",
@@ -50,6 +50,7 @@
     "glob": "^4.4.0",
     "jscs": "^1.9.0",
     "jshint": "^2.5.5",
-    "mocha": "^1.21.4"
+    "mocha": "^1.21.4",
+    "stylus": "^0.50.0"
   }
 }
