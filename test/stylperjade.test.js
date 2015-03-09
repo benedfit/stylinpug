@@ -8,31 +8,51 @@ var _ = require('lodash')
 describe('stylperjade', function () {
 
   var fixturesPath = __dirname + '/fixtures/'
+    , stylusFixtures = []
 
   before(function (done) {
-    var input = fs.readFileSync(fixturesPath + 'test.styl', 'utf8')
+    var filename = fixturesPath + 'test.styl'
+      , input = fs.readFileSync(filename, 'utf8')
+      , style = stylus(input).set('filename', filename)
 
-    stylus(input)
-      .set('filename', fixturesPath + 'test.css')
-      .render(function (err, output) {
+    renderStylus(style, fixturesPath + 'test.css')
+
+    style = stylus(input).set('sourcemap', { inline: false })
+
+    renderStylus(style, fixturesPath + 'test-sourcemap.css')
+
+    style = stylus(input).set('sourcemap', { inline: true })
+
+    renderStylus(style, fixturesPath + 'test-sourcemap-inline.css')
+
+    function renderStylus(style, file) {
+
+      style.render(function (err, output) {
         if (err) done(err)
-        fs.writeFileSync(fixturesPath + 'test.css', output)
-        done()
+
+        fs.writeFileSync(file, output)
+
+        stylusFixtures.push(file)
+
+        if (style.options.sourcemap && !style.options.sourcemap.inline) {
+          file = fixturesPath + style.options.filename + '.css.map'
+
+          fs.writeFileSync(file, JSON.stringify(style.sourcemap))
+
+          stylusFixtures.push(file)
+        }
       })
 
-    stylus(input)
-      .set('filename', fixturesPath + 'test-sourcemap.css')
-      .set('sourcemap', { inline: true })
-      .render(function (err, output) {
-        if (err) done(err)
-        fs.writeFileSync(fixturesPath + 'test-sourcemap.css', output)
-        done()
-      })
+    }
+
+    done()
   })
 
   after(function (done) {
-    fs.unlinkSync(fixturesPath + 'test.css')
-    fs.unlinkSync(fixturesPath + 'test-sourcemap.css')
+    stylusFixtures.forEach(function (file) {
+      fs.unlinkSync(file)
+    })
+
     done()
   })
 
