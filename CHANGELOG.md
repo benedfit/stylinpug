@@ -1,3 +1,11 @@
+## v0.3.2 / 2015-03-09
+
+### Highlights
+* Pass file path to `jade-lexer` for better debugging
+
+### Changes
+[v0.3.1...v0.3.2](https://github.com/benedfit/stylperjade/compare/v0.3.1...v0.3.2)
+
 ## v0.3.1 / 2015-03-09
 
 ### Highlights
