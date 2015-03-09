@@ -1,3 +1,11 @@
+## v0.3.1 / 2015-03-09
+
+### Highlights
+* Use source map to report location of CSS classes
+
+### Changes
+[v0.3.0...v0.3.1](https://github.com/benedfit/stylperjade/compare/v0.3.0...v0.3.1)
+
 ## v0.3.0 / 2015-03-05
 
 ### Highlights
