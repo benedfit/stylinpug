@@ -145,7 +145,7 @@ describe('stylperjade', function () {
     })
   })
 
-  it.skip('should report the locations of unused CSS classes using external sourcemap', function (done) {
+  it('should report the locations of unused CSS classes using external sourcemap', function (done) {
     var cssFiles = [ fixturesPath + 'test-sourcemap.css' ]
       , jadeFiles = [ fixturesPath + 'test.jade' ]
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-sourcemap.txt', 'utf-8')
