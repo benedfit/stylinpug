@@ -145,13 +145,27 @@ describe('stylperjade', function () {
     })
   })
 
-  it('should report the locations of unused CSS classes using sourcemaps', function (done) {
+  it.skip('should report the locations of unused CSS classes using external sourcemap', function (done) {
     var cssFiles = [ fixturesPath + 'test-sourcemap.css' ]
       , jadeFiles = [ fixturesPath + 'test.jade' ]
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-sourcemap.txt', 'utf-8')
 
     stylperjade(cssFiles, jadeFiles, function (err, results) {
-      assert(!err)
+      assert(!err, err)
+      assert.equal(chalk.stripColor(results.report.trim())
+        , expectedReport.replace(/%dirname%/g, __dirname).trim()
+        , results.report)
+      done()
+    })
+  })
+
+  it('should report the locations of unused CSS classes using inline sourcemap', function (done) {
+    var cssFiles = [ fixturesPath + 'test-sourcemap-inline.css' ]
+      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , expectedReport = fs.readFileSync(fixturesPath + 'expected-sourcemap.txt', 'utf-8')
+
+    stylperjade(cssFiles, jadeFiles, function (err, results) {
+      assert(!err, err)
       assert.equal(chalk.stripColor(results.report.trim())
         , expectedReport.replace(/%dirname%/g, __dirname).trim()
         , results.report)
