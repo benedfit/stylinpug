@@ -1,17 +1,16 @@
 ✔ Stylperjade: No blacklisted classes found
 
-✘ Stylperjade: 13 unused classes found
+✘ Stylperjade: 15 unused classes found
 
 3 unused classes found in CSS files:
 - nu
-  %dirname%/fixtures/test.css:32
   %dirname%/fixtures/test.css:32
 - omega
   %dirname%/fixtures/test.css:26
 - pi
   %dirname%/fixtures/test.css:35
 
-10 unused classes found in Jade files:
+12 unused classes found in Jade files:
 - epsilon
   %dirname%/fixtures/test.jade
   %dirname%/fixtures/test.jade:10
@@ -29,6 +28,8 @@
   %dirname%/fixtures/test.jade:9
 - lambda__element
   %dirname%/fixtures/test.jade
+- rho
+- rho--modifier
 - theta
   %dirname%/fixtures/test.jade:9
 - theta--modifier
