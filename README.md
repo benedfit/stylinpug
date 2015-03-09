@@ -42,6 +42,11 @@ stylperjade(cssFiles, jadeFiles, options, function (err, results) {
 })
 ```
 
+### Known issues
+
+* [Line number are not reported for nest classes in .jade files](https://github.com/benedfit/stylperjade/issues/13)
+* [Line number are not reported, or errors are thrown for classes found in Jade \#\[\] syntax blocks](https://github.com/benedfit/stylperjade/issues/7)
+
 ## API
 
 ### stylperjade(cssFiles, jadeFiles, [options,] callback)
