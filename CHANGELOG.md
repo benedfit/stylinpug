@@ -1,3 +1,12 @@
+## v0.3.3 / 2015-03-11
+
+### Highlights
+* Only parse source map once per CSS file, rather than on ever rule found in the stylesheet.
+* Paths in `results` where source maps are used are now reported relative to the location of the `.stylperjaderc` file
+
+### Changes
+[v0.3.2...v0.3.3](https://github.com/benedfit/stylperjade/compare/v0.3.2...v0.3.3)
+
 ## v0.3.2 / 2015-03-09
 
 ### Highlights
