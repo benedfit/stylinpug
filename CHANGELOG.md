@@ -1,3 +1,11 @@
+## v0.3.4 / 2015-03-12
+
+### Highlights
+* File names can now be added to `options.cssWhitelist` and `options.jadeWhitelist` to whitelist all classes found in those files
+
+### Changes
+[v0.3.3...v0.3.4](https://github.com/benedfit/stylperjade/compare/v0.3.3...v0.3.4)
+
 ## v0.3.3 / 2015-03-11
 
 ### Highlights

@@ -5,32 +5,35 @@
 3 unused classes found in CSS files:
 - nu
   %dirname%/fixtures/test.css:32
+  %dirname%/fixtures/test.css:38
+  %dirname%/fixtures/test.css:44
 - omega
   %dirname%/fixtures/test.css:26
 - pi
   %dirname%/fixtures/test.css:35
+  %dirname%/fixtures/test.css:47
 
 12 unused classes found in Jade files:
 - epsilon
+  %dirname%/fixtures/test-include.jade:3
   %dirname%/fixtures/test.jade
-  %dirname%/fixtures/test.jade:10
 - eta--modifier
-  %dirname%/fixtures/test.jade:8
+  %dirname%/fixtures/test-include.jade:1
 - eta--modifier-beta
-  %dirname%/fixtures/test.jade:8
+  %dirname%/fixtures/test-include.jade:1
 - gamma
   %dirname%/fixtures/test.jade
 - js-alpha
-  %dirname%/fixtures/test.jade:8
+  %dirname%/fixtures/test-include.jade:1
 - js-beta-delta
-  %dirname%/fixtures/test.jade:10
+  %dirname%/fixtures/test-include.jade:3
 - js-mu
-  %dirname%/fixtures/test.jade:9
+  %dirname%/fixtures/test-include.jade:2
 - lambda__element
   %dirname%/fixtures/test.jade
 - rho
 - rho--modifier
 - theta
-  %dirname%/fixtures/test.jade:9
+  %dirname%/fixtures/test-include.jade:2
 - theta--modifier
-  %dirname%/fixtures/test.jade:9
+  %dirname%/fixtures/test-include.jade:2

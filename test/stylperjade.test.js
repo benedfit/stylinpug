@@ -2,6 +2,7 @@ var _ = require('lodash')
   , assert = require('assert')
   , chalk = require('chalk')
   , fs = require('fs')
+  , path = require('path')
   , stylperjade = require('../lib/stylperjade')
   , stylus = require('stylus')
 
@@ -17,11 +18,11 @@ describe('stylperjade', function () {
 
     renderStylus(style, fixturesPath + 'test.css')
 
-    style = stylus(input).set('sourcemap', { inline: false })
+    style = style.set('sourcemap', { inline: false, basePath: fixturesPath, sourceRoot: fixturesPath })
 
     renderStylus(style, fixturesPath + 'test-sourcemap.css')
 
-    style = stylus(input).set('sourcemap', { inline: true })
+    style = style.set('sourcemap', { inline: true })
 
     renderStylus(style, fixturesPath + 'test-sourcemap-inline.css')
 
@@ -35,7 +36,7 @@ describe('stylperjade', function () {
         stylusFixtures.push(file)
 
         if (style.options.sourcemap && !style.options.sourcemap.inline) {
-          file = fixturesPath + style.options.filename + '.css.map'
+          file = style.options.filename.replace(path.extname(style.options.filename), '.css.map')
 
           fs.writeFileSync(file, JSON.stringify(style.sourcemap))
 
@@ -119,7 +120,7 @@ describe('stylperjade', function () {
 
   it('should report unused CSS and Jade classes', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-unused.txt', 'utf-8')
 
     stylperjade(cssFiles, jadeFiles, function (err, results) {
@@ -147,7 +148,7 @@ describe('stylperjade', function () {
 
   it('should report the locations of unused CSS classes using external sourcemap', function (done) {
     var cssFiles = [ fixturesPath + 'test-sourcemap.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-sourcemap.txt', 'utf-8')
 
     stylperjade(cssFiles, jadeFiles, function (err, results) {
@@ -161,7 +162,7 @@ describe('stylperjade', function () {
 
   it('should report the locations of unused CSS classes using inline sourcemap', function (done) {
     var cssFiles = [ fixturesPath + 'test-sourcemap-inline.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-sourcemap.txt', 'utf-8')
 
     stylperjade(cssFiles, jadeFiles, function (err, results) {
@@ -173,9 +174,32 @@ describe('stylperjade', function () {
     })
   })
 
+  it('should not report the locations of unused CSS for whitelisted files', function (done) {
+    var cssFiles = [ fixturesPath + 'test-sourcemap-inline.css' ]
+      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
+      , options =
+      { cssWhitelist: [ 'test-import.styl' ]
+      , jadeWhitelist: [ 'test-include.jade' ]
+      }
+
+    stylperjade(cssFiles, jadeFiles, options, function (err, results) {
+      assert(!err, err)
+      assert.equal(results.unusedTotal, 9)
+      assert.equal(results.unusedCssCount, 4)
+      assert.equal(results.unusedJadeCount, 5)
+      assert.equal(_.findIndex(results.unusedCssClasses, 'name', 'nu') !== -1, true)
+      assert.equal(_.findIndex(results.unusedCssClasses, 'name', 'pi') === -1, true)
+      assert.equal(_.findIndex(results.unusedJadeClasses, 'name', 'epsilon') !== -1, true)
+      assert.equal(_.findIndex(results.unusedJadeClasses, 'name', 'theta') === -1, true)
+      assert.equal(results.report.indexOf('test-import.styl') === -1, true, results.report)
+      assert.equal(results.report.indexOf('test-include.jade') === -1, true, results.report)
+      done()
+    })
+  })
+
   it('should report blacklisted CSS and Jade classes', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
       , options =
         { cssWhitelist: [ '*' ]
         , jadeWhitelist: [ '*' ]
@@ -201,7 +225,7 @@ describe('stylperjade', function () {
 
   it('should report no unused and no blacklisted CSS and Jade classes', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
       , options =
         { cssWhitelist: [ '*' ]
         , jadeWhitelist: [ '*' ]
@@ -225,7 +249,7 @@ describe('stylperjade', function () {
 
   it('should filter out CSS classes using options.cssWhitelist', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
       , options = { cssWhitelist: [ 'delta*', 'kappa' ] }
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-csswhitelist.txt', 'utf-8')
 
@@ -245,7 +269,7 @@ describe('stylperjade', function () {
 
   it('should filter out Jade classes using options.jadeWhitelist', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
       , options = { jadeWhitelist: [ 'js-*' ] }
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-jadewhitelist.txt', 'utf-8')
 
@@ -266,7 +290,7 @@ describe('stylperjade', function () {
 
   it('should report any CSS classes matching options.cssBlacklist', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
       , options = { cssBlacklist: [ 'delta*', 'kappa' ] }
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-cssblacklist.txt', 'utf-8')
 
@@ -287,7 +311,7 @@ describe('stylperjade', function () {
 
   it('should report any Jade classes matching options.jadeBlacklist', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
       , options = { jadeBlacklist: [ 'js-*' ] }
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-jadeblacklist.txt', 'utf-8')
 
@@ -308,7 +332,7 @@ describe('stylperjade', function () {
 
   it('should error if options.stylperjaderc is not found', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
       , options = { stylperjaderc: 'nonexistent' }
 
     assert.throws(function () {
@@ -322,7 +346,7 @@ describe('stylperjade', function () {
 
   it('should error if options.stylperjaderc is invalid', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
       , options = { stylperjaderc: fixturesPath + '.stylperjaderc-invalid' }
 
     assert.throws(function () {
@@ -336,7 +360,7 @@ describe('stylperjade', function () {
 
   it('should load config from options.stylperjaderc', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
       , options = { stylperjaderc: fixturesPath + '.stylperjaderc-valid' }
 
     stylperjade(cssFiles, jadeFiles, options, function (err, results) {
@@ -353,7 +377,7 @@ describe('stylperjade', function () {
 
   it('should load config from .stylperjaderc in project root if no options are set', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-unused.txt', 'utf-8')
 
     stylperjade(cssFiles, jadeFiles, function (err, results) {

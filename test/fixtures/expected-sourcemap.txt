@@ -8,33 +8,36 @@
 - kappa
   %dirname%/fixtures/test.styl:20:2
 - nu
+  %dirname%/fixtures/test-import.styl:4
+  %dirname%/fixtures/test-import.styl:10
   %dirname%/fixtures/test.styl:36:2
 - omega
   %dirname%/fixtures/test.styl:29:2
 - pi
-  %dirname%/fixtures/test.styl:39
+  %dirname%/fixtures/test-import.styl:1
+  %dirname%/fixtures/test-import.styl:13
 
 12 unused classes found in Jade files:
 - epsilon
+  %dirname%/fixtures/test-include.jade:3
   %dirname%/fixtures/test.jade
-  %dirname%/fixtures/test.jade:10
 - eta--modifier
-  %dirname%/fixtures/test.jade:8
+  %dirname%/fixtures/test-include.jade:1
 - eta--modifier-beta
-  %dirname%/fixtures/test.jade:8
+  %dirname%/fixtures/test-include.jade:1
 - gamma
   %dirname%/fixtures/test.jade
 - js-alpha
-  %dirname%/fixtures/test.jade:8
+  %dirname%/fixtures/test-include.jade:1
 - js-beta-delta
-  %dirname%/fixtures/test.jade:10
+  %dirname%/fixtures/test-include.jade:3
 - js-mu
-  %dirname%/fixtures/test.jade:9
+  %dirname%/fixtures/test-include.jade:2
 - lambda__element
   %dirname%/fixtures/test.jade
 - rho
 - rho--modifier
 - theta
-  %dirname%/fixtures/test.jade:9
+  %dirname%/fixtures/test-include.jade:2
 - theta--modifier
-  %dirname%/fixtures/test.jade:9
+  %dirname%/fixtures/test-include.jade:2

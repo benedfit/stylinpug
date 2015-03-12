@@ -8,10 +8,10 @@
 
 3 blacklisted classes found in Jade files:
 - js-alpha
-  %dirname%/fixtures/test.jade:8
+  %dirname%/fixtures/test-include.jade:1
 - js-beta-delta
-  %dirname%/fixtures/test.jade:10
+  %dirname%/fixtures/test-include.jade:3
 - js-mu
-  %dirname%/fixtures/test.jade:9
+  %dirname%/fixtures/test-include.jade:2
 
 ✔ Stylperjade: No unused classes found

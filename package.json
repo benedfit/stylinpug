@@ -1,6 +1,6 @@
 {
   "name": "stylperjade",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Checks Jade for unused CSS classes",
   "author": "Ben Edwards <hello@benedfit.com>",
   "license": "ISC",
@@ -11,6 +11,7 @@
     "optimise",
     "unused",
     "selector",
+    "sourcemap",
     "css",
     "stylus",
     "jade",
