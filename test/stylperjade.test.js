@@ -119,7 +119,7 @@ describe('stylperjade', function () {
 
   it('should report unused CSS and Jade classes', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-unused.txt', 'utf-8')
 
     stylperjade(cssFiles, jadeFiles, function (err, results) {
@@ -147,7 +147,7 @@ describe('stylperjade', function () {
 
   it('should report the locations of unused CSS classes using external sourcemap', function (done) {
     var cssFiles = [ fixturesPath + 'test-sourcemap.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-sourcemap.txt', 'utf-8')
 
     stylperjade(cssFiles, jadeFiles, function (err, results) {
@@ -161,7 +161,7 @@ describe('stylperjade', function () {
 
   it('should report the locations of unused CSS classes using inline sourcemap', function (done) {
     var cssFiles = [ fixturesPath + 'test-sourcemap-inline.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-sourcemap.txt', 'utf-8')
 
     stylperjade(cssFiles, jadeFiles, function (err, results) {
@@ -175,7 +175,7 @@ describe('stylperjade', function () {
 
   it('should report blacklisted CSS and Jade classes', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
       , options =
         { cssWhitelist: [ '*' ]
         , jadeWhitelist: [ '*' ]
@@ -201,7 +201,7 @@ describe('stylperjade', function () {
 
   it('should report no unused and no blacklisted CSS and Jade classes', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
       , options =
         { cssWhitelist: [ '*' ]
         , jadeWhitelist: [ '*' ]
@@ -225,7 +225,7 @@ describe('stylperjade', function () {
 
   it('should filter out CSS classes using options.cssWhitelist', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
       , options = { cssWhitelist: [ 'delta*', 'kappa' ] }
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-csswhitelist.txt', 'utf-8')
 
@@ -245,7 +245,7 @@ describe('stylperjade', function () {
 
   it('should filter out Jade classes using options.jadeWhitelist', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
       , options = { jadeWhitelist: [ 'js-*' ] }
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-jadewhitelist.txt', 'utf-8')
 
@@ -266,7 +266,7 @@ describe('stylperjade', function () {
 
   it('should report any CSS classes matching options.cssBlacklist', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
       , options = { cssBlacklist: [ 'delta*', 'kappa' ] }
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-cssblacklist.txt', 'utf-8')
 
@@ -287,7 +287,7 @@ describe('stylperjade', function () {
 
   it('should report any Jade classes matching options.jadeBlacklist', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
       , options = { jadeBlacklist: [ 'js-*' ] }
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-jadeblacklist.txt', 'utf-8')
 
@@ -308,7 +308,7 @@ describe('stylperjade', function () {
 
   it('should error if options.stylperjaderc is not found', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
       , options = { stylperjaderc: 'nonexistent' }
 
     assert.throws(function () {
@@ -322,7 +322,7 @@ describe('stylperjade', function () {
 
   it('should error if options.stylperjaderc is invalid', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
       , options = { stylperjaderc: fixturesPath + '.stylperjaderc-invalid' }
 
     assert.throws(function () {
@@ -336,7 +336,7 @@ describe('stylperjade', function () {
 
   it('should load config from options.stylperjaderc', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
       , options = { stylperjaderc: fixturesPath + '.stylperjaderc-valid' }
 
     stylperjade(cssFiles, jadeFiles, options, function (err, results) {
@@ -353,7 +353,7 @@ describe('stylperjade', function () {
 
   it('should load config from .stylperjaderc in project root if no options are set', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-unused.txt', 'utf-8')
 
     stylperjade(cssFiles, jadeFiles, function (err, results) {
