@@ -2,6 +2,7 @@ var _ = require('lodash')
   , assert = require('assert')
   , chalk = require('chalk')
   , fs = require('fs')
+  , path = require('path')
   , stylperjade = require('../lib/stylperjade')
   , stylus = require('stylus')
 
@@ -17,11 +18,11 @@ describe('stylperjade', function () {
 
     renderStylus(style, fixturesPath + 'test.css')
 
-    style = stylus(input).set('sourcemap', { inline: false })
+    style = style.set('sourcemap', { inline: false, basePath: fixturesPath, sourceRoot: fixturesPath })
 
     renderStylus(style, fixturesPath + 'test-sourcemap.css')
 
-    style = stylus(input).set('sourcemap', { inline: true })
+    style = style.set('sourcemap', { inline: true })
 
     renderStylus(style, fixturesPath + 'test-sourcemap-inline.css')
 
@@ -35,7 +36,7 @@ describe('stylperjade', function () {
         stylusFixtures.push(file)
 
         if (style.options.sourcemap && !style.options.sourcemap.inline) {
-          file = fixturesPath + style.options.filename + '.css.map'
+          file = style.options.filename.replace(path.extname(style.options.filename), '.css.map')
 
           fs.writeFileSync(file, JSON.stringify(style.sourcemap))
 
@@ -169,6 +170,29 @@ describe('stylperjade', function () {
       assert.equal(chalk.stripColor(results.report.trim())
         , expectedReport.replace(/%dirname%/g, __dirname).trim()
         , results.report)
+      done()
+    })
+  })
+
+  it('should not report the locations of unused CSS for whitelisted files', function (done) {
+    var cssFiles = [ fixturesPath + 'test-sourcemap-inline.css' ]
+      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
+      , options =
+      { cssWhitelist: [ 'test-import.styl' ]
+      , jadeWhitelist: [ 'test-include.jade' ]
+      }
+
+    stylperjade(cssFiles, jadeFiles, options, function (err, results) {
+      assert(!err, err)
+      assert.equal(results.unusedTotal, 9)
+      assert.equal(results.unusedCssCount, 4)
+      assert.equal(results.unusedJadeCount, 5)
+      assert.equal(_.findIndex(results.unusedCssClasses, 'name', 'nu') !== -1, true)
+      assert.equal(_.findIndex(results.unusedCssClasses, 'name', 'pi') === -1, true)
+      assert.equal(_.findIndex(results.unusedJadeClasses, 'name', 'epsilon') !== -1, true)
+      assert.equal(_.findIndex(results.unusedJadeClasses, 'name', 'theta') === -1, true)
+      assert.equal(results.report.indexOf('test-import.styl') === -1, true, results.report)
+      assert.equal(results.report.indexOf('test-include.jade') === -1, true, results.report)
       done()
     })
   })
