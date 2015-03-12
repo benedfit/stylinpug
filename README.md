@@ -1,6 +1,8 @@
 # Stylperjade
 
-Pronounced: /[stʌɪl](//ssl.gstatic.com/dictionary/static/sounds/de/0/style.mp3) [pəˈreɪd](//ssl.gstatic.com/dictionary/static/sounds/de/0/parade.mp3)/ - Checks Jade against CSS, and vice versa, for unused classes.
+Pronounced: /[stʌɪl](//ssl.gstatic.com/dictionary/static/sounds/de/0/style.mp3) [pəˈreɪd](//ssl.gstatic.com/dictionary/static/sounds/de/0/parade.mp3)/ - Checks Jade against CSS, and vice versa, for unused and blacklisted classes.
+
+> Now supports source maps for even better reporting!
 
 [![build](https://img.shields.io/travis/benedfit/stylperjade.svg)](https://travis-ci.org/benedfit/stylperjade)
 [![npm](https://img.shields.io/npm/v/stylperjade.svg)](https://www.npmjs.com/package/stylperjade)
@@ -19,8 +21,8 @@ var stylperjade = require('stylperjade')
   , cssFiles = [ 'index.css' ]
   , jadeFiles = [ 'default.jade', 'includes/header.jade' ]
   , options =
-    { cssWhitelist: [ 'js', 'no-svg', 'icon--*', 'is-*' ]
-    , jadeWhitelist: [ 'js-*', 'style-guide-nav' ]
+    { cssWhitelist: [ 'footer.styl', 'js', 'no-svg', 'icon--*', 'is-*' ]
+    , jadeWhitelist: [ 'header.jade', 'js-*', 'style-guide-nav' ]
     , cssBlacklist: [ 'js-*' ]
     , jadeBlacklist: []
     }
@@ -69,12 +71,12 @@ An array of `.jade` file paths.
 
 Type: `object`
 
-| Name          | Type     | Description |
-| ------------- | -------- | ----------- |
-| cssBlacklist  | `Array`  | An array of patterns for classes that should never exist in `.css` files |
-| cssWhitelist  | `Array`  | An array of patterns for classes to ignore when they exist in `.css` but not in `.jade` files |
-| jadeBlacklist | `Array`  | An array of patterns for classes that should never exist in `.jade` files |
-| jadeWhitelist | `Array`  | An array of patterns for classes to ignore when they exist in `.jade` but not in `.css` files |
+| Name | Type | Description |
+| --- | --- | --- |
+| cssBlacklist | `Array` | An array of patterns for classes that should never exist in `.css` files or source map sources |
+| cssWhitelist | `Array` | An array of file names or patterns for classes, to ignore when they exist in `.css` files or source maps sources but not in `.jade` files |
+| jadeBlacklist | `Array` | An array of patterns for classes that should never exist in `.jade` files |
+| jadeWhitelist | `Array` | An array of file names or patterns for classes to ignore when they exist in `.jade` files but not in `.css` files or source map sources |
 | stylperjaderc | `string` | The alternative path to a `.stylperjaderc` file to load options from |
 
 #### callback(error, results)
@@ -86,19 +88,19 @@ Type: `function`
 
 Type: `object`
 
-| Name                                              | Type     | Description |
-| ------------------------------------------------- | -------- | ----------- |
-| [blacklistedCssClasses](#user-content-example-classes-object)  | `object` | The blacklisted classes found in `.css` files |
-| blacklistedCssCount                               | `int`    | The number of blacklisted classes found in `.css` files |
+| Name | Type | Description |
+| --- | --- | --- |
+| [blacklistedCssClasses](#user-content-example-classes-object) | `object` | The blacklisted classes found in `.css` files |
+| blacklistedCssCount | `int` | The number of blacklisted classes found in `.css` files |
 | [blacklistedJadeClasses](#user-content-example-classes-object) | `object` | The blacklisted classes found in `.jade` files |
-| blacklistedJadeCount                              | `int`    | The number of blacklisted classes found in `.jade` files |
-| blacklistedTotal                                  | `int`    | The total number of blacklisted classes found in all files |
-| [unusedCssClasses](#user-content-example-classes-object)       | `object` | The classes found that exist in `.css` but not `.jade` files |
-| unusedCssCount                                    | `int`    | The number of classes found that exist in `.css` but not `.jade` files |
-| [unusedJadeClasses](#user-content-example-classes-object)      | `object` | The classes found that exist in `.jade` but not `.css` files |
-| unusedJadeCount                                   | `int`    | The number of classes found that exist in `.jade` but not `.css` files |
-| unusedTotal                                       | `int`    | The total number of ununsed classes found in all files |
-| [report](#user-content-example-report)                       | `string` | The visual representation of blacklisted and unused classes found across all files |
+| blacklistedJadeCount | `int` | The number of blacklisted classes found in `.jade` files |
+| blacklistedTotal | `int` | The total number of blacklisted classes found in all files |
+| [unusedCssClasses](#user-content-example-classes-object) | `object` | The classes found that exist in `.css` but not `.jade` files |
+| unusedCssCount | `int` | The number of classes found that exist in `.css` but not `.jade` files |
+| [unusedJadeClasses](#user-content-example-classes-object) | `object` | The classes found that exist in `.jade` but not `.css` files |
+| unusedJadeCount | `int` | The number of classes found that exist in `.jade` but not `.css` files |
+| unusedTotal | `int` | The total number of ununsed classes found in all files |
+| [report](#user-content-example-report) | `string` | The visual representation of blacklisted and unused classes found across all files |
 
 ###### Example classes object
 
@@ -107,13 +109,14 @@ Type: `object`
 , "locations":
   [ { "file": "/path/to/.css/or/.jade", "line": 1, "column": 1 }
   , { "file": "/path/to/another/.css/or/.jade", "line": 5, "column": 3 }
+  , { "file": "/path/to/original/source/using/source/map", "line": 20 }
   ]
 }
 ```
 
 ###### Example report
 
-![](test/fixtures/example-report.png)
+![](example-report.png)
 
 ## Licence
 ISC © [Ben Edwards](https://github.com/benedfit/)
