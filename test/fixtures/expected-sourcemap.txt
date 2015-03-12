@@ -12,7 +12,7 @@
 - omega
   %dirname%/fixtures/test.styl:29:2
 - pi
-  %dirname%/fixtures/test.styl:39
+  %dirname%/fixtures/test-import.styl:1
 
 12 unused classes found in Jade files:
 - epsilon
