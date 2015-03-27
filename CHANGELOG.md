@@ -1,3 +1,11 @@
+## v0.3.5 / 2015-03-27
+
+### Highlights
+* 100% test coverage
+
+### Changes
+[v0.3.4...v0.3.5](https://github.com/benedfit/stylperjade/compare/v0.3.4...v0.3.5)
+
 ## v0.3.4 / 2015-03-12
 
 ### Highlights
