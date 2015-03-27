@@ -118,6 +118,30 @@ describe('stylperjade', function () {
     })
   })
 
+  it('should return error if CSS files cannot be read', function (done) {
+    var cssFiles = [ 'nonexistent.css' ]
+      , jadeFiles = [ fixturesPath + 'test.jade' ]
+
+    stylperjade(cssFiles, jadeFiles, function (err, results) {
+      assert(err)
+      assert.equal(err, 'Stylperjade: CSS file \'nonexistent.css\' error - ENOENT, open \'nonexistent.css\'')
+      assert.equal(results, null)
+      done()
+    })
+  })
+
+  it('should return error if Jade files cannot be read', function (done) {
+    var cssFiles = [ fixturesPath + 'test.css' ]
+      , jadeFiles = [ 'nonexistent.jade' ]
+
+    stylperjade(cssFiles, jadeFiles, function (err, results) {
+      assert(err)
+      assert.equal(err, 'Stylperjade: Jade file \'nonexistent.jade\' error - ENOENT, open \'nonexistent.jade\'')
+      assert.equal(results, null)
+      done()
+    })
+  })
+
   it('should report unused CSS and Jade classes', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
       , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
