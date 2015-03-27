@@ -1,6 +1,6 @@
 {
   "name": "stylperjade",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "Checks Jade for unused CSS classes",
   "author": "Ben Edwards <hello@benedfit.com>",
   "license": "ISC",
@@ -29,7 +29,8 @@
     "lint": "jshint .",
     "checkStyle": "jscs .",
     "pretest": "npm run lint && npm run checkStyle",
-    "test": "mocha --recursive -R spec",
+    "test": "istanbul cover _mocha -- -R spec",
+    "posttest": "istanbul check-coverage && rm -rf coverage",
     "prepublish": "npm test && npm prune"
   },
   "engines": {
@@ -51,6 +52,7 @@
   },
   "devDependencies": {
     "glob": "^4.4.0",
+    "istanbul": "^0.3.10",
     "jscs": "^1.9.0",
     "jshint": "^2.5.5",
     "mocha": "^1.21.4",

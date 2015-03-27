@@ -11,11 +11,13 @@
   %dirname%/fixtures/test.css:32
   %dirname%/fixtures/test.css:38
   %dirname%/fixtures/test.css:44
+  %dirname%/fixtures/test.css:47
+  %dirname%/fixtures/test.css:54:3
 - omega
   %dirname%/fixtures/test.css:26
 - pi
   %dirname%/fixtures/test.css:35
-  %dirname%/fixtures/test.css:47
+  %dirname%/fixtures/test.css:50
 
 12 unused classes found in Jade files:
 - epsilon
