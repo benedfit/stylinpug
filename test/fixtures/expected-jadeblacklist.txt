@@ -30,13 +30,13 @@
 12 unused classes found in Jade files:
 - epsilon
   %dirname%/fixtures/test-include.jade:3
-  %dirname%/fixtures/test.jade
+  %dirname%/fixtures/test.jade:2
 - eta--modifier
   %dirname%/fixtures/test-include.jade:1
 - eta--modifier-beta
   %dirname%/fixtures/test-include.jade:1
 - gamma
-  %dirname%/fixtures/test.jade
+  %dirname%/fixtures/test.jade:3
 - js-alpha
   %dirname%/fixtures/test-include.jade:1
 - js-beta-delta
@@ -44,7 +44,7 @@
 - js-mu
   %dirname%/fixtures/test-include.jade:2
 - lambda__element
-  %dirname%/fixtures/test.jade
+  %dirname%/fixtures/test.jade:4
 - rho
 - rho--modifier
 - theta
