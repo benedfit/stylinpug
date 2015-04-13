@@ -42,10 +42,7 @@ describe('reporting', function () {
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-sourcemap.txt', 'utf-8')
 
     stylperjade(cssFiles, jadeFiles, function (err, results) {
-      console.log(' ')
       assert(!err, err)
-      console.log(results.report)
-      console.log(' ')
       assert.equal(chalk.stripColor(results.report.trim())
         , expectedReport.replace(/%dirname%/g, __dirname).trim()
         , results.report)
