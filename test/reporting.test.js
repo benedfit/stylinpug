@@ -2,145 +2,11 @@ var _ = require('lodash')
   , assert = require('assert')
   , chalk = require('chalk')
   , fs = require('fs')
-  , path = require('path')
   , stylperjade = require('../lib/stylperjade')
-  , stylus = require('stylus')
 
-describe('stylperjade', function () {
+  , fixturesPath = __dirname + '/fixtures/'
 
-  var fixturesPath = __dirname + '/fixtures/'
-    , stylusFixtures = []
-
-  before(function (done) {
-    var filename = fixturesPath + 'test.styl'
-      , input = fs.readFileSync(filename, 'utf8')
-      , style = stylus(input).set('filename', filename)
-
-    renderStylus(style, fixturesPath + 'test.css')
-
-    style = style.set('sourcemap', { inline: false, basePath: fixturesPath, sourceRoot: fixturesPath })
-
-    renderStylus(style, fixturesPath + 'test-sourcemap.css')
-
-    style = style.set('sourcemap', { inline: true })
-
-    renderStylus(style, fixturesPath + 'test-sourcemap-inline.css')
-
-    function renderStylus(style, file) {
-
-      style.render(function (err, output) {
-        if (err) done(err)
-
-        fs.writeFileSync(file, output)
-
-        stylusFixtures.push(file)
-
-        if (style.options.sourcemap && !style.options.sourcemap.inline) {
-          file = style.options.filename.replace(path.extname(style.options.filename), '.css.map')
-
-          fs.writeFileSync(file, JSON.stringify(style.sourcemap))
-
-          stylusFixtures.push(file)
-        }
-      })
-
-    }
-
-    done()
-  })
-
-  after(function (done) {
-    stylusFixtures.forEach(function (file) {
-      fs.unlinkSync(file)
-    })
-
-    done()
-  })
-
-  it('should error if no CSS files specified', function (done) {
-    var cssFiles = []
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
-
-    assert.throws(function () {
-      stylperjade(cssFiles, jadeFiles, function (err, results) {
-        assert.equal(results, null)
-      })
-    }
-    , /Stylperjade: no CSS files found/)
-    done()
-  })
-
-  it('should error if no Jade files specified', function (done) {
-    var cssFiles = [ fixturesPath + 'test.css' ]
-      , jadeFiles = []
-
-    assert.throws(function () {
-      stylperjade(cssFiles, jadeFiles, function (err, results) {
-        assert.equal(results, null)
-      })
-    }
-    , /Stylperjade: no Jade files found/)
-    done()
-  })
-
-  it('should error if no callback specified', function (done) {
-    var cssFiles = [ fixturesPath + 'test.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
-
-    assert.throws(function () {
-      stylperjade(cssFiles, jadeFiles)
-    }
-    , /Stylperjade: expected a callback/)
-    done()
-  })
-
-  it('should return error if no CSS files found', function (done) {
-    var cssFiles = [ 'nonexistent' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
-
-    stylperjade(cssFiles, jadeFiles, function (err, results) {
-      assert(err)
-      assert.equal(err, 'Stylperjade: CSS file \'nonexistent\' not found')
-      assert.equal(results, null)
-      done()
-    })
-  })
-
-  it('should return error if no Jade files found', function (done) {
-    var cssFiles = [ fixturesPath + 'test.css' ]
-      , jadeFiles = [ 'nonexistent' ]
-
-    stylperjade(cssFiles, jadeFiles, function (err, results) {
-      assert(err)
-      assert.equal(err, 'Stylperjade: Jade file \'nonexistent\' not found')
-      assert.equal(results, null)
-      done()
-    })
-  })
-
-  it('should return error if CSS files cannot be read', function (done) {
-    var cssFiles = [ 'nonexistent.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
-
-    stylperjade(cssFiles, jadeFiles, function (err, results) {
-      assert(err)
-      assert.equal(err, 'Stylperjade: CSS file \'nonexistent.css\' error - ENOENT, open \'nonexistent.css\'')
-      assert.equal(results, null)
-      done()
-    })
-  })
-
-  it('should return error if Jade files cannot be read', function (done) {
-    var cssFiles = [ fixturesPath + 'test.css' ]
-      , jadeFiles = [ 'nonexistent.jade' ]
-
-    stylperjade(cssFiles, jadeFiles, function (err, results) {
-      assert(err)
-      assert.equal(err, 'Stylperjade: Jade file \'nonexistent.jade\' error - ENOENT, open \'nonexistent.jade\'')
-      assert.equal(results, null)
-      done()
-    })
-  })
+describe('reporting', function () {
 
   it('should report unused CSS and Jade classes', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
@@ -176,7 +42,10 @@ describe('stylperjade', function () {
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-sourcemap.txt', 'utf-8')
 
     stylperjade(cssFiles, jadeFiles, function (err, results) {
+      console.log(' ')
       assert(!err, err)
+      console.log(results.report)
+      console.log(' ')
       assert.equal(chalk.stripColor(results.report.trim())
         , expectedReport.replace(/%dirname%/g, __dirname).trim()
         , results.report)
@@ -347,79 +216,6 @@ describe('stylperjade', function () {
       assert.equal(_.findIndex(results.blacklistedJadeClasses, 'name', 'js-alpha') !== -1, true)
       assert.equal(_.findIndex(results.blacklistedJadeClasses, 'name', 'js-beta-delta') !== -1, true)
       assert.equal(_.findIndex(results.blacklistedJadeClasses, 'name', 'js-mu') !== -1, true)
-      assert.equal(chalk.stripColor(results.report.trim())
-        , expectedReport.replace(/%dirname%/g, __dirname).trim()
-        , results.report)
-      done()
-    })
-  })
-
-  it('should error if options.stylperjaderc is not found', function (done) {
-    var cssFiles = [ fixturesPath + 'test.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
-      , options = { stylperjaderc: 'nonexistent' }
-
-    assert.throws(function () {
-      stylperjade(cssFiles, jadeFiles, options, function (err, results) {
-        assert.equal(results, null)
-      })
-    }
-    , /Stylperjade: .stylperjaderc not found/)
-    done()
-  })
-
-  it('should error if options.stylperjaderc is invalid', function (done) {
-    var cssFiles = [ fixturesPath + 'test.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
-      , options = { stylperjaderc: fixturesPath + '.stylperjaderc-invalid' }
-
-    assert.throws(function () {
-      stylperjade(cssFiles, jadeFiles, options, function (err, results) {
-        assert.equal(results, null)
-      })
-    }
-    , /Stylperjade: .stylperjaderc is invalid JSON/)
-    done()
-  })
-
-  it('should load config from options.stylperjaderc', function (done) {
-    var cssFiles = [ fixturesPath + 'test.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
-      , options = { stylperjaderc: fixturesPath + '.stylperjaderc-valid' }
-
-    stylperjade(cssFiles, jadeFiles, options, function (err, results) {
-      assert(!err, err)
-      assert.equal(results.unusedTotal, 11)
-      assert.equal(results.unusedCssCount, 3)
-      assert.equal(results.unusedJadeCount, 8)
-      assert.equal(results.blacklistedTotal, 7)
-      assert.equal(results.blacklistedCssCount, 2)
-      assert.equal(results.blacklistedJadeCount, 5)
-      done()
-    })
-  })
-
-  it('should load config from .stylperjaderc in project root if no options are set', function (done) {
-    var cssFiles = [ fixturesPath + 'test.css' ]
-      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
-      , expectedReport = fs.readFileSync(fixturesPath + 'expected-unused.txt', 'utf-8')
-
-    stylperjade(cssFiles, jadeFiles, function (err, results) {
-      assert(!err, err)
-      assert.equal(results.unusedTotal, 17)
-      assert.equal(results.unusedCssCount, 5)
-      assert.equal(results.unusedJadeCount, 12)
-      assert.equal(results.blacklistedTotal, 0)
-      assert.equal(results.blacklistedCssCount, 0)
-      assert.equal(results.blacklistedJadeCount, 0)
-      assert.equal(_.findIndex(results.unusedCssClasses, 'name', 'delta--modifier') !== -1, true)
-      assert.equal(_.findIndex(results.unusedCssClasses, 'name', 'kappa') !== -1, true)
-      assert.equal(_.findIndex(results.unusedCssClasses, 'name', 'pi') !== -1, true)
-      assert.equal(_.findIndex(results.unusedCssClasses, 'name', 'beta') === -1, true)
-      assert.equal(_.findIndex(results.unusedCssClasses, 'name', 'fieldset') === -1, true)
-      assert.equal(_.findIndex(results.unusedJadeClasses, 'name', 'epsilon') !== -1, true)
-      assert.equal(_.findIndex(results.unusedJadeClasses, 'name', 'js-alpha') !== -1, true)
-      assert.equal(_.findIndex(results.unusedJadeClasses, 'name', 'beta') === -1, true)
       assert.equal(chalk.stripColor(results.report.trim())
         , expectedReport.replace(/%dirname%/g, __dirname).trim()
         , results.report)
