@@ -1,3 +1,13 @@
+## v0.3.6 / 2015-04-13
+
+### Highlights
+* Line numbers are now reported for nested classes in .jade files
+* Unhandled errors in CSS and Jade files are now more helpfully returned
+* The use of Jade tag interpolation no longer throws errors, but line number are still not reported
+
+### Changes
+[v0.3.5...v0.3.6](https://github.com/benedfit/stylperjade/compare/v0.3.5...v0.3.6)
+
 ## v0.3.5 / 2015-03-27
 
 ### Highlights
