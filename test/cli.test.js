@@ -22,8 +22,24 @@ describe('cli', function () {
       )
   })
 
+  it('should output help', function (done) {
+    var message = 'Usage: stylperjade [options] <cssFiles ...> <jadeFiles ...>'
+
+    exec
+      ( 'node ./bin/stylperjade -h'
+      , { cwd: __dirname + '/../' }
+      , function (err, stdout, stderr) {
+          assert(!err, err)
+          assert.equal(stderr, '')
+          assert.equal(stdout.indexOf(message) !== -1, true)
+          assert.equal(stdout.indexOf(package.description) !== -1, true)
+          done()
+        }
+      )
+  })
+
   it('should output help if no CSS files specified', function (done) {
-    var errorMessage = 'Usage: stylperjade [options] <cssFiles ...> <jadeFiles ...>'
+    var message = 'Usage: stylperjade [options] <cssFiles ...> <jadeFiles ...>'
 
     exec
       ( 'node ./bin/stylperjade'
@@ -31,7 +47,7 @@ describe('cli', function () {
       , function (err, stdout, stderr) {
           assert(!err, err)
           assert.equal(stderr, '')
-          assert.equal(stdout.indexOf(errorMessage) !== -1, true)
+          assert.equal(stdout.indexOf(message) !== -1, true)
           assert.equal(stdout.indexOf(package.description) !== -1, true)
           done()
         }
@@ -39,7 +55,7 @@ describe('cli', function () {
   })
 
   it('should output help if no Jade files specified', function (done) {
-    var errorMessage = 'Usage: stylperjade [options] <cssFiles ...> <jadeFiles ...>'
+    var message = 'Usage: stylperjade [options] <cssFiles ...> <jadeFiles ...>'
 
     exec
       ( 'node ./bin/stylperjade **/*.css'
@@ -47,7 +63,7 @@ describe('cli', function () {
       , function (err, stdout, stderr) {
           assert(!err, err)
           assert.equal(stderr, '')
-          assert.equal(stdout.indexOf(errorMessage) !== -1, true)
+          assert.equal(stdout.indexOf(message) !== -1, true)
           assert.equal(stdout.indexOf(package.description) !== -1, true)
           done()
         }
