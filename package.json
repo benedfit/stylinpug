@@ -1,7 +1,7 @@
 {
   "name": "stylperjade",
   "version": "0.3.6",
-  "description": "Checks Jade for unused CSS classes",
+  "description": "Checks Jade against CSS, and vice versa, for unused and blacklisted classes",
   "author": "Ben Edwards <hello@benedfit.com>",
   "license": "ISC",
   "keywords": [
@@ -24,7 +24,10 @@
   "publishConfig": {
     "registry": "http://registry.npmjs.org"
   },
-  "main": "lib/stylperjade",
+  "main": "./lib/stylperjade",
+  "bin": {
+    "stylperjade": "./bin/stylperjade"
+  },
   "scripts": {
     "lint": "jshint .",
     "checkStyle": "jscs .",
@@ -39,6 +42,7 @@
   "dependencies": {
     "async": "^0.9.0",
     "chalk": "^0.5.1",
+    "commander": "^2.8.1",
     "css": "^2.2.0",
     "css-selector-parser": "^1.0.4",
     "glob": "^5.0.6",

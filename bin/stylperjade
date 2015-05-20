@@ -1,0 +1,42 @@
+#!/usr/bin/env node
+
+var program = require('commander')
+  , package = require('../package.json')
+  , stylperjade = require('../lib/stylperjade')
+
+  , cssPatterns = []
+  , jadePatterns = []
+  , options = {}
+
+program
+  .version(package.version)
+  .description(package.description)
+  .option
+    ( '-c, --config <file>'
+    , 'The alternative path to a .stylperjaderc file to load options from'
+    )
+  .usage('[options] <cssFiles ...> <jadeFiles ...>')
+  .action(function (cssFiles, jadeFiles) {
+    if (cssFiles && typeof cssFiles === 'string') cssPatterns.push(cssFiles)
+    if (jadeFiles && typeof jadeFiles === 'string') jadePatterns.push(jadeFiles)
+  })
+  .parse(process.argv)
+
+if (program.config) {
+  options.stylperjaderc = program.config
+}
+
+try {
+  stylperjade(cssPatterns, jadePatterns, options, function (err, results) {
+    if (err) {
+      console.error(err)
+      process.exit(1)
+    }
+
+    console.log(results.report)
+    process.exit()
+  })
+} catch (err) {
+  console.error(err)
+  process.exit(1)
+}
