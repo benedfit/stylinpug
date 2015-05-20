@@ -1,21 +1,18 @@
 /* comments are valid, and will be stripped */
 { "ignoreFiles":
-  [ ""
+  [ "coverage"
+  , "node_modules/**"
   ]
 , "cssWhitelist":
-  [ "delta*"
-  , "kappa"
+  [ "*"
   ]
 , "jadeWhitelist":
-  [ "js-*"
-  , "theta"
+  [ "*"
   ]
 , "cssBlacklist":
-  [ "delta*"
+  [
   ]
 , "jadeBlacklist":
-  [ "epsilon"
-  , "gamma"
-  , "eta*"
+  [
   ]
 }

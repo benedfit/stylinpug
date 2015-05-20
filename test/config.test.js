@@ -40,15 +40,19 @@ describe('config', function () {
     var cssFiles = [ fixturesPath + 'test.css' ]
       , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
       , options = { stylperjaderc: fixturesPath + '.stylperjaderc-valid' }
+      , expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
 
     stylperjade(cssFiles, jadeFiles, options, function (err, results) {
       assert(!err, err)
-      assert.equal(results.unusedTotal, 12)
-      assert.equal(results.unusedCssCount, 4)
-      assert.equal(results.unusedJadeCount, 8)
-      assert.equal(results.blacklistedTotal, 7)
-      assert.equal(results.blacklistedCssCount, 2)
-      assert.equal(results.blacklistedJadeCount, 5)
+      assert.equal(results.unusedTotal, 0)
+      assert.equal(results.unusedCssCount, 0)
+      assert.equal(results.unusedJadeCount, 0)
+      assert.equal(results.blacklistedTotal, 0)
+      assert.equal(results.blacklistedCssCount, 0)
+      assert.equal(results.blacklistedJadeCount, 0)
+      assert.equal(chalk.stripColor(results.report.trim())
+        , expectedReport.replace(/%dirname%/g, __dirname).trim()
+        , results.report)
       done()
     })
   })
