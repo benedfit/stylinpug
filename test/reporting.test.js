@@ -87,6 +87,28 @@ describe('reporting', function () {
     })
   })
 
+  it('should not report the locations of unused CSS for ignored files', function (done) {
+    var cssFiles = [ fixturesPath + 'test-sourcemap-inline.css' ]
+      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
+      , options =
+      { ignoreFiles: [ '**/test-import.styl', '**/test-include.jade' ]
+      }
+
+    stylperjade(cssFiles, jadeFiles, options, function (err, results) {
+      assert(!err, err)
+      assert.equal(results.unusedTotal, 9)
+      assert.equal(results.unusedCssCount, 4)
+      assert.equal(results.unusedJadeCount, 5)
+      assert.equal(_.findIndex(results.unusedCssClasses, 'name', 'nu') !== -1, true)
+      assert.equal(_.findIndex(results.unusedCssClasses, 'name', 'pi') === -1, true)
+      assert.equal(_.findIndex(results.unusedJadeClasses, 'name', 'epsilon') !== -1, true)
+      assert.equal(_.findIndex(results.unusedJadeClasses, 'name', 'theta') === -1, true)
+      assert.equal(results.report.indexOf('test-import.styl') === -1, true, results.report)
+      assert.equal(results.report.indexOf('test-include.jade') === -1, true, results.report)
+      done()
+    })
+  })
+
   it('should report blacklisted CSS and Jade classes', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
       , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]

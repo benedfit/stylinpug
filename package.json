@@ -41,6 +41,7 @@
     "chalk": "^0.5.1",
     "css": "^2.2.0",
     "css-selector-parser": "^1.0.4",
+    "glob": "^5.0.6",
     "jade-lexer": "0.0.4",
     "jade-parser": "0.0.5",
     "jade-walk": "git://github.com/jadejs/jade-walk.git",
