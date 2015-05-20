@@ -15,6 +15,10 @@ program
     ( '-c, --config <file>'
     , 'The alternative path to a .stylperjaderc file to load options from'
     )
+  .option
+    ( '-v, --verbose'
+    , 'Displays the visual representation of blacklisted and unused classes found across all files'
+    )
   .usage('[options] <cssFiles ...> <jadeFiles ...>')
   .action(function (cssFiles, jadeFiles) {
     if (cssFiles && typeof cssFiles === 'string') cssPatterns.push(cssFiles)
@@ -39,7 +43,10 @@ try {
       process.exit(1)
     }
 
-    console.log(results.report)
+    if (program.verbose) {
+      console.log(results.report)
+    }
+
     process.exit()
   })
 } catch (err) {

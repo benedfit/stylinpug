@@ -156,7 +156,7 @@ describe('cli', function () {
     var errorMessage = 'Stylperjade: .stylperjaderc is invalid JSON'
 
     exec
-      ( 'node ./bin/stylperjade -c ' + fixturesPath + '.stylperjaderc-invalid **/test.css **/test*.jade'
+      ( 'node ./bin/stylperjade -v -c ' + fixturesPath + '.stylperjaderc-invalid **/test.css **/test*.jade'
       , { cwd: __dirname + '/../' }
       , function (err, stdout, stderr) {
           assert(err)
@@ -172,7 +172,7 @@ describe('cli', function () {
     var expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
 
     exec
-      ( 'node ./bin/stylperjade -c ' + fixturesPath + '.stylperjaderc-valid **/test.css **/test*.jade'
+      ( 'node ./bin/stylperjade -v -c ' + fixturesPath + '.stylperjaderc-valid **/test.css **/test*.jade'
       , { cwd: __dirname + '/../' }
       , function (err, stdout, stderr) {
           assert(!err, err)
@@ -189,7 +189,7 @@ describe('cli', function () {
     var expectedReport = fs.readFileSync(fixturesPath + 'expected-unused.txt', 'utf-8')
 
     exec
-      ( 'node ./bin/stylperjade **/test.css **/test*.jade'
+      ( 'node ./bin/stylperjade -v **/test.css **/test*.jade'
       , { cwd: __dirname + '/../' }
       , function (err, stdout, stderr) {
           assert(!err, err)
@@ -206,7 +206,7 @@ describe('cli', function () {
     var expectedReport = fs.readFileSync(fixturesPath + 'expected-sourcemap.txt', 'utf-8')
 
     exec
-      ( 'node ./bin/stylperjade **/test-sourcemap.css **/test*.jade'
+      ( 'node ./bin/stylperjade -v **/test-sourcemap.css **/test*.jade'
       , { cwd: __dirname + '/../' }
       , function (err, stdout, stderr) {
           assert(!err, err)
@@ -223,7 +223,7 @@ describe('cli', function () {
     var expectedReport = fs.readFileSync(fixturesPath + 'expected-sourcemap.txt', 'utf-8')
 
     exec
-      ( 'node ./bin/stylperjade **/test-sourcemap-inline.css **/test*.jade'
+      ( 'node ./bin/stylperjade -v **/test-sourcemap-inline.css **/test*.jade'
       , { cwd: __dirname + '/../' }
       , function (err, stdout, stderr) {
           assert(!err, err)
@@ -231,6 +231,19 @@ describe('cli', function () {
           assert.equal(chalk.stripColor(stdout.trim())
             , expectedReport.replace(/%dirname%/g, __dirname).trim()
             , stdout)
+          done()
+        }
+      )
+  })
+
+  it('should output silently by default', function (done) {
+    exec
+      ( 'node ./bin/stylperjade **/test.css **/test*.jade'
+      , { cwd: __dirname + '/../' }
+      , function (err, stdout, stderr) {
+          assert(!err, err)
+          assert.equal(stderr, '')
+          assert.equal(stdout, '')
           done()
         }
       )
