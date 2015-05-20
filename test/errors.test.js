@@ -14,7 +14,7 @@ describe('error handling', function () {
         assert.equal(results, null)
       })
     }
-    , /Stylperjade: no CSS files found/)
+    , /No CSS files found/)
     done()
   })
 
@@ -27,7 +27,7 @@ describe('error handling', function () {
         assert.equal(results, null)
       })
     }
-    , /Stylperjade: no Jade files found/)
+    , /No Jade files found/)
     done()
   })
 
@@ -38,7 +38,7 @@ describe('error handling', function () {
     assert.throws(function () {
       stylperjade(cssFiles, jadeFiles)
     }
-    , /Stylperjade: expected a callback/)
+    , /Expected a callback/)
     done()
   })
 
@@ -51,7 +51,7 @@ describe('error handling', function () {
         assert.equal(results, null)
       })
     }
-    , /Stylperjade: no CSS files found/)
+    , /No CSS files found/)
     done()
   })
 
@@ -64,7 +64,7 @@ describe('error handling', function () {
         assert.equal(results, null)
       })
     }
-    , /Stylperjade: no Jade files found/)
+    , /No Jade files found/)
     done()
   })
 
@@ -74,7 +74,7 @@ describe('error handling', function () {
 
     stylperjade(cssFiles, jadeFiles, function (err, results) {
       assert(err)
-      assert.equal(err.indexOf('Stylperjade: CSS file \'' + cssFiles[0] + '\' error - ') !== -1, true)
+      assert.equal(err.indexOf('CSS file \'' + cssFiles[0] + '\' error - ') !== -1, true)
       assert.equal(results, null)
       done()
     })
@@ -86,7 +86,7 @@ describe('error handling', function () {
 
     stylperjade(cssFiles, jadeFiles, function (err, results) {
       assert(err)
-      assert.equal(err.indexOf('Stylperjade: Jade file \'' + jadeFiles[0] + '\' error - ') !== -1, true)
+      assert.equal(err.indexOf('Jade file \'' + jadeFiles[0] + '\' error - ') !== -1, true)
       assert.equal(results, null)
       done()
     })

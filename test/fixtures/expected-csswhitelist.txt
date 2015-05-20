@@ -1,6 +1,6 @@
-✔ Stylperjade: No blacklisted classes found
+✔ No blacklisted classes found
 
-✘ Stylperjade: 16 unused classes found
+✘ 16 unused classes found
 
 4 unused classes found in CSS files:
 - nu

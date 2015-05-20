@@ -7,7 +7,7 @@ var assert = require('assert')
   , fixturesPath = __dirname + '/fixtures/'
   , fixturesDir = 'test/fixtures/'
 
-describe.skip('cli', function () {
+describe('cli', function () {
 
   it('should output the current version number', function (done) {
     exec
@@ -71,7 +71,7 @@ describe.skip('cli', function () {
   })
 
   it('should error if no CSS files found', function (done) {
-    var errorMessage = 'Stylperjade: no CSS files found'
+    var errorMessage = 'No CSS files found'
 
     exec
       ( 'node ./bin/stylperjade nonexistent **/test*.jade'
@@ -87,7 +87,7 @@ describe.skip('cli', function () {
   })
 
   it('should error if no Jade files found', function (done) {
-    var errorMessage = 'Stylperjade: no Jade files found'
+    var errorMessage = 'No Jade files found'
 
     exec
       ( 'node ./bin/stylperjade **/test.css nonexistent'
@@ -104,7 +104,7 @@ describe.skip('cli', function () {
 
   it('should error if CSS files are invalid', function (done) {
     var cssFile = 'invalid.css'
-      , errorMessage = 'Stylperjade: CSS file \'' + fixturesDir + cssFile + '\' error - '
+      , errorMessage = 'CSS file \'' + fixturesDir + cssFile + '\' error - '
 
     exec
       ( 'node ./bin/stylperjade **/' + cssFile + ' **/test*.jade'
@@ -121,7 +121,7 @@ describe.skip('cli', function () {
 
   it('should error if Jade files are invalid', function (done) {
     var jadeFile = 'invalid.jade'
-      , errorMessage = 'Stylperjade: Jade file \'' + fixturesDir + jadeFile + '\' error - '
+      , errorMessage = 'Jade file \'' + fixturesDir + jadeFile + '\' error - '
 
     exec
       ( 'node ./bin/stylperjade **/test.css **/' + jadeFile
@@ -137,7 +137,7 @@ describe.skip('cli', function () {
   })
 
   it('should error if options.stylperjaderc is not found', function (done) {
-    var errorMessage = 'Stylperjade: .stylperjaderc not found'
+    var errorMessage = '.stylperjaderc not found'
 
     exec
       ( 'node ./bin/stylperjade -c nonexistent **/test.css **/test*.jade'
@@ -153,7 +153,7 @@ describe.skip('cli', function () {
   })
 
   it('should error if options.stylperjaderc is invalid', function (done) {
-    var errorMessage = 'Stylperjade: .stylperjaderc is invalid JSON'
+    var errorMessage = '.stylperjaderc is invalid JSON'
 
     exec
       ( 'node ./bin/stylperjade -v -c ' + fixturesPath + '.stylperjaderc-invalid **/test.css **/test*.jade'

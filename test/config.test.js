@@ -18,7 +18,7 @@ describe('config', function () {
         assert.equal(results, null)
       })
     }
-    , /Stylperjade: .stylperjaderc not found/)
+    , /.stylperjaderc not found/)
     done()
   })
 
@@ -32,7 +32,7 @@ describe('config', function () {
         assert.equal(results, null)
       })
     }
-    , /Stylperjade: .stylperjaderc is invalid JSON/)
+    , /.stylperjaderc is invalid JSON/)
     done()
   })
 

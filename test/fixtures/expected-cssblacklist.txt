@@ -1,4 +1,4 @@
-✘ Stylperjade: 3 blacklisted classes found
+✘ 3 blacklisted classes found
 
 3 blacklisted classes found in CSS files:
 - delta
@@ -8,7 +8,7 @@
 - kappa
   %dirname%/fixtures/test.css:17
 
-✘ Stylperjade: 18 unused classes found
+✘ 18 unused classes found
 
 6 unused classes found in CSS files:
 - delta--modifier
