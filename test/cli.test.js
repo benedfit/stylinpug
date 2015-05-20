@@ -2,39 +2,53 @@ var assert = require('assert')
   , chalk = require('chalk')
   , exec = require('child_process').exec
   , fs = require('fs')
+  , package = require('../package.json')
 
   , fixturesPath = __dirname + '/fixtures/'
   , fixturesDir = 'test/fixtures/'
 
 describe('cli', function () {
 
-  it('should error if no CSS files specified', function (done) {
-    var errorMessage = 'Stylperjade: no CSS files found'
-
+  it('should output the current version number', function (done) {
     exec
-      ( 'node ./bin/stylperjade'
+      ( 'node ./bin/stylperjade -V'
       , { cwd: __dirname + '/../' }
       , function (err, stdout, stderr) {
-          assert(err)
-          assert.equal(err.message.indexOf(errorMessage) !== -1, true)
-          assert.equal(stderr.indexOf(errorMessage) !== -1, true)
-          assert.equal(stdout, '')
+          assert(!err, err)
+          assert.equal(stderr, '')
+          assert.equal(stdout.indexOf(package.version) !== -1, true)
           done()
         }
       )
   })
 
-  it('should error if no Jade files specified', function (done) {
-    var errorMessage = 'Stylperjade: no Jade files found'
+  it('should output help if no CSS files specified', function (done) {
+    var errorMessage = 'Usage: stylperjade [options] <cssFiles ...> <jadeFiles ...>'
+
+    exec
+      ( 'node ./bin/stylperjade'
+      , { cwd: __dirname + '/../' }
+      , function (err, stdout, stderr) {
+          assert(!err, err)
+          assert.equal(stderr, '')
+          assert.equal(stdout.indexOf(errorMessage) !== -1, true)
+          assert.equal(stdout.indexOf(package.description) !== -1, true)
+          done()
+        }
+      )
+  })
+
+  it('should output help if no Jade files specified', function (done) {
+    var errorMessage = 'Usage: stylperjade [options] <cssFiles ...> <jadeFiles ...>'
 
     exec
       ( 'node ./bin/stylperjade **/*.css'
       , { cwd: __dirname + '/../' }
       , function (err, stdout, stderr) {
-          assert(err)
-          assert.equal(err.message.indexOf(errorMessage) !== -1, true)
-          assert.equal(stderr.indexOf(errorMessage) !== -1, true)
-          assert.equal(stdout, '')
+          assert(!err, err)
+          assert.equal(stderr, '')
+          assert.equal(stdout.indexOf(errorMessage) !== -1, true)
+          assert.equal(stdout.indexOf(package.description) !== -1, true)
           done()
         }
       )
@@ -146,10 +160,10 @@ describe('cli', function () {
       , { cwd: __dirname + '/../' }
       , function (err, stdout, stderr) {
           assert(!err, err)
+          assert.equal(stderr, '')
           assert.equal(chalk.stripColor(stdout.trim())
             , expectedReport.replace(/%dirname%/g, __dirname).trim()
             , stdout)
-          assert.equal(stderr, '')
           done()
         }
       )
@@ -163,10 +177,10 @@ describe('cli', function () {
       , { cwd: __dirname + '/../' }
       , function (err, stdout, stderr) {
           assert(!err, err)
+          assert.equal(stderr, '')
           assert.equal(chalk.stripColor(stdout.trim())
             , expectedReport.replace(/%dirname%/g, __dirname).trim()
             , stdout)
-          assert.equal(stderr, '')
           done()
         }
       )
@@ -180,10 +194,10 @@ describe('cli', function () {
       , { cwd: __dirname + '/../' }
       , function (err, stdout, stderr) {
           assert(!err, err)
+          assert.equal(stderr, '')
           assert.equal(chalk.stripColor(stdout.trim())
             , expectedReport.replace(/%dirname%/g, __dirname).trim()
             , stdout)
-          assert.equal(stderr, '')
           done()
         }
       )
@@ -197,10 +211,10 @@ describe('cli', function () {
       , { cwd: __dirname + '/../' }
       , function (err, stdout, stderr) {
           assert(!err, err)
+          assert.equal(stderr, '')
           assert.equal(chalk.stripColor(stdout.trim())
             , expectedReport.replace(/%dirname%/g, __dirname).trim()
             , stdout)
-          assert.equal(stderr, '')
           done()
         }
       )
