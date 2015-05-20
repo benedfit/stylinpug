@@ -43,8 +43,8 @@ describe('config', function () {
 
     stylperjade(cssFiles, jadeFiles, options, function (err, results) {
       assert(!err, err)
-      assert.equal(results.unusedTotal, 11)
-      assert.equal(results.unusedCssCount, 3)
+      assert.equal(results.unusedTotal, 12)
+      assert.equal(results.unusedCssCount, 4)
       assert.equal(results.unusedJadeCount, 8)
       assert.equal(results.blacklistedTotal, 7)
       assert.equal(results.blacklistedCssCount, 2)
@@ -60,8 +60,8 @@ describe('config', function () {
 
     stylperjade(cssFiles, jadeFiles, function (err, results) {
       assert(!err, err)
-      assert.equal(results.unusedTotal, 17)
-      assert.equal(results.unusedCssCount, 5)
+      assert.equal(results.unusedTotal, 18)
+      assert.equal(results.unusedCssCount, 6)
       assert.equal(results.unusedJadeCount, 12)
       assert.equal(results.blacklistedTotal, 0)
       assert.equal(results.blacklistedCssCount, 0)
