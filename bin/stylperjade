@@ -21,15 +21,10 @@ program
     )
   .usage('[options] <cssFiles...> <jadeFiles...>')
   .action(function (cssFiles, jadeFiles) {
-    console.log(333, cssFiles)
-    console.log(444, jadeFiles)
     if (cssFiles && typeof cssFiles === 'string') cssPatterns.push(cssFiles)
     if (jadeFiles && typeof jadeFiles === 'string') jadePatterns.push(jadeFiles)
   })
   .parse(process.argv)
-
-console.log(111, cssPatterns)
-console.log(222, jadePatterns)
 
 if (!cssPatterns.length || !jadePatterns.length) {
   program.help()
