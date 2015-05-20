@@ -1,5 +1,8 @@
-{ "cssWhitelist":
-  /* comments are valid, and will be stripped */
+/* comments are valid, and will be stripped */
+{ "ignoreFiles":
+  [ ""
+  ]
+, "cssWhitelist":
   [ "delta*"
   , "kappa"
   ]
