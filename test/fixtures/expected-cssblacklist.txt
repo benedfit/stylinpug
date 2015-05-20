@@ -8,9 +8,9 @@
 - kappa
   %dirname%/fixtures/test.css:17
 
-✘ Stylperjade: 17 unused classes found
+✘ Stylperjade: 18 unused classes found
 
-5 unused classes found in CSS files:
+6 unused classes found in CSS files:
 - delta--modifier
   %dirname%/fixtures/test.css:14
 - kappa
@@ -20,9 +20,11 @@
   %dirname%/fixtures/test.css:38
   %dirname%/fixtures/test.css:44
   %dirname%/fixtures/test.css:47
-  %dirname%/fixtures/test.css:54:3
+  %dirname%/fixtures/test.css:57:3
 - omega
   %dirname%/fixtures/test.css:26
+- omicron
+  %dirname%/fixtures/test.css:53
 - pi
   %dirname%/fixtures/test.css:35
   %dirname%/fixtures/test.css:50

@@ -1,16 +1,18 @@
 ✔ Stylperjade: No blacklisted classes found
 
-✘ Stylperjade: 15 unused classes found
+✘ Stylperjade: 16 unused classes found
 
-3 unused classes found in CSS files:
+4 unused classes found in CSS files:
 - nu
   %dirname%/fixtures/test.css:32
   %dirname%/fixtures/test.css:38
   %dirname%/fixtures/test.css:44
   %dirname%/fixtures/test.css:47
-  %dirname%/fixtures/test.css:54:3
+  %dirname%/fixtures/test.css:57:3
 - omega
   %dirname%/fixtures/test.css:26
+- omicron
+  %dirname%/fixtures/test.css:53
 - pi
   %dirname%/fixtures/test.css:35
   %dirname%/fixtures/test.css:50
