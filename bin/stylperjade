@@ -21,6 +21,8 @@ program
     )
   .usage('[options] <cssFiles...> <jadeFiles...>')
   .action(function (cssFiles, jadeFiles) {
+    console.log(333, cssFiles)
+    console.log(444, jadeFiles)
     if (cssFiles && typeof cssFiles === 'string') cssPatterns.push(cssFiles)
     if (jadeFiles && typeof jadeFiles === 'string') jadePatterns.push(jadeFiles)
   })
