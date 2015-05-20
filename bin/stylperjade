@@ -19,12 +19,15 @@ program
     ( '-v, --verbose'
     , 'Displays the visual representation of blacklisted and unused classes found across all files'
     )
-  .usage('[options] <cssFiles ...> <jadeFiles ...>')
+  .usage('[options] <cssFiles...> <jadeFiles...>')
   .action(function (cssFiles, jadeFiles) {
     if (cssFiles && typeof cssFiles === 'string') cssPatterns.push(cssFiles)
     if (jadeFiles && typeof jadeFiles === 'string') jadePatterns.push(jadeFiles)
   })
   .parse(process.argv)
+
+console.log(111, cssPatterns)
+console.log(222, jadePatterns)
 
 if (!cssPatterns.length || !jadePatterns.length) {
   program.help()
@@ -37,8 +40,6 @@ if (program.config) {
 try {
   stylperjade(cssPatterns, jadePatterns, options, function (err, results) {
     if (err) {
-      console.error(cssPatterns)
-      console.error(jadePatterns)
       console.error(err)
       process.exit(1)
     }
