@@ -9,244 +9,214 @@ var assert = require('assert')
 
 describe('cli', function () {
 
+  function run(options, done) {
+    var bin = 'node ./bin/stylperjade'
+      , execOpts = { cwd: __dirname + '/../' }
+
+    exec(bin + ' ' + options, execOpts, function (err, stdout, stderr) {
+      done
+        ( null
+        , { err: err
+          , stdout: stdout.trim()
+          , stderr: stderr.trim()
+          }
+        )
+    })
+  }
+
   it('should output the current version number', function (done) {
-    exec
-      ( 'node ./bin/stylperjade -V'
-      , { cwd: __dirname + '/../' }
-      , function (err, stdout, stderr) {
-          assert(!err, err)
-          assert.equal(stderr, '')
-          assert.equal(stdout.indexOf(package.version) !== -1, true)
-          done()
-        }
-      )
+    run('-V', function (err, result) {
+      assert(!err, err)
+      assert(!result.err, result.err)
+      assert.equal(result.stderr, '')
+      assert.equal(result.stdout.indexOf(package.version) !== -1, true)
+      done()
+    })
   })
 
   it('should output help', function (done) {
     var message = 'Usage: stylperjade [options] <cssFiles ...> <jadeFiles ...>'
 
-    exec
-      ( 'node ./bin/stylperjade -h'
-      , { cwd: __dirname + '/../' }
-      , function (err, stdout, stderr) {
-          assert(!err, err)
-          assert.equal(stderr, '')
-          assert.equal(stdout.indexOf(message) !== -1, true)
-          assert.equal(stdout.indexOf(package.description) !== -1, true)
-          done()
-        }
-      )
+    run('-h', function (err, result) {
+      assert(!err, err)
+      assert(!result.err, result.err)
+      assert.equal(result.stderr, '')
+      assert.equal(result.stdout.indexOf(message) !== -1, true)
+      assert.equal(result.stdout.indexOf(package.description) !== -1, true)
+      done()
+    })
   })
 
   it('should output help if no CSS files specified', function (done) {
     var message = 'Usage: stylperjade [options] <cssFiles ...> <jadeFiles ...>'
 
-    exec
-      ( 'node ./bin/stylperjade'
-      , { cwd: __dirname + '/../' }
-      , function (err, stdout, stderr) {
-          assert(!err, err)
-          assert.equal(stderr, '')
-          assert.equal(stdout.indexOf(message) !== -1, true)
-          assert.equal(stdout.indexOf(package.description) !== -1, true)
-          done()
-        }
-      )
+    run('', function (err, result) {
+      assert(!err, err)
+      assert(!result.err, result.err)
+      assert.equal(result.stderr, '')
+      assert.equal(result.stdout.indexOf(message) !== -1, true)
+      assert.equal(result.stdout.indexOf(package.description) !== -1, true)
+      done()
+    })
   })
 
   it('should output help if no Jade files specified', function (done) {
     var message = 'Usage: stylperjade [options] <cssFiles ...> <jadeFiles ...>'
 
-    exec
-      ( 'node ./bin/stylperjade **/*.css'
-      , { cwd: __dirname + '/../' }
-      , function (err, stdout, stderr) {
-          assert(!err, err)
-          assert.equal(stderr, '')
-          assert.equal(stdout.indexOf(message) !== -1, true)
-          assert.equal(stdout.indexOf(package.description) !== -1, true)
-          done()
-        }
-      )
+    run('**/*.css', function (err, result) {
+      assert(!err, err)
+      assert(!result.err, result.err)
+      assert.equal(result.stderr, '')
+      assert.equal(result.stdout.indexOf(message) !== -1, true)
+      assert.equal(result.stdout.indexOf(package.description) !== -1, true)
+      done()
+    })
   })
 
   it('should error if no CSS files found', function (done) {
     var errorMessage = 'No CSS files found'
 
-    exec
-      ( 'node ./bin/stylperjade nonexistent **/test*.jade'
-      , { cwd: __dirname + '/../' }
-      , function (err, stdout, stderr) {
-          assert(err)
-          assert.equal(err.message.indexOf(errorMessage) !== -1, true)
-          assert.equal(stderr.indexOf(errorMessage) !== -1, true)
-          assert.equal(stdout, '')
-          done()
-        }
-      )
+    run('nonexistent **/test*.jade', function (err, result) {
+      assert(!err, err)
+      assert(result.err)
+      assert.equal(result.err.message.indexOf(errorMessage) !== -1, true)
+      assert.equal(result.stderr.indexOf(errorMessage) !== -1, true)
+      assert.equal(result.stdout, '')
+      done()
+    })
   })
 
   it('should error if no Jade files found', function (done) {
     var errorMessage = 'No Jade files found'
 
-    exec
-      ( 'node ./bin/stylperjade **/test.css nonexistent'
-      , { cwd: __dirname + '/../' }
-      , function (err, stdout, stderr) {
-          assert(err)
-          assert.equal(err.message.indexOf(errorMessage) !== -1, true)
-          assert.equal(stderr.indexOf(errorMessage) !== -1, true)
-          assert.equal(stdout, '')
-          done()
-        }
-      )
+    run('**/test.css nonexistent', function (err, result) {
+      assert(!err, err)
+      assert(result.err)
+      assert.equal(result.err.message.indexOf(errorMessage) !== -1, true)
+      assert.equal(result.stderr.indexOf(errorMessage) !== -1, true)
+      assert.equal(result.stdout, '')
+      done()
+    })
   })
 
   it('should error if CSS files are invalid', function (done) {
     var cssFile = 'invalid.css'
       , errorMessage = 'CSS file \'' + fixturesDir + cssFile + '\' error - '
 
-    exec
-      ( 'node ./bin/stylperjade **/' + cssFile + ' **/test*.jade'
-      , { cwd: __dirname + '/../' }
-      , function (err, stdout, stderr) {
-          assert(err)
-          assert.equal(err.message.indexOf(errorMessage) !== -1, true)
-          assert.equal(stderr.indexOf(errorMessage) !== -1, true)
-          assert.equal(stdout, '')
-          done()
-        }
-      )
+    run('**/' + cssFile + ' **/test*.jade', function (err, result) {
+      assert(!err, err)
+      assert(result.err)
+      assert.equal(result.err.message.indexOf(errorMessage) !== -1, true)
+      assert.equal(result.stderr.indexOf(errorMessage) !== -1, true)
+      assert.equal(result.stdout, '')
+      done()
+    })
   })
 
   it('should error if Jade files are invalid', function (done) {
     var jadeFile = 'invalid.jade'
       , errorMessage = 'Jade file \'' + fixturesDir + jadeFile + '\' error - '
 
-    exec
-      ( 'node ./bin/stylperjade **/test.css **/' + jadeFile
-      , { cwd: __dirname + '/../' }
-      , function (err, stdout, stderr) {
-          assert(err)
-          assert.equal(err.message.indexOf(errorMessage) !== -1, true)
-          assert.equal(stderr.indexOf(errorMessage) !== -1, true)
-          assert.equal(stdout, '')
-          done()
-        }
-      )
+    run('**/test.css **/' + jadeFile, function (err, result) {
+      assert(!err, err)
+      assert(result.err)
+      assert.equal(result.err.message.indexOf(errorMessage) !== -1, true)
+      assert.equal(result.stderr.indexOf(errorMessage) !== -1, true)
+      assert.equal(result.stdout, '')
+      done()
+    })
   })
 
   it('should error if options.stylperjaderc is not found', function (done) {
     var errorMessage = '.stylperjaderc not found'
 
-    exec
-      ( 'node ./bin/stylperjade -c nonexistent **/test.css **/test*.jade'
-      , { cwd: __dirname + '/../' }
-      , function (err, stdout, stderr) {
-          assert(err)
-          assert.equal(err.message.indexOf(errorMessage) !== -1, true)
-          assert.equal(stderr.indexOf(errorMessage) !== -1, true)
-          assert.equal(stdout, '')
-          done()
-        }
-      )
+    run('-c nonexistent **/test.css **/test*.jade', function (err, result) {
+      assert(!err, err)
+      assert(result.err)
+      assert.equal(result.err.message.indexOf(errorMessage) !== -1, true)
+      assert.equal(result.stderr.indexOf(errorMessage) !== -1, true)
+      assert.equal(result.stdout, '')
+      done()
+    })
   })
 
   it('should error if options.stylperjaderc is invalid', function (done) {
     var errorMessage = '.stylperjaderc is invalid JSON'
 
-    exec
-      ( 'node ./bin/stylperjade -v -c ' + fixturesPath + '.stylperjaderc-invalid **/test.css **/test*.jade'
-      , { cwd: __dirname + '/../' }
-      , function (err, stdout, stderr) {
-          assert(err)
-          assert.equal(err.message.indexOf(errorMessage) !== -1, true)
-          assert.equal(stderr.indexOf(errorMessage) !== -1, true)
-          assert.equal(stdout, '')
-          done()
-        }
-      )
+    run('-v -c ' + fixturesPath + '.stylperjaderc-invalid **/test.css **/test*.jade', function (err, result) {
+      assert(!err, err)
+      assert(result.err)
+      assert.equal(result.err.message.indexOf(errorMessage) !== -1, true)
+      assert.equal(result.stderr.indexOf(errorMessage) !== -1, true)
+      assert.equal(result.stdout, '')
+      done()
+    })
   })
 
   it('should load config from options.stylperjaderc', function (done) {
     var expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
 
-    exec
-      ( 'node ./bin/stylperjade -v -c ' + fixturesPath + '.stylperjaderc-valid **/test.css **/test*.jade'
-      , { cwd: __dirname + '/../' }
-      , function (err, stdout, stderr) {
-          assert(!err, err)
-          assert.equal(stderr, '')
-          assert.equal(chalk.stripColor(stdout).trim()
-            , expectedReport.replace(/%dirname%/g, __dirname).trim()
-            , stdout)
-          done()
-        }
-      )
+    run('-v -c ' + fixturesPath + '.stylperjaderc-valid **/test.css **/test*.jade', function (err, result) {
+      assert(!err, err)
+      assert(!result.err, result.err)
+      assert.equal(result.stderr, '')
+      assert.equal(chalk.stripColor(result.stdout).trim()
+        , expectedReport.replace(/%dirname%/g, __dirname).trim()
+        , result.stdout)
+      done()
+    })
   })
 
   it('should load config from .stylperjaderc in project root if no options are set', function (done) {
     var expectedReport = fs.readFileSync(fixturesPath + 'expected-unused.txt', 'utf-8')
 
-    exec
-      ( 'node ./bin/stylperjade -v **/test.css **/test*.jade'
-      , { cwd: __dirname + '/../' }
-      , function (err, stdout, stderr) {
-          assert(!err, err)
-          assert.equal(stderr, '')
-          assert.equal(chalk.stripColor(stdout).trim()
-            , expectedReport.replace(/%dirname%/g, __dirname).trim()
-            , stdout)
-          done()
-        }
-      )
+    run('-v **/test.css **/test*.jade', function (err, result) {
+      assert(!err, err)
+      assert(!result.err, result.err)
+      assert.equal(result.stderr, '')
+      assert.equal(chalk.stripColor(result.stdout).trim()
+        , expectedReport.replace(/%dirname%/g, __dirname).trim()
+        , result.stdout)
+      done()
+    })
   })
 
   it('should report the locations of unused CSS classes using external sourcemap', function (done) {
     var expectedReport = fs.readFileSync(fixturesPath + 'expected-sourcemap.txt', 'utf-8')
 
-    exec
-      ( 'node ./bin/stylperjade -v **/test-sourcemap.css **/test*.jade'
-      , { cwd: __dirname + '/../' }
-      , function (err, stdout, stderr) {
-          assert(!err, err)
-          assert.equal(stderr, '')
-          assert.equal(chalk.stripColor(stdout).trim()
-            , expectedReport.replace(/%dirname%/g, __dirname).trim()
-            , stdout)
-          done()
-        }
-      )
+    run('-v **/test-sourcemap.css **/test*.jade', function (err, result) {
+      assert(!err, err)
+      assert(!result.err, result.err)
+      assert.equal(result.stderr, '')
+      assert.equal(chalk.stripColor(result.stdout).trim()
+        , expectedReport.replace(/%dirname%/g, __dirname).trim()
+        , result.stdout)
+      done()
+    })
   })
 
   it('should report the locations of unused CSS classes using inline sourcemap', function (done) {
     var expectedReport = fs.readFileSync(fixturesPath + 'expected-sourcemap.txt', 'utf-8')
 
-    exec
-      ( 'node ./bin/stylperjade -v **/test-sourcemap-inline.css **/test*.jade'
-      , { cwd: __dirname + '/../' }
-      , function (err, stdout, stderr) {
-          assert(!err, err)
-          assert.equal(stderr, '')
-          assert.equal(chalk.stripColor(stdout).trim()
-            , expectedReport.replace(/%dirname%/g, __dirname).trim()
-            , stdout)
-          done()
-        }
-      )
+    run('-v **/test-sourcemap-inline.css **/test*.jade', function (err, result) {
+      assert(!err, err)
+      assert(!result.err, result.err)
+      assert.equal(result.stderr, '')
+      assert.equal(chalk.stripColor(result.stdout).trim()
+        , expectedReport.replace(/%dirname%/g, __dirname).trim()
+        , result.stdout)
+      done()
+    })
   })
 
   it('should output silently by default', function (done) {
-    exec
-      ( 'node ./bin/stylperjade **/test.css **/test*.jade'
-      , { cwd: __dirname + '/../' }
-      , function (err, stdout, stderr) {
-          assert(!err, err)
-          assert.equal(stderr, '')
-          assert.equal(stdout, '')
-          done()
-        }
-      )
+    run( '**/test.css **/test*.jade', function (err, result) {
+      assert(!err, err)
+      assert(!result.err, result.err)
+      assert.equal(result.stderr, '')
+      assert.equal(result.stdout, '')
+      done()
+    })
   })
 
 })
