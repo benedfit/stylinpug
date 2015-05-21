@@ -23,10 +23,10 @@ $ stylperjade [options] <cssFiles...> <jadeFiles...>
 
 ### options
 
--h, --help: output usage information
--V, --version: output the version number
--c, --config <file>: The alternative path to a [.stylperjaderc](.stylperjaderc) file to load options from
--v, --verbose: Displays the [visual representation](#user-content-example-report) of blacklisted and unused classes found across all files
+* `-h, --help`: Output usage information
+* `-V, --version`: Output the version number
+* `-c, --config <file>`: The alternative path to a [.stylperjaderc](#user-content-configuration-file) file to load options from
+* `-v, --verbose`: Displays the [visual representation](#user-content-example-report) of blacklisted and unused classes found across all files
 
 ## API
 
