@@ -7,13 +7,36 @@ Pronounced: /[stʌɪl](//ssl.gstatic.com/dictionary/static/sounds/de/0/style.mp3
 [![build](https://img.shields.io/travis/benedfit/stylperjade.svg)](https://travis-ci.org/benedfit/stylperjade)
 [![npm](https://img.shields.io/npm/v/stylperjade.svg)](https://www.npmjs.com/package/stylperjade)
 
+## CLI
+
 ## Installation
+
+```shell
+$ npm install stylperjade -g
+```
+
+## Usage
+
+```shell
+$ stylperjade [options] <cssFiles...> <jadeFiles...>
+```
+
+### options
+
+-h, --help: output usage information
+-V, --version: output the version number
+-c, --config <file>: The alternative path to a [.stylperjaderc](.stylperjaderc) file to load options from
+-v, --verbose: Displays the [visual representation](#user-content-example-report) of blacklisted and unused classes found across all files
+
+## API
+
+### Installation
 
 ```shell
 $ npm install stylperjade --save
 ```
 
-## Usage
+### Usage
 
 ```js
 var stylperjade = require('stylperjade')
@@ -32,24 +55,6 @@ stylperjade(cssFiles, jadeFiles, options, function (err, results) {
   console.log(results.report)
 })
 ```
-
-### Configuration file
-
-Alternatively options can be specified in a `.stylperjaderc` file ([see example](.stylperjaderc)). If no options have been specified, Stylperjade checks the current working directory to see if there is a `.stylperjaderc` file present. This can be overridden by setting `options.stylperjaderc` to the path of the desired configuration file:
-
-```js
-var options = { stylperjaderc: '/path/to/.stylperjaderc' }
-
-stylperjade(cssFiles, jadeFiles, options, function (err, results) {
-  console.log(results.report)
-})
-```
-
-### Known issues
-
-* [Line number are not reported for classes found in Jade \#\[\] syntax blocks](https://github.com/benedfit/stylperjade/issues/7)
-
-## API
 
 ### stylperjade(cssFiles, jadeFiles, [options,] callback)
 
@@ -118,6 +123,22 @@ Type: `object`
 ###### Example report
 
 ![](example-report.png)
+
+## Configuration file
+
+Options can be specified in a `.stylperjaderc` file ([see example](.stylperjaderc)). If no options have been specified, Stylperjade checks the current working directory to see if there is a `.stylperjaderc` file present. This can be overridden by setting `options.stylperjaderc` to the path of the desired configuration file:
+
+```js
+var options = { stylperjaderc: '/path/to/.stylperjaderc' }
+
+stylperjade(cssFiles, jadeFiles, options, function (err, results) {
+  console.log(results.report)
+})
+```
+
+## Known issues
+
+* [Line number are not reported for classes found in Jade \#\[\] syntax blocks](https://github.com/benedfit/stylperjade/issues/7)
 
 ## Licence
 ISC © [Ben Edwards](https://github.com/benedfit/)

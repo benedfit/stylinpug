@@ -1,3 +1,12 @@
+## v1.0.0 / 2005-05-21
+
+### Highlights
+* File name patterns can now be added to `options.ignoreFile` to whitelist all classes found in those files
+* CLI support
+
+### Changes
+[v0.3.6...v1.0.0](https://github.com/benedfit/stylperjade/compare/v0.3.6...v1.0.0)
+
 ## v0.3.6 / 2015-04-13
 
 ### Highlights
