@@ -7,7 +7,7 @@ var assert = require('assert')
   , fixturesPath = __dirname + '/fixtures/'
   , fixturesDir = 'test/fixtures/'
 
-describe.skip('cli', function () {
+describe('cli', function () {
 
   it('should output the current version number', function (done) {
     exec
