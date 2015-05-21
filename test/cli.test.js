@@ -177,8 +177,8 @@ describe.skip('cli', function () {
       , function (err, stdout, stderr) {
           assert(!err, err)
           assert.equal(stderr, '')
-          assert.equal(chalk.stripColor(stdout)
-            , expectedReport.replace(/%dirname%/g, __dirname)
+          assert.equal(chalk.stripColor(stdout).trim()
+            , expectedReport.replace(/%dirname%/g, __dirname).trim()
             , stdout)
           done()
         }
@@ -194,8 +194,8 @@ describe.skip('cli', function () {
       , function (err, stdout, stderr) {
           assert(!err, err)
           assert.equal(stderr, '')
-          assert.equal(chalk.stripColor(stdout)
-            , expectedReport.replace(/%dirname%/g, __dirname)
+          assert.equal(chalk.stripColor(stdout).trim()
+            , expectedReport.replace(/%dirname%/g, __dirname).trim()
             , stdout)
           done()
         }
@@ -211,8 +211,8 @@ describe.skip('cli', function () {
       , function (err, stdout, stderr) {
           assert(!err, err)
           assert.equal(stderr, '')
-          assert.equal(chalk.stripColor(stdout)
-            , expectedReport.replace(/%dirname%/g, __dirname)
+          assert.equal(chalk.stripColor(stdout).trim()
+            , expectedReport.replace(/%dirname%/g, __dirname).trim()
             , stdout)
           done()
         }
@@ -228,8 +228,8 @@ describe.skip('cli', function () {
       , function (err, stdout, stderr) {
           assert(!err, err)
           assert.equal(stderr, '')
-          assert.equal(chalk.stripColor(stdout)
-            , expectedReport.replace(/%dirname%/g, __dirname)
+          assert.equal(chalk.stripColor(stdout).trim()
+            , expectedReport.replace(/%dirname%/g, __dirname).trim()
             , stdout)
           done()
         }
