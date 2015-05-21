@@ -1,12 +1,8 @@
 #!/usr/bin/env node
 
-var program = require('commander')
+var cli = require('../lib/cli')
+  , program = require('commander')
   , package = require('../package.json')
-  , stylperjade = require('../lib/stylperjade')
-
-  , cssPatterns = []
-  , jadePatterns = []
-  , options = {}
 
 program
   .version(package.version)
@@ -20,35 +16,6 @@ program
     ( '-v, --verbose'
     , 'Displays the visual representation of blacklisted and unused classes found across all files'
     )
-  .usage('[options] <cssFiles...> <jadeFiles...>')
-  .action(function (cssFiles, jadeFiles) {
-    if (cssFiles && typeof cssFiles === 'string') cssPatterns.push(cssFiles)
-    if (jadeFiles && typeof jadeFiles === 'string') jadePatterns.push(jadeFiles)
-  })
   .parse(process.argv)
 
-if (!cssPatterns.length || !jadePatterns.length) {
-  program.help()
-}
-
-if (program.config) {
-  options.stylperjaderc = program.config
-}
-
-try {
-  stylperjade(cssPatterns, jadePatterns, options, function (err, results) {
-    if (err) {
-      console.error(err)
-      process.exit(1)
-    }
-
-    if (program.verbose) {
-      console.log(results.report)
-    }
-
-    process.exit()
-  })
-} catch (err) {
-  console.error(err)
-  process.exit(1)
-}
+cli(program)
