@@ -1,4 +1,5 @@
-✘ Stylperjade: 5 blacklisted classes found
+
+✘ 5 blacklisted classes found
 
 2 blacklisted classes found in CSS files:
 - delta
@@ -14,4 +15,4 @@
 - js-mu
   %dirname%/fixtures/test-include.jade:2
 
-✔ Stylperjade: No unused classes found
+✔ No unused classes found

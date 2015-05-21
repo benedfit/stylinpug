@@ -1,4 +1,8 @@
-{ "cssWhitelist":
+{ "ignoreFiles":
+  [ "coverage"
+  , "node_modules/**"
+  ]
+, "cssWhitelist":
   [
   ]
 , "jadeWhitelist":

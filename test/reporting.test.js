@@ -15,8 +15,8 @@ describe('reporting', function () {
 
     stylperjade(cssFiles, jadeFiles, function (err, results) {
       assert(!err, err)
-      assert.equal(results.unusedTotal, 17)
-      assert.equal(results.unusedCssCount, 5)
+      assert.equal(results.unusedTotal, 18)
+      assert.equal(results.unusedCssCount, 6)
       assert.equal(results.unusedJadeCount, 12)
       assert.equal(results.blacklistedTotal, 0)
       assert.equal(results.blacklistedCssCount, 0)
@@ -70,6 +70,28 @@ describe('reporting', function () {
       , options =
       { cssWhitelist: [ 'test-import.styl' ]
       , jadeWhitelist: [ 'test-include.jade' ]
+      }
+
+    stylperjade(cssFiles, jadeFiles, options, function (err, results) {
+      assert(!err, err)
+      assert.equal(results.unusedTotal, 9)
+      assert.equal(results.unusedCssCount, 4)
+      assert.equal(results.unusedJadeCount, 5)
+      assert.equal(_.findIndex(results.unusedCssClasses, 'name', 'nu') !== -1, true)
+      assert.equal(_.findIndex(results.unusedCssClasses, 'name', 'pi') === -1, true)
+      assert.equal(_.findIndex(results.unusedJadeClasses, 'name', 'epsilon') !== -1, true)
+      assert.equal(_.findIndex(results.unusedJadeClasses, 'name', 'theta') === -1, true)
+      assert.equal(results.report.indexOf('test-import.styl') === -1, true, results.report)
+      assert.equal(results.report.indexOf('test-include.jade') === -1, true, results.report)
+      done()
+    })
+  })
+
+  it('should not report the locations of unused CSS for ignored files', function (done) {
+    var cssFiles = [ fixturesPath + 'test-sourcemap-inline.css' ]
+      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
+      , options =
+      { ignoreFiles: [ '**/test-import.styl', '**/test-include.jade' ]
       }
 
     stylperjade(cssFiles, jadeFiles, options, function (err, results) {
@@ -145,8 +167,8 @@ describe('reporting', function () {
 
     stylperjade(cssFiles, jadeFiles, options, function (err, results) {
       assert(!err, err)
-      assert.equal(results.unusedTotal, 15)
-      assert.equal(results.unusedCssCount, 3)
+      assert.equal(results.unusedTotal, 16)
+      assert.equal(results.unusedCssCount, 4)
       assert.equal(results.unusedJadeCount, 12)
       assert.equal(_.findIndex(results.unusedCssClasses, 'name', 'delta--modifier') === -1, true)
       assert.equal(_.findIndex(results.unusedCssClasses, 'name', 'kappa') === -1, true)
@@ -165,8 +187,8 @@ describe('reporting', function () {
 
     stylperjade(cssFiles, jadeFiles, options, function (err, results) {
       assert(!err, err)
-      assert.equal(results.unusedTotal, 14)
-      assert.equal(results.unusedCssCount, 5)
+      assert.equal(results.unusedTotal, 15)
+      assert.equal(results.unusedCssCount, 6)
       assert.equal(results.unusedJadeCount, 9)
       assert.equal(_.findIndex(results.unusedJadeClasses, 'name', 'js-alpha') === -1, true)
       assert.equal(_.findIndex(results.unusedJadeClasses, 'name', 'js-beta-delta') === -1, true)

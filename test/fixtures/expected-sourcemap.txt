@@ -1,8 +1,9 @@
-✔ Stylperjade: No blacklisted classes found
 
-✘ Stylperjade: 17 unused classes found
+✔ No blacklisted classes found
 
-5 unused classes found in CSS files:
+✘ 18 unused classes found
+
+6 unused classes found in CSS files:
 - delta--modifier
   %dirname%/fixtures/test.styl:16
 - kappa
@@ -15,6 +16,8 @@
   %dirname%/fixtures/test.styl:42:2
 - omega
   %dirname%/fixtures/test.styl:29:2
+- omicron
+  %dirname%/fixtures/test-import.styl:19
 - pi
   %dirname%/fixtures/test-import.styl:1
   %dirname%/fixtures/test-import.styl:16

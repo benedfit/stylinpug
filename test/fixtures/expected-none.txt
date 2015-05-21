@@ -1,3 +1,4 @@
-✔ Stylperjade: No blacklisted classes found
 
-✔ Stylperjade: No unused classes found
+✔ No blacklisted classes found
+
+✔ No unused classes found
