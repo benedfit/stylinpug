@@ -1,7 +1,7 @@
 ## v1.0.0 / 2005-05-21
 
 ### Highlights
-* File name patterns can now be added to `options.ignoreFile` to whitelist all classes found in those files
+* File name patterns can now be added to `options.ignoreFiles` to whitelist all classes found in those files
 * CLI support
 
 ### Changes
