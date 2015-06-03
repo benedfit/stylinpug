@@ -9,12 +9,12 @@ program
   .description(package.description)
   .usage('[options] <cssFiles ...> <jadeFiles ...>')
   .option
-    ( '-c, --config <file>'
-    , 'The alternative path to a .stylperjaderc file to load options from'
+    ( '-v, --verbose'
+    , 'displays the visual representation of blacklisted and unused classes found across all files'
     )
   .option
-    ( '-v, --verbose'
-    , 'Displays the visual representation of blacklisted and unused classes found across all files'
+    ( '-c, --config <path>'
+    , 'set path to load options from. Defaults to ./.stylperjaderc'
     )
   .parse(process.argv)
 
