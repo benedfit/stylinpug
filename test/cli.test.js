@@ -173,10 +173,10 @@ describe('cli', function () {
     run('-v **/test.css **/test*.jade', function (err, result) {
       assert(!err, err)
       assert(!result.err, result.err)
-      assert.equal(result.stderr, '')
-      assert.equal(chalk.stripColor(result.stdout).trim()
+      assert.equal(result.stdout, '')
+      assert.equal(chalk.stripColor(result.stderr).trim()
         , expectedReport.replace(/%dirname%/g, __dirname).trim()
-        , result.stdout)
+        , result.stderr)
       done()
     })
   })
@@ -187,10 +187,10 @@ describe('cli', function () {
     run('-v **/test-sourcemap.css **/test*.jade', function (err, result) {
       assert(!err, err)
       assert(!result.err, result.err)
-      assert.equal(result.stderr, '')
-      assert.equal(chalk.stripColor(result.stdout).trim()
+      assert.equal(result.stdout, '')
+      assert.equal(chalk.stripColor(result.stderr).trim()
         , expectedReport.replace(/%dirname%/g, __dirname).trim()
-        , result.stdout)
+        , result.stderr)
       done()
     })
   })
@@ -201,16 +201,16 @@ describe('cli', function () {
     run('-v **/test-sourcemap-inline.css **/test*.jade', function (err, result) {
       assert(!err, err)
       assert(!result.err, result.err)
-      assert.equal(result.stderr, '')
-      assert.equal(chalk.stripColor(result.stdout).trim()
+      assert.equal(result.stdout, '')
+      assert.equal(chalk.stripColor(result.stderr).trim()
         , expectedReport.replace(/%dirname%/g, __dirname).trim()
-        , result.stdout)
+        , result.stderr)
       done()
     })
   })
 
   it('should output silently by default', function (done) {
-    run( '**/test.css **/test*.jade', function (err, result) {
+    run('-c ' + fixturesPath + '.stylperjaderc-valid **/test.css **/test*.jade', function (err, result) {
       assert(!err, err)
       assert(!result.err, result.err)
       assert.equal(result.stderr, '')
