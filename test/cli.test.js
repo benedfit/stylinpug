@@ -181,6 +181,20 @@ describe('cli', function () {
     })
   })
 
+  it('should report the locations of unused CSS classes from all files', function (done) {
+    var expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
+
+    run('-v -c ' + fixturesPath + '.stylperjaderc-valid .', function (err, result) {
+      assert(!err, err)
+      assert(!result.err, result.err)
+      assert.equal(result.stderr, '')
+      assert.equal(chalk.stripColor(result.stdout).trim()
+        , expectedReport.replace(/%dirname%/g, __dirname).trim()
+        , result.stdout)
+      done()
+    })
+  })
+
   it('should report the locations of unused CSS classes using external sourcemap', function (done) {
     var expectedReport = fs.readFileSync(fixturesPath + 'expected-sourcemap.txt', 'utf-8')
 
