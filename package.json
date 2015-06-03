@@ -48,7 +48,7 @@
     "glob": "^5.0.6",
     "jade-lexer": "0.0.4",
     "jade-parser": "0.0.5",
-    "jade-walk": "git://github.com/jadejs/jade-walk.git",
+    "jade-walk": "0.0.2",
     "jsonminify": "^0.2.3",
     "lodash": "^3.1.0",
     "minimatch": "^2.0.1",
