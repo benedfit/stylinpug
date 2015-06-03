@@ -85,4 +85,6 @@ describe('config', function () {
     })
   })
 
+  it('should load config from the .stylperjaderc in working directory when set in options')
+
 })

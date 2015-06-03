@@ -13,6 +13,10 @@ program
     , 'displays the visual representation of blacklisted and unused classes found across all files'
     )
   .option
+    ( '-C, --chdir <path>'
+    , 'change the working directory'
+    )
+  .option
     ( '-c, --config <path>'
     , 'set path to load options from. Defaults to ./.stylperjaderc'
     )

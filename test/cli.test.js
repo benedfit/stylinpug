@@ -181,6 +181,8 @@ describe('cli', function () {
     })
   })
 
+  it('should load config from the .stylperjaderc in working directory when set in options')
+
   it('should report the locations of unused CSS classes from all files', function (done) {
     var expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
 
