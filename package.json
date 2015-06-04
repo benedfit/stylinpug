@@ -33,7 +33,7 @@
     "checkStyle": "jscs .",
     "wrap": "rm -f npm-shrinkwrap.json; npm prune && npm install && npm shrinkwrap && pliers cleanShrinkwrap",
     "pretest": "npm run lint && npm run checkStyle",
-    "test": "istanbul cover _mocha -- -R spec",
+    "test": "istanbul --include-all-sources cover _mocha -- -R spec",
     "posttest": "istanbul check-coverage && rm -rf coverage",
     "preversion": "npm run wrap",
     "prepublish": "npm test"
