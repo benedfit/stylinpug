@@ -86,7 +86,7 @@ Type: `object`
 
 | Name | Type | Description |
 | --- | --- | --- |
-| cwd | 'string' | The alternative path to the current working directory |
+| cwd | `string` | The alternative path to the current working directory |
 | ignoreFiles | `Array` | An array of patterns for file names to ignore when they exist in `.css` files, `.jade` files, or source map sources |
 | cssBlacklist | `Array` | An array of patterns for classes that should never exist in `.css` files or source map sources |
 | cssWhitelist | `Array` | An array patterns for classes, to ignore when they exist in `.css` files or source maps sources but not in `.jade` files |
