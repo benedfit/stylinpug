@@ -85,6 +85,25 @@ describe('config', function () {
     })
   })
 
-  it('should load config from the .stylperjaderc in working directory when set in options')
+  it('should load config from the .stylperjaderc in working directory when set in options', function (done) {
+    var cssFiles = [ 'test.css' ]
+      , jadeFiles = [ 'test*.jade' ]
+      , options = { cwd: fixturesPath }
+      , expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
+
+    stylperjade(cssFiles, jadeFiles, options, function (err, results) {
+      assert(!err, err)
+      assert.equal(results.unusedTotal, 0)
+      assert.equal(results.unusedCssCount, 0)
+      assert.equal(results.unusedJadeCount, 0)
+      assert.equal(results.blacklistedTotal, 0)
+      assert.equal(results.blacklistedCssCount, 0)
+      assert.equal(results.blacklistedJadeCount, 0)
+      assert.equal(chalk.stripColor(results.report.trim())
+        , expectedReport.replace(/%dirname%/g, __dirname).trim()
+        , results.report)
+      done()
+    })
+  })
 
 })

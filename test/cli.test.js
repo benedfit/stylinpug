@@ -5,7 +5,6 @@ var assert = require('assert')
   , package = require('../package.json')
 
   , fixturesPath = __dirname + '/fixtures/'
-  , fixturesDir = 'test/fixtures/'
 
 describe('cli', function () {
 
@@ -101,7 +100,7 @@ describe('cli', function () {
 
   it('should error if CSS files are invalid', function (done) {
     var cssFile = 'invalid.css'
-      , errorMessage = 'CSS file \'' + fixturesDir + cssFile + '\' error - '
+      , errorMessage = 'CSS file \'' + fixturesPath + cssFile + '\' error - '
 
     run('**/' + cssFile + ' **/test*.jade', function (err, result) {
       assert(!err, err)
@@ -115,7 +114,7 @@ describe('cli', function () {
 
   it('should error if Jade files are invalid', function (done) {
     var jadeFile = 'invalid.jade'
-      , errorMessage = 'Jade file \'' + fixturesDir + jadeFile + '\' error - '
+      , errorMessage = 'Jade file \'' + fixturesPath + jadeFile + '\' error - '
 
     run('**/test.css **/' + jadeFile, function (err, result) {
       assert(!err, err)
@@ -181,7 +180,19 @@ describe('cli', function () {
     })
   })
 
-  it('should load config from the .stylperjaderc in working directory when set in options')
+  it('should load config from the .stylperjaderc in working directory when set in options', function (done) {
+    var expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
+
+    run('-v -C ' + fixturesPath + ' .', function (err, result) {
+      assert(!err, err)
+      assert(!result.err, result.err)
+      assert.equal(result.stderr, '')
+      assert.equal(chalk.stripColor(result.stdout).trim()
+        , expectedReport.replace(/%dirname%/g, __dirname).trim()
+        , result.stdout)
+      done()
+    })
+  })
 
   it('should report the locations of unused CSS classes from all files', function (done) {
     var expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
