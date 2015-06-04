@@ -25,7 +25,7 @@ describe('config', function () {
   it('should error if options.stylperjaderc is invalid', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
       , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
-      , options = { stylperjaderc: fixturesPath + '.stylperjaderc-invalid' }
+      , options = { stylperjaderc: fixturesPath + 'invalid.json' }
 
     assert.throws(function () {
       stylperjade(cssFiles, jadeFiles, options, function (err, results) {
@@ -39,7 +39,7 @@ describe('config', function () {
   it('should load config from options.stylperjaderc', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
       , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
-      , options = { stylperjaderc: fixturesPath + '.stylperjaderc-valid' }
+      , options = { stylperjaderc: fixturesPath + '.stylperjaderc' }
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
 
     stylperjade(cssFiles, jadeFiles, options, function (err, results) {

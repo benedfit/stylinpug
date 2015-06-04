@@ -143,7 +143,7 @@ describe('cli', function () {
   it('should error if options.stylperjaderc is invalid', function (done) {
     var errorMessage = '.stylperjaderc is invalid JSON'
 
-    run('-v -c ' + fixturesPath + '.stylperjaderc-invalid **/test.css **/test*.jade', function (err, result) {
+    run('-v -c ' + fixturesPath + 'invalid.json **/test.css **/test*.jade', function (err, result) {
       assert(!err, err)
       assert(result.err)
       assert.equal(result.err.message.indexOf(errorMessage) !== -1, true)
@@ -156,7 +156,7 @@ describe('cli', function () {
   it('should load config from options.stylperjaderc', function (done) {
     var expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
 
-    run('-v -c ' + fixturesPath + '.stylperjaderc-valid **/test.css **/test*.jade', function (err, result) {
+    run('-v -c ' + fixturesPath + '.stylperjaderc **/test.css **/test*.jade', function (err, result) {
       assert(!err, err)
       assert(!result.err, result.err)
       assert.equal(result.stderr, '')
@@ -186,7 +186,7 @@ describe('cli', function () {
   it('should report the locations of unused CSS classes from all files', function (done) {
     var expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
 
-    run('-v -c ' + fixturesPath + '.stylperjaderc-valid .', function (err, result) {
+    run('-v -c ' + fixturesPath + '.stylperjaderc .', function (err, result) {
       assert(!err, err)
       assert(!result.err, result.err)
       assert.equal(result.stderr, '')
@@ -226,7 +226,7 @@ describe('cli', function () {
   })
 
   it('should output silently by default', function (done) {
-    run('-c ' + fixturesPath + '.stylperjaderc-valid **/test.css **/test*.jade', function (err, result) {
+    run('-c ' + fixturesPath + '.stylperjaderc **/test.css **/test*.jade', function (err, result) {
       assert(!err, err)
       assert(!result.err, result.err)
       assert.equal(result.stderr, '')
