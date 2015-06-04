@@ -1,3 +1,4 @@
+/* istanbul ignore next */
 module.exports = tasks
 
 var glob = require('glob')
