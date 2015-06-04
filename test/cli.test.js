@@ -16,8 +16,8 @@ describe('cli', function () {
       done
         ( null
         , { err: err
-          , stdout: stdout.trim()
-          , stderr: stderr.trim()
+          , stdout: stdout
+          , stderr: stderr
           }
         )
     })
