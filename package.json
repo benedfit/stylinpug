@@ -48,7 +48,7 @@
     "css": "^2.2.0",
     "css-selector-parser": "^1.0.4",
     "glob": "^5.0.6",
-    "jade-lexer": "benedfit/jade-lexer",
+    "jade-lexer": "^0.0.7",
     "jade-parser": "^0.0.8",
     "jade-walk": "^0.0.2",
     "jsonminify": "^0.2.3",

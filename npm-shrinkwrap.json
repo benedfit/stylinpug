@@ -121,9 +121,8 @@
       }
     },
     "jade-lexer": {
-      "version": "0.0.6",
-      "from": "jade-lexer@git+https://github.com/benedfit/jade-lexer",
-      "resolved": "git+https://github.com/benedfit/jade-lexer#8693ea0eb6f80f5e544465e1678a353855602562",
+      "version": "0.0.7",
+      "from": "jade-lexer@^0.0.7",
       "dependencies": {
         "character-parser": {
           "version": "1.2.2",
