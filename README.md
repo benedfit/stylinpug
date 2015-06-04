@@ -22,7 +22,7 @@ $ stylperjade [options] <cssFiles...> <jadeFiles...>
 
 ```
 
-OR to fill all CSS and Jade files in current working directory
+OR to find all CSS and Jade files in current working directory
 
 ```
 $ stylperjade [options] .
