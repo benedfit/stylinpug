@@ -136,9 +136,5 @@ stylperjade(cssFiles, jadeFiles, options, function (err, results) {
 })
 ```
 
-## Known issues
-
-* [Line number are not reported for classes found in Jade \#\[\] syntax blocks](https://github.com/benedfit/stylperjade/issues/7)
-
 ## Licence
 ISC © [Ben Edwards](https://github.com/benedfit/)
