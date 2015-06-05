@@ -32,7 +32,7 @@ $ stylperjade [options] .
 
 * `-h, --help`: output usage information
 * `-V, --version`: output the version number
-* `-v, --verbose`: Displays the [visual representation](#user-content-example-report) of blacklisted and unused classes found across all files
+* `-v, --verbose`: displays the full [visual representation](#user-content-example-report) of blacklisted and unused classes
 * `-C, --chdir <path>`: change the working directory
 * `-c, --config <path>`: set path to load options from. Defaults to [./.stylperjaderc](#user-content-configuration-file)
 
@@ -87,6 +87,7 @@ Type: `object`
 | Name | Type | Description |
 | --- | --- | --- |
 | cwd | `string` | The alternative path to the current working directory |
+| verbose | `boolean` | Displays the full [visual representation](#user-content-example-report) of blacklisted and unused classes |
 | ignoreFiles | `Array` | An array of patterns for file names to ignore when they exist in `.css` files, `.jade` files, or source map sources |
 | cssBlacklist | `Array` | An array of patterns for classes that should never exist in `.css` files or source map sources |
 | cssWhitelist | `Array` | An array patterns for classes, to ignore when they exist in `.css` files or source maps sources but not in `.jade` files |
