@@ -1,6 +1,4 @@
 
-✔ No blacklisted classes found
-
 ✘ 16 unused classes found
 
 4 unused classes found in CSS files:

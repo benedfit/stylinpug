@@ -169,7 +169,7 @@ describe('cli', function () {
   it('should load config from .stylperjaderc in project root if no options are set', function (done) {
     var expectedReport = fs.readFileSync(fixturesPath + 'expected-unused.txt', 'utf-8')
 
-    run('-v **/test.css **/test*.jade', function (err, result) {
+    run('**/test.css **/test*.jade', function (err, result) {
       assert(!err, err)
       assert(!result.err, result.err)
       assert.equal(result.stdout, '')
@@ -211,7 +211,7 @@ describe('cli', function () {
   it('should report the locations of unused CSS classes using external sourcemap', function (done) {
     var expectedReport = fs.readFileSync(fixturesPath + 'expected-sourcemap.txt', 'utf-8')
 
-    run('-v **/test-sourcemap.css **/test*.jade', function (err, result) {
+    run('**/test-sourcemap.css **/test*.jade', function (err, result) {
       assert(!err, err)
       assert(!result.err, result.err)
       assert.equal(result.stdout, '')
@@ -225,7 +225,7 @@ describe('cli', function () {
   it('should report the locations of unused CSS classes using inline sourcemap', function (done) {
     var expectedReport = fs.readFileSync(fixturesPath + 'expected-sourcemap.txt', 'utf-8')
 
-    run('-v **/test-sourcemap-inline.css **/test*.jade', function (err, result) {
+    run('**/test-sourcemap-inline.css **/test*.jade', function (err, result) {
       assert(!err, err)
       assert(!result.err, result.err)
       assert.equal(result.stdout, '')

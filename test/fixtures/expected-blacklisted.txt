@@ -14,5 +14,3 @@
   %dirname%/fixtures/test-include.jade:3
 - js-mu
   %dirname%/fixtures/test-include.jade:2
-
-✔ No unused classes found

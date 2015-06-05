@@ -39,7 +39,7 @@ describe('config', function () {
   it('should load config from options.stylperjaderc', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
       , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
-      , options = { stylperjaderc: fixturesPath + '.stylperjaderc' }
+      , options = { stylperjaderc: fixturesPath + '.stylperjaderc', verbose: true }
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
 
     stylperjade(cssFiles, jadeFiles, options, function (err, results) {
@@ -88,7 +88,7 @@ describe('config', function () {
   it('should load config from the .stylperjaderc in working directory when set in options', function (done) {
     var cssFiles = [ 'test.css' ]
       , jadeFiles = [ 'test*.jade' ]
-      , options = { cwd: fixturesPath }
+      , options = { cwd: fixturesPath, verbose: true }
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
 
     stylperjade(cssFiles, jadeFiles, options, function (err, results) {
