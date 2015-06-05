@@ -1,3 +1,15 @@
+## v1.1.0 / 2005-06-05
+
+### Highlights
+* CLI not supports a catch all argument e.g. `stylperjade .` to find all CSS and Jade files in the current working directory
+* Current working directory can now be passed to the API and CLI via `options.cwd` and `-C, --chdir` respectively
+* Success messages in `results.report` and CLI output are now hidden by default and are only exposed when `options.verbose: true` or `-v, --verbose` are passed to the API or CLI respectively
+* Errors are now always reported irrespective of whether verbose output is enabled or not
+* Line number are now reported for classes found in Jade `#[]` syntax blocks
+
+### Changes
+[v1.0.0...v1.1.0](https://github.com/benedfit/stylperjade/compare/v1.0.0...v1.1.0)
+
 ## v1.0.0 / 2005-05-21
 
 ### Highlights
