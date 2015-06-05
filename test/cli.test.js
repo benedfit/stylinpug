@@ -5,7 +5,6 @@ var assert = require('assert')
   , package = require('../package.json')
 
   , fixturesPath = __dirname + '/fixtures/'
-  , fixturesDir = 'test/fixtures/'
 
 describe('cli', function () {
 
@@ -17,8 +16,8 @@ describe('cli', function () {
       done
         ( null
         , { err: err
-          , stdout: stdout.trim()
-          , stderr: stderr.trim()
+          , stdout: stdout
+          , stderr: stderr
           }
         )
     })
@@ -101,7 +100,7 @@ describe('cli', function () {
 
   it('should error if CSS files are invalid', function (done) {
     var cssFile = 'invalid.css'
-      , errorMessage = 'CSS file \'' + fixturesDir + cssFile + '\' error - '
+      , errorMessage = 'CSS file \'' + fixturesPath + cssFile + '\' error - '
 
     run('**/' + cssFile + ' **/test*.jade', function (err, result) {
       assert(!err, err)
@@ -115,7 +114,7 @@ describe('cli', function () {
 
   it('should error if Jade files are invalid', function (done) {
     var jadeFile = 'invalid.jade'
-      , errorMessage = 'Jade file \'' + fixturesDir + jadeFile + '\' error - '
+      , errorMessage = 'Jade file \'' + fixturesPath + jadeFile + '\' error - '
 
     run('**/test.css **/' + jadeFile, function (err, result) {
       assert(!err, err)
@@ -143,7 +142,7 @@ describe('cli', function () {
   it('should error if options.stylperjaderc is invalid', function (done) {
     var errorMessage = '.stylperjaderc is invalid JSON'
 
-    run('-v -c ' + fixturesPath + '.stylperjaderc-invalid **/test.css **/test*.jade', function (err, result) {
+    run('-v -c ' + fixturesPath + 'invalid.json **/test.css **/test*.jade', function (err, result) {
       assert(!err, err)
       assert(result.err)
       assert.equal(result.err.message.indexOf(errorMessage) !== -1, true)
@@ -156,7 +155,7 @@ describe('cli', function () {
   it('should load config from options.stylperjaderc', function (done) {
     var expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
 
-    run('-v -c ' + fixturesPath + '.stylperjaderc-valid **/test.css **/test*.jade', function (err, result) {
+    run('-v -c ' + fixturesPath + '.stylperjaderc **/test.css **/test*.jade', function (err, result) {
       assert(!err, err)
       assert(!result.err, result.err)
       assert.equal(result.stderr, '')
@@ -170,7 +169,7 @@ describe('cli', function () {
   it('should load config from .stylperjaderc in project root if no options are set', function (done) {
     var expectedReport = fs.readFileSync(fixturesPath + 'expected-unused.txt', 'utf-8')
 
-    run('-v **/test.css **/test*.jade', function (err, result) {
+    run('**/test.css **/test*.jade', function (err, result) {
       assert(!err, err)
       assert(!result.err, result.err)
       assert.equal(result.stdout, '')
@@ -181,10 +180,38 @@ describe('cli', function () {
     })
   })
 
+  it('should load config from the .stylperjaderc in working directory when set in options', function (done) {
+    var expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
+
+    run('-v -C ' + fixturesPath + ' .', function (err, result) {
+      assert(!err, err)
+      assert(!result.err, result.err)
+      assert.equal(result.stderr, '')
+      assert.equal(chalk.stripColor(result.stdout).trim()
+        , expectedReport.replace(/%dirname%/g, __dirname).trim()
+        , result.stdout)
+      done()
+    })
+  })
+
+  it('should report the locations of unused CSS classes from all files', function (done) {
+    var expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
+
+    run('-v -c ' + fixturesPath + '.stylperjaderc .', function (err, result) {
+      assert(!err, err)
+      assert(!result.err, result.err)
+      assert.equal(result.stderr, '')
+      assert.equal(chalk.stripColor(result.stdout).trim()
+        , expectedReport.replace(/%dirname%/g, __dirname).trim()
+        , result.stdout)
+      done()
+    })
+  })
+
   it('should report the locations of unused CSS classes using external sourcemap', function (done) {
     var expectedReport = fs.readFileSync(fixturesPath + 'expected-sourcemap.txt', 'utf-8')
 
-    run('-v **/test-sourcemap.css **/test*.jade', function (err, result) {
+    run('**/test-sourcemap.css **/test*.jade', function (err, result) {
       assert(!err, err)
       assert(!result.err, result.err)
       assert.equal(result.stdout, '')
@@ -198,7 +225,7 @@ describe('cli', function () {
   it('should report the locations of unused CSS classes using inline sourcemap', function (done) {
     var expectedReport = fs.readFileSync(fixturesPath + 'expected-sourcemap.txt', 'utf-8')
 
-    run('-v **/test-sourcemap-inline.css **/test*.jade', function (err, result) {
+    run('**/test-sourcemap-inline.css **/test*.jade', function (err, result) {
       assert(!err, err)
       assert(!result.err, result.err)
       assert.equal(result.stdout, '')
@@ -210,7 +237,7 @@ describe('cli', function () {
   })
 
   it('should output silently by default', function (done) {
-    run('-c ' + fixturesPath + '.stylperjaderc-valid **/test.css **/test*.jade', function (err, result) {
+    run('-c ' + fixturesPath + '.stylperjaderc **/test.css **/test*.jade', function (err, result) {
       assert(!err, err)
       assert(!result.err, result.err)
       assert.equal(result.stderr, '')
