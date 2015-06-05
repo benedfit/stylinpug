@@ -2,6 +2,7 @@
 { "ignoreFiles":
   [ "coverage"
   , "node_modules/**"
+  , "**/invalid.*"
   ]
 , "cssWhitelist":
   [ "*"

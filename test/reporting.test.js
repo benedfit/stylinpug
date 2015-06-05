@@ -141,6 +141,7 @@ describe('reporting', function () {
       , options =
         { cssWhitelist: [ '*' ]
         , jadeWhitelist: [ '*' ]
+        , verbose: true
         }
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
 

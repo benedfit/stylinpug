@@ -2,7 +2,7 @@
 
 Pronounced: /[stʌɪl](//ssl.gstatic.com/dictionary/static/sounds/de/0/style.mp3) [pəˈreɪd](//ssl.gstatic.com/dictionary/static/sounds/de/0/parade.mp3)/ - Checks Jade against CSS, and vice versa, for unused and blacklisted classes.
 
-> Now supports source maps for even better reporting!
+> Now with CLI support for better testing!
 
 [![build](https://img.shields.io/travis/benedfit/stylperjade.svg)](https://travis-ci.org/benedfit/stylperjade)
 [![npm](https://img.shields.io/npm/v/stylperjade.svg)](https://www.npmjs.com/package/stylperjade)
@@ -19,14 +19,22 @@ $ npm install stylperjade -g
 
 ```shell
 $ stylperjade [options] <cssFiles...> <jadeFiles...>
+
+```
+
+OR to find all CSS and Jade files in current working directory
+
+```
+$ stylperjade [options] .
 ```
 
 ### options
 
-* `-h, --help`: Output usage information
-* `-V, --version`: Output the version number
-* `-c, --config <file>`: The alternative path to a [.stylperjaderc](#user-content-configuration-file) file to load options from
-* `-v, --verbose`: Displays the [visual representation](#user-content-example-report) of blacklisted and unused classes found across all files
+* `-h, --help`: output usage information
+* `-V, --version`: output the version number
+* `-v, --verbose`: displays the full [visual representation](#user-content-example-report) of blacklisted and unused classes
+* `-C, --chdir <path>`: change the working directory
+* `-c, --config <path>`: set path to load options from. Defaults to [./.stylperjaderc](#user-content-configuration-file)
 
 ## API
 
@@ -78,6 +86,8 @@ Type: `object`
 
 | Name | Type | Description |
 | --- | --- | --- |
+| cwd | `string` | The alternative path to the current working directory |
+| verbose | `boolean` | Displays the full [visual representation](#user-content-example-report) of blacklisted and unused classes |
 | ignoreFiles | `Array` | An array of patterns for file names to ignore when they exist in `.css` files, `.jade` files, or source map sources |
 | cssBlacklist | `Array` | An array of patterns for classes that should never exist in `.css` files or source map sources |
 | cssWhitelist | `Array` | An array patterns for classes, to ignore when they exist in `.css` files or source maps sources but not in `.jade` files |
@@ -135,10 +145,6 @@ stylperjade(cssFiles, jadeFiles, options, function (err, results) {
   console.log(results.report)
 })
 ```
-
-## Known issues
-
-* [Line number are not reported for classes found in Jade \#\[\] syntax blocks](https://github.com/benedfit/stylperjade/issues/7)
 
 ## Licence
 ISC © [Ben Edwards](https://github.com/benedfit/)

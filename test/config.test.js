@@ -25,7 +25,7 @@ describe('config', function () {
   it('should error if options.stylperjaderc is invalid', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
       , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
-      , options = { stylperjaderc: fixturesPath + '.stylperjaderc-invalid' }
+      , options = { stylperjaderc: fixturesPath + 'invalid.json' }
 
     assert.throws(function () {
       stylperjade(cssFiles, jadeFiles, options, function (err, results) {
@@ -39,7 +39,7 @@ describe('config', function () {
   it('should load config from options.stylperjaderc', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
       , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
-      , options = { stylperjaderc: fixturesPath + '.stylperjaderc-valid' }
+      , options = { stylperjaderc: fixturesPath + '.stylperjaderc', verbose: true }
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
 
     stylperjade(cssFiles, jadeFiles, options, function (err, results) {
@@ -78,6 +78,27 @@ describe('config', function () {
       assert.equal(_.findIndex(results.unusedJadeClasses, 'name', 'epsilon') !== -1, true)
       assert.equal(_.findIndex(results.unusedJadeClasses, 'name', 'js-alpha') !== -1, true)
       assert.equal(_.findIndex(results.unusedJadeClasses, 'name', 'beta') === -1, true)
+      assert.equal(chalk.stripColor(results.report.trim())
+        , expectedReport.replace(/%dirname%/g, __dirname).trim()
+        , results.report)
+      done()
+    })
+  })
+
+  it('should load config from the .stylperjaderc in working directory when set in options', function (done) {
+    var cssFiles = [ 'test.css' ]
+      , jadeFiles = [ 'test*.jade' ]
+      , options = { cwd: fixturesPath, verbose: true }
+      , expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
+
+    stylperjade(cssFiles, jadeFiles, options, function (err, results) {
+      assert(!err, err)
+      assert.equal(results.unusedTotal, 0)
+      assert.equal(results.unusedCssCount, 0)
+      assert.equal(results.unusedJadeCount, 0)
+      assert.equal(results.blacklistedTotal, 0)
+      assert.equal(results.blacklistedCssCount, 0)
+      assert.equal(results.blacklistedJadeCount, 0)
       assert.equal(chalk.stripColor(results.report.trim())
         , expectedReport.replace(/%dirname%/g, __dirname).trim()
         , results.report)
