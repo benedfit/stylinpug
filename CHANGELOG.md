@@ -1,3 +1,11 @@
+## v1.2.2 / 2005-06-08
+
+### Highlights
+* Return correct status code when unused or blacklisted classes are found via CLI
+
+### Changes
+[v1.2.1...v1.2.1](https://github.com/benedfit/stylperjade/compare/v1.2.1...v1.2.2)
+
 ## v1.2.1 / 2005-06-08
 
 ### Highlights
