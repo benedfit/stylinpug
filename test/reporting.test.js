@@ -68,7 +68,7 @@ describe('reporting', function () {
     var cssFiles = [ fixturesPath + 'test-sourcemap-inline.css' ]
       , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
       , options =
-      { cssWhitelist: [ 'test-import.styl' ]
+      { cssWhitelist: [ 'import.styl' ]
       , jadeWhitelist: [ 'test-include.jade' ]
       }
 
@@ -91,7 +91,7 @@ describe('reporting', function () {
     var cssFiles = [ fixturesPath + 'test-sourcemap-inline.css' ]
       , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
       , options =
-      { ignoreFiles: [ '**/test-import.styl', '**/test-include.jade' ]
+      { ignoreFiles: [ '**/import.styl', '**/test-include.jade' ]
       }
 
     stylperjade(cssFiles, jadeFiles, options, function (err, results) {
