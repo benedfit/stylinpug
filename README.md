@@ -185,7 +185,7 @@ Adds the specified pattern to [`options.jadeBlacklist`](#options-1)
 * CSS usage: `/!* stylperjade jadeblacklist <pattern> */`
 * Jade usage: `//- stylperjade jadeblacklist <pattern>`
 
-### whitelist
+### blacklist
 
 Adds the specified pattern to both [`options.cssBlacklist`](#options-1) and [`options.jadeBlacklist`](#options-1)
 
