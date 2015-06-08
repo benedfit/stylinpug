@@ -1,3 +1,11 @@
+## v1.2.1 / 2005-06-08
+
+### Highlights
+* Tidied up package using `.npmignore`
+
+### Changes
+[v1.2.0...v1.2.1](https://github.com/benedfit/stylperjade/compare/v1.2.0...v1.2.1)
+
 ## v1.2.0 / 2005-06-08
 
 ### Highlights
