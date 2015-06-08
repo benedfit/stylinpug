@@ -154,42 +154,42 @@ The following configuration directives as supported by Stylperjade:
 
 Adds the specified pattern to [`options.cssWhitelist`](#options-1)
 
-* CSS usage: `/!* stylperjade csswhitelist: <pattern> */`
+* CSS usage: `/*! stylperjade csswhitelist: <pattern> */`
 * Jade usage: `//- stylperjade csswhitelist: <pattern>`
 
 ### jadewhitelist
 
 Adds the specified pattern to [`options.jadeWhitelist`](#options-1)
 
-* CSS usage: `/!* stylperjade jadewhitelist: <pattern> */`
+* CSS usage: `/*! stylperjade jadewhitelist: <pattern> */`
 * Jade usage: `//- stylperjade jadewhitelist: <pattern>`
 
 ### whitelist
 
 Adds the specified pattern to both [`options.cssWhitelist`](#options-1) and [`options.jadeWhitelist`](#options-1)
 
-* CSS usage: `/!* stylperjade whitelist: <pattern> */`
+* CSS usage: `/*! stylperjade whitelist: <pattern> */`
 * Jade usage: `//- stylperjade whitelist: <pattern>`
 
 ### cssblacklist
 
 Adds the specified pattern to [`options.cssBlacklist`](#options-1)
 
-* CSS usage: `/!* stylperjade cssblacklist: <pattern> */`
+* CSS usage: `/*! stylperjade cssblacklist: <pattern> */`
 * Jade usage: `//- stylperjade cssblacklist: <pattern>`
 
 ### jadeblacklist
 
 Adds the specified pattern to [`options.jadeBlacklist`](#options-1)
 
-* CSS usage: `/!* stylperjade jadeblacklist: <pattern> */`
+* CSS usage: `/*! stylperjade jadeblacklist: <pattern> */`
 * Jade usage: `//- stylperjade jadeblacklist: <pattern>`
 
 ### blacklist
 
 Adds the specified pattern to both [`options.cssBlacklist`](#options-1) and [`options.jadeBlacklist`](#options-1)
 
-* CSS usage: `/!* stylperjade blacklist: <pattern> */`
+* CSS usage: `/*! stylperjade blacklist: <pattern> */`
 * Jade usage: `//- stylperjade blacklist: <pattern>`
 
 ## Licence
