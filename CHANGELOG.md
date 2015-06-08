@@ -1,3 +1,12 @@
+## v1.2.0 / 2005-06-08
+
+### Highlights
+* Added support for directives via comments in CSS and Jade files
+* Fixed issues where setting `options.stylperjaderc` incorrectly set `options.cwd`
+
+### Changes
+[v1.1.0...v1.2.0](https://github.com/benedfit/stylperjade/compare/v1.1.0...v1.2.0)
+
 ## v1.1.0 / 2005-06-05
 
 ### Highlights
