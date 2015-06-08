@@ -126,6 +126,20 @@ describe('cli', function () {
     })
   })
 
+  it('should handle catch-all argument for CSS and Jade files', function (done) {
+    var expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
+
+    run('-v -C ' + fixturesPath + ' .', function (err, result) {
+      assert(!err, err)
+      assert(!result.err, result.err)
+      assert.equal(result.stderr, '')
+      assert.equal(chalk.stripColor(result.stdout).trim()
+        , expectedReport.replace(/%dirname%/g, __dirname).trim()
+        , result.stdout)
+      done()
+    })
+  })
+
   it('should error if options.stylperjaderc is not found', function (done) {
     var errorMessage = '.stylperjaderc not found'
 
@@ -183,7 +197,7 @@ describe('cli', function () {
   it('should load config from the .stylperjaderc in working directory when set in options', function (done) {
     var expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
 
-    run('-v -C ' + fixturesPath + ' .', function (err, result) {
+    run('-v -C ' + fixturesPath + ' test.css test*.jade', function (err, result) {
       assert(!err, err)
       assert(!result.err, result.err)
       assert.equal(result.stderr, '')
@@ -197,7 +211,7 @@ describe('cli', function () {
   it('should report the locations of unused CSS classes from all files', function (done) {
     var expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
 
-    run('-v -c ' + fixturesPath + '.stylperjaderc .', function (err, result) {
+    run('-v -c ' + fixturesPath + '.stylperjaderc **/test.css **/test*.jade', function (err, result) {
       assert(!err, err)
       assert(!result.err, result.err)
       assert.equal(result.stderr, '')

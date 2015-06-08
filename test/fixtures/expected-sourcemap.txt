@@ -7,18 +7,18 @@
 - kappa
   %dirname%/fixtures/test.styl:20:2
 - nu
-  %dirname%/fixtures/test-import.styl:4
-  %dirname%/fixtures/test-import.styl:10:2
-  %dirname%/fixtures/test-import.styl:13
+  %dirname%/fixtures/import.styl:4
+  %dirname%/fixtures/import.styl:10:2
+  %dirname%/fixtures/import.styl:13
   %dirname%/fixtures/test.styl:36:2
   %dirname%/fixtures/test.styl:42:2
 - omega
   %dirname%/fixtures/test.styl:29:2
 - omicron
-  %dirname%/fixtures/test-import.styl:19
+  %dirname%/fixtures/import.styl:19
 - pi
-  %dirname%/fixtures/test-import.styl:1
-  %dirname%/fixtures/test-import.styl:16
+  %dirname%/fixtures/import.styl:1
+  %dirname%/fixtures/import.styl:16
 
 12 unused classes found in Jade files:
 - epsilon
