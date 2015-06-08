@@ -185,7 +185,7 @@ describe('cli', function () {
 
     run('**/test.css **/test*.jade', function (err, result) {
       assert(!err, err)
-      assert(!result.err, result.err)
+      assert(result.err)
       assert.equal(result.stdout, '')
       assert.equal(chalk.stripColor(result.stderr).trim()
         , expectedReport.replace(/%dirname%/g, __dirname).trim()
@@ -227,7 +227,7 @@ describe('cli', function () {
 
     run('**/test-sourcemap.css **/test*.jade', function (err, result) {
       assert(!err, err)
-      assert(!result.err, result.err)
+      assert(result.err)
       assert.equal(result.stdout, '')
       assert.equal(chalk.stripColor(result.stderr).trim()
         , expectedReport.replace(/%dirname%/g, __dirname).trim()
@@ -241,7 +241,7 @@ describe('cli', function () {
 
     run('**/test-sourcemap-inline.css **/test*.jade', function (err, result) {
       assert(!err, err)
-      assert(!result.err, result.err)
+      assert(result.err)
       assert.equal(result.stdout, '')
       assert.equal(chalk.stripColor(result.stderr).trim()
         , expectedReport.replace(/%dirname%/g, __dirname).trim()
