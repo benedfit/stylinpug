@@ -90,7 +90,7 @@ Type: `object`
 | verbose | `boolean` | Displays the full [visual representation](#user-content-example-report) of blacklisted and unused classes |
 | ignoreFiles | `Array` | An array of patterns for file names to ignore when they exist in `.css` files, `.jade` files, or source map sources |
 | cssBlacklist | `Array` | An array of patterns for classes that should never exist in `.css` files or source map sources |
-| cssWhitelist | `Array` | An array patterns for classes, to ignore when they exist in `.css` files or source maps sources but not in `.jade` files |
+| cssWhitelist | `Array` | An array patterns for classes to ignore when they exist in `.css` files or source maps sources but not in `.jade` files |
 | jadeBlacklist | `Array` | An array of patterns for classes that should never exist in `.jade` files |
 | jadeWhitelist | `Array` | An array of patterns for classes to ignore when they exist in `.jade` files but not in `.css` files or source map sources |
 | stylperjaderc | `string` | The alternative path to a `.stylperjaderc` file to load options from |
@@ -145,6 +145,17 @@ stylperjade(cssFiles, jadeFiles, options, function (err, results) {
   console.log(results.report)
 })
 ```
+
+## Directives
+
+The following configuration directives as supported by Stylperjade:
+
+### csswhitelist
+
+Adds the specified pattern to [`options.cssWhitelist`](#options-1)
+
+CSS usage: `/!* stylperjade csswhitelist <pattern> */`
+Jade usage: `//- stylperjade csswhitelist <pattern>`
 
 ## Licence
 ISC © [Ben Edwards](https://github.com/benedfit/)
