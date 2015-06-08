@@ -35,7 +35,7 @@
     "pretest": "npm run lint && npm run checkStyle",
     "test": "istanbul --include-all-sources cover _mocha -- -R spec",
     "posttest": "istanbul check-coverage && rm -rf coverage",
-    "preversion": "npm run wrap",
+    "postversion": "npm run wrap",
     "prepublish": "npm test"
   },
   "engines": {
