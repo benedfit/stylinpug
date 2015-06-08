@@ -1,6 +1,6 @@
 {
   "name": "stylperjade",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Checks Jade against CSS, and vice versa, for unused and blacklisted classes",
   "author": "Ben Edwards <hello@benedfit.com>",
   "license": "ISC",
