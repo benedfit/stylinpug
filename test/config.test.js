@@ -50,8 +50,8 @@ describe('config', function () {
       assert.equal(results.blacklistedTotal, 0)
       assert.equal(results.blacklistedCssCount, 0)
       assert.equal(results.blacklistedJadeCount, 0)
-      assert.equal(chalk.stripColor(results.report.trim())
-        , expectedReport.replace(/%dirname%/g, __dirname).trim()
+      assert.equal(chalk.stripColor(results.report)
+        , expectedReport.replace(/%dirname%/g, __dirname)
         , results.report)
       done()
     })
@@ -78,8 +78,8 @@ describe('config', function () {
       assert.equal(_.findIndex(results.unusedJadeClasses, 'name', 'epsilon') !== -1, true)
       assert.equal(_.findIndex(results.unusedJadeClasses, 'name', 'js-alpha') !== -1, true)
       assert.equal(_.findIndex(results.unusedJadeClasses, 'name', 'beta') === -1, true)
-      assert.equal(chalk.stripColor(results.report.trim())
-        , expectedReport.replace(/%dirname%/g, __dirname).trim()
+      assert.equal(chalk.stripColor(results.report)
+        , expectedReport.replace(/%dirname%/g, __dirname)
         , results.report)
       done()
     })
@@ -99,8 +99,13 @@ describe('config', function () {
       assert.equal(results.blacklistedTotal, 0)
       assert.equal(results.blacklistedCssCount, 0)
       assert.equal(results.blacklistedJadeCount, 0)
-      assert.equal(chalk.stripColor(results.report.trim())
-        , expectedReport.replace(/%dirname%/g, __dirname).trim()
+      assert.equal(chalk.stripColor(results.report)
+        , expectedReport.replace(/%dirname%/g, __dirname)
+        , results.report)
+      done()
+    })
+  })
+
   it('should use empty config if working directory does not contain .stylperjaderc', function (done) {
     var cssFiles = [ '**/test.css' ]
       , jadeFiles = [ '**/test*.jade' ]
