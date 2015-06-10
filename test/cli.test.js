@@ -208,6 +208,20 @@ describe('cli', function () {
     })
   })
 
+  it('should use empty config if working directory does not contain .stylperjaderc', function (done) {
+    var expectedReport = fs.readFileSync(fixturesPath + 'expected-unused.txt', 'utf-8')
+
+    run('-C ' + __dirname + ' **/test.css **/test*.jade', function (err, result) {
+      assert(!err, err)
+      assert(result.err)
+      assert.equal(result.stdout, '')
+      assert.equal(chalk.stripColor(result.stderr).trim()
+        , expectedReport.replace(/%dirname%/g, __dirname).trim()
+        , result.stderr)
+      done()
+    })
+  })
+
   it('should report the locations of unused CSS classes from all files', function (done) {
     var expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
 

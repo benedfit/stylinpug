@@ -101,6 +101,22 @@ describe('config', function () {
       assert.equal(results.blacklistedJadeCount, 0)
       assert.equal(chalk.stripColor(results.report.trim())
         , expectedReport.replace(/%dirname%/g, __dirname).trim()
+  it('should use empty config if working directory does not contain .stylperjaderc', function (done) {
+    var cssFiles = [ '**/test.css' ]
+      , jadeFiles = [ '**/test*.jade' ]
+      , options = { cwd: __dirname }
+      , expectedReport = fs.readFileSync(fixturesPath + 'expected-unused.txt', 'utf-8')
+
+    stylperjade(cssFiles, jadeFiles, options, function (err, results) {
+      assert(!err, err)
+      assert.equal(results.unusedTotal, 18)
+      assert.equal(results.unusedCssCount, 6)
+      assert.equal(results.unusedJadeCount, 12)
+      assert.equal(results.blacklistedTotal, 0)
+      assert.equal(results.blacklistedCssCount, 0)
+      assert.equal(results.blacklistedJadeCount, 0)
+      assert.equal(chalk.stripColor(results.report)
+        , expectedReport.replace(/%dirname%/g, __dirname)
         , results.report)
       done()
     })
