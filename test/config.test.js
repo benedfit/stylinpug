@@ -13,13 +13,12 @@ describe('config', function () {
       , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
       , options = { stylperjaderc: 'nonexistent' }
 
-    assert.throws(function () {
-      stylperjade(cssFiles, jadeFiles, options, function (err, results) {
-        assert.equal(results, null)
-      })
-    }
-    , /.stylperjaderc not found/)
-    done()
+    stylperjade(cssFiles, jadeFiles, options, function (err, results) {
+      assert(err)
+      assert.equal(err, '.stylperjaderc not found')
+      assert.equal(results, null)
+      done()
+    })
   })
 
   it('should error if options.stylperjaderc is invalid', function (done) {
@@ -27,13 +26,12 @@ describe('config', function () {
       , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
       , options = { stylperjaderc: fixturesPath + 'invalid.json' }
 
-    assert.throws(function () {
-      stylperjade(cssFiles, jadeFiles, options, function (err, results) {
-        assert.equal(results, null)
-      })
-    }
-    , /.stylperjaderc is invalid JSON/)
-    done()
+    stylperjade(cssFiles, jadeFiles, options, function (err, results) {
+      assert(err)
+      assert.equal(err, '.stylperjaderc is invalid JSON')
+      assert.equal(results, null)
+      done()
+    })
   })
 
   it('should load config from options.stylperjaderc', function (done) {
