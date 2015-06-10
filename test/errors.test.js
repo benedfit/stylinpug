@@ -11,10 +11,11 @@ describe('error handling', function () {
 
     assert.throws(function () {
       stylperjade(cssFiles, jadeFiles, function (err, results) {
+        assert(err)
         assert.equal(results, null)
       })
     }
-    , /No CSS files found/)
+    , /No CSS files specified/)
     done()
   })
 
@@ -24,10 +25,11 @@ describe('error handling', function () {
 
     assert.throws(function () {
       stylperjade(cssFiles, jadeFiles, function (err, results) {
+        assert(err)
         assert.equal(results, null)
       })
     }
-    , /No Jade files found/)
+    , /No Jade files specified/)
     done()
   })
 
@@ -46,26 +48,24 @@ describe('error handling', function () {
     var cssFiles = [ 'nonexistent' ]
       , jadeFiles = [ fixturesPath + 'test.jade' ]
 
-    assert.throws(function () {
-      stylperjade(cssFiles, jadeFiles, function (err, results) {
-        assert.equal(results, null)
-      })
-    }
-    , /No CSS files found/)
-    done()
+    stylperjade(cssFiles, jadeFiles, function (err, results) {
+      assert(err)
+      assert.equal(err, 'No CSS files found')
+      assert.equal(results, null)
+      done()
+    })
   })
 
   it('should error if no Jade files found', function (done) {
     var cssFiles = [ fixturesPath + 'test.css' ]
       , jadeFiles = [ 'nonexistent' ]
 
-    assert.throws(function () {
-      stylperjade(cssFiles, jadeFiles, function (err, results) {
-        assert.equal(results, null)
-      })
-    }
-    , /No Jade files found/)
-    done()
+    stylperjade(cssFiles, jadeFiles, function (err, results) {
+      assert(err)
+      assert.equal(err, 'No Jade files found')
+      assert.equal(results, null)
+      done()
+    })
   })
 
   it('should error if CSS files are invalid', function (done) {
