@@ -1,275 +1,304 @@
 var assert = require('assert')
+  , bin = require.resolve('../bin/stylperjade')
   , chalk = require('chalk')
-  , exec = require('child_process').exec
   , fs = require('fs')
   , package = require('../package.json')
+  , spawn = require('child_process').spawn
 
   , fixturesPath = __dirname + '/fixtures/'
 
 describe('cli', function () {
 
-  function run(options, done) {
-    var bin = 'node ./bin/stylperjade'
-      , execOpts = { cwd: __dirname + '/../' }
+  function run(args, cb) {
+    var command = [ bin ].concat(args)
+      , stdout = ''
+      , stderr = ''
+      , node = process.execPath
+      , child = spawn(node, command)
 
-    exec(bin + ' ' + options, execOpts, function (err, stdout, stderr) {
-      done
-        ( null
-        , { err: err
-          , stdout: stdout
-          , stderr: stderr
-          }
-        )
+    if (child.stderr) {
+      child.stderr.on('data', function (chunk) {
+        stderr += chunk
+      })
+    }
+
+    if (child.stdout) {
+      child.stdout.on('data', function (chunk) {
+        stdout += chunk
+      })
+    }
+
+    child.on('error', cb)
+
+    child.on('close', function (code) {
+      cb(null, code, stdout, stderr)
     })
+
+    return child
   }
 
   it('should output the current version number', function (done) {
-    run('-V', function (err, result) {
+    var args = [ '-V' ]
+
+    run(args, function (err, code, stdout, stderr) {
       assert(!err, err)
-      assert(!result.err, result.err)
-      assert.equal(result.stderr, '')
-      assert.equal(result.stdout.indexOf(package.version) !== -1, true)
+      assert.equal(code, 0, code)
+      assert.equal(stderr, '', stderr)
+      assert.equal(stdout.indexOf(package.version) !== -1, true, stdout)
       done()
     })
   })
 
   it('should output help', function (done) {
-    var message = 'Usage: stylperjade [options] <cssFiles ...> <jadeFiles ...>'
+    var args = [ '-h' ]
+      , message = 'Usage: stylperjade [options] <cssFiles ...> <jadeFiles ...>'
 
-    run('-h', function (err, result) {
+    run(args, function (err, code, stdout, stderr) {
       assert(!err, err)
-      assert(!result.err, result.err)
-      assert.equal(result.stderr, '')
-      assert.equal(result.stdout.indexOf(message) !== -1, true)
-      assert.equal(result.stdout.indexOf(package.description) !== -1, true)
+      assert.equal(code, 0, code)
+      assert.equal(stderr, '', stderr)
+      assert.equal(stdout.indexOf(message) !== -1, true, stdout)
+      assert.equal(stdout.indexOf(package.description) !== -1, true, stdout)
       done()
     })
   })
 
   it('should output help if no CSS files specified', function (done) {
-    var message = 'Usage: stylperjade [options] <cssFiles ...> <jadeFiles ...>'
+    var args = [ '' ]
+      , message = 'Usage: stylperjade [options] <cssFiles ...> <jadeFiles ...>'
 
-    run('', function (err, result) {
+    run(args, function (err, code, stdout, stderr) {
       assert(!err, err)
-      assert(!result.err, result.err)
-      assert.equal(result.stderr, '')
-      assert.equal(result.stdout.indexOf(message) !== -1, true)
-      assert.equal(result.stdout.indexOf(package.description) !== -1, true)
+      assert.equal(code, 0, code)
+      assert.equal(stderr, '', stderr)
+      assert.equal(stdout.indexOf(message) !== -1, true, stdout)
+      assert.equal(stdout.indexOf(package.description) !== -1, true, stdout)
       done()
     })
   })
 
   it('should output help if no Jade files specified', function (done) {
-    var message = 'Usage: stylperjade [options] <cssFiles ...> <jadeFiles ...>'
+    var args = [ '**/*.css' ]
+      , message = 'Usage: stylperjade [options] <cssFiles ...> <jadeFiles ...>'
 
-    run('**/*.css', function (err, result) {
+    run(args, function (err, code, stdout, stderr) {
       assert(!err, err)
-      assert(!result.err, result.err)
-      assert.equal(result.stderr, '')
-      assert.equal(result.stdout.indexOf(message) !== -1, true)
-      assert.equal(result.stdout.indexOf(package.description) !== -1, true)
+      assert.equal(code, 0, code)
+      assert.equal(stderr, '', stderr)
+      assert.equal(stdout.indexOf(message) !== -1, true, stdout)
+      assert.equal(stdout.indexOf(package.description) !== -1, true, stdout)
       done()
     })
   })
 
   it('should error if no CSS files found', function (done) {
-    var errorMessage = 'No CSS files found'
+    var args = [ 'nonexistent', '**/test*.jade' ]
+      , errorMessage = 'No CSS files found'
 
-    run('nonexistent **/test*.jade', function (err, result) {
+    run(args, function (err, code, stdout, stderr) {
       assert(!err, err)
-      assert(result.err)
-      assert.equal(result.err.message.indexOf(errorMessage) !== -1, true)
-      assert.equal(result.stderr.indexOf(errorMessage) !== -1, true)
-      assert.equal(result.stdout, '')
+      assert.equal(code, 1, code)
+      assert.equal(stdout, '', stdout)
+      assert.equal(stderr.indexOf(errorMessage) !== -1, true, stderr)
       done()
     })
   })
 
   it('should error if no Jade files found', function (done) {
-    var errorMessage = 'No Jade files found'
+    var args = [ '**/test.css', 'nonexistent' ]
+      , errorMessage = 'No Jade files found'
 
-    run('**/test.css nonexistent', function (err, result) {
+    run(args, function (err, code, stdout, stderr) {
       assert(!err, err)
-      assert(result.err)
-      assert.equal(result.err.message.indexOf(errorMessage) !== -1, true)
-      assert.equal(result.stderr.indexOf(errorMessage) !== -1, true)
-      assert.equal(result.stdout, '')
+      assert.equal(code, 1, code)
+      assert.equal(stdout, '', stdout)
+      assert.equal(stderr.indexOf(errorMessage) !== -1, true, stderr)
       done()
     })
   })
 
   it('should error if CSS files are invalid', function (done) {
     var cssFile = 'invalid.css'
+      , args = [ '**/' + cssFile, '**/test*.jade' ]
       , errorMessage = 'CSS file \'' + fixturesPath + cssFile + '\' error - '
 
-    run('**/' + cssFile + ' **/test*.jade', function (err, result) {
+    run(args, function (err, code, stdout, stderr) {
       assert(!err, err)
-      assert(result.err)
-      assert.equal(result.err.message.indexOf(errorMessage) !== -1, true)
-      assert.equal(result.stderr.indexOf(errorMessage) !== -1, true)
-      assert.equal(result.stdout, '')
+      assert.equal(code, 1, code)
+      assert.equal(stdout, '', stdout)
+      assert.equal(stderr.indexOf(errorMessage) !== -1, true, stderr)
       done()
     })
   })
 
   it('should error if Jade files are invalid', function (done) {
     var jadeFile = 'invalid.jade'
+      , args = [ '**/test.css', '**/' + jadeFile ]
       , errorMessage = 'Jade file \'' + fixturesPath + jadeFile + '\' error - '
 
-    run('**/test.css **/' + jadeFile, function (err, result) {
+    run(args, function (err, code, stdout, stderr) {
       assert(!err, err)
-      assert(result.err)
-      assert.equal(result.err.message.indexOf(errorMessage) !== -1, true)
-      assert.equal(result.stderr.indexOf(errorMessage) !== -1, true)
-      assert.equal(result.stdout, '')
+      assert.equal(code, 1, code)
+      assert.equal(stdout, '', stdout)
+      assert.equal(stderr.indexOf(errorMessage) !== -1, true, stderr)
       done()
     })
   })
 
   it('should handle catch-all argument for CSS and Jade files', function (done) {
-    var expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
+    var args = [ '-v', '-C', fixturesPath, '.' ]
+      , expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
 
-    run('-v -C ' + fixturesPath + ' .', function (err, result) {
+    run(args, function (err, code, stdout, stderr) {
       assert(!err, err)
-      assert(!result.err, result.err)
-      assert.equal(result.stderr, '')
-      assert.equal(chalk.stripColor(result.stdout).trim()
+      assert.equal(code, 0, code)
+      assert.equal(stderr, '', stderr)
+      assert.equal(chalk.stripColor(stdout).trim()
         , expectedReport.replace(/%dirname%/g, __dirname).trim()
-        , result.stdout)
+        , stdout)
       done()
     })
   })
 
   it('should error if options.stylperjaderc is not found', function (done) {
-    var errorMessage = '.stylperjaderc not found'
+    var args = [ '-c', 'nonexistent', '**/test.css', '**/test*.jade' ]
+      , errorMessage = '.stylperjaderc not found'
 
-    run('-c nonexistent **/test.css **/test*.jade', function (err, result) {
+    run(args, function (err, code, stdout, stderr) {
       assert(!err, err)
-      assert(result.err)
-      assert.equal(result.err.message.indexOf(errorMessage) !== -1, true)
-      assert.equal(result.stderr.indexOf(errorMessage) !== -1, true)
-      assert.equal(result.stdout, '')
+      assert.equal(code, 1, code)
+      assert.equal(stdout, '', stdout)
+      assert.equal(stderr.indexOf(errorMessage) !== -1, true, stderr)
       done()
     })
   })
 
   it('should error if options.stylperjaderc is invalid', function (done) {
-    var errorMessage = '.stylperjaderc is invalid JSON'
+    var args = [ '-v', '-c', fixturesPath + 'invalid.json', '**/test.css', '**/test*.jade' ]
+      , errorMessage = '.stylperjaderc is invalid JSON'
 
-    run('-v -c ' + fixturesPath + 'invalid.json **/test.css **/test*.jade', function (err, result) {
+    run(args, function (err, code, stdout, stderr) {
       assert(!err, err)
-      assert(result.err)
-      assert.equal(result.err.message.indexOf(errorMessage) !== -1, true)
-      assert.equal(result.stderr.indexOf(errorMessage) !== -1, true)
-      assert.equal(result.stdout, '')
+      assert.equal(code, 1, code)
+      assert.equal(stdout, '', stdout)
+      assert.equal(stderr.indexOf(errorMessage) !== -1, true, stderr)
       done()
     })
   })
 
   it('should load config from options.stylperjaderc', function (done) {
-    var expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
+    var args = [ '-v', '-c', fixturesPath + '.stylperjaderc', '**/test.css', '**/test*.jade' ]
+      , expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
 
-    run('-v -c ' + fixturesPath + '.stylperjaderc **/test.css **/test*.jade', function (err, result) {
+    run(args, function (err, code, stdout, stderr) {
       assert(!err, err)
-      assert(!result.err, result.err)
-      assert.equal(result.stderr, '')
-      assert.equal(chalk.stripColor(result.stdout).trim()
+      assert.equal(code, 0, code)
+      assert.equal(stderr, '', stderr)
+      assert.equal(chalk.stripColor(stdout).trim()
         , expectedReport.replace(/%dirname%/g, __dirname).trim()
-        , result.stdout)
+        , stdout)
       done()
     })
   })
 
   it('should load config from .stylperjaderc in project root if no options are set', function (done) {
-    var expectedReport = fs.readFileSync(fixturesPath + 'expected-unused.txt', 'utf-8')
+    var args = [ '**/test.css', '**/test*.jade' ]
+      , expectedReport = fs.readFileSync(fixturesPath + 'expected-unused.txt', 'utf-8')
 
-    run('**/test.css **/test*.jade', function (err, result) {
+    run(args, function (err, code, stdout, stderr) {
       assert(!err, err)
-      assert(result.err)
-      assert.equal(result.stdout, '')
-      assert.equal(chalk.stripColor(result.stderr).trim()
+      assert.equal(code, 2, code)
+      assert.equal(stdout, '', stdout)
+      assert.equal(chalk.stripColor(stderr).trim()
         , expectedReport.replace(/%dirname%/g, __dirname).trim()
-        , result.stderr)
+        , stderr)
       done()
     })
   })
 
   it('should load config from the .stylperjaderc in working directory when set in options', function (done) {
-    var expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
+    var args = [ '-v', '-C', fixturesPath, 'test.css', 'test*.jade' ]
+      , expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
 
-    run('-v -C ' + fixturesPath + ' test.css test*.jade', function (err, result) {
+    run(args, function (err, code, stdout, stderr) {
       assert(!err, err)
-      assert(!result.err, result.err)
-      assert.equal(result.stderr, '')
-      assert.equal(chalk.stripColor(result.stdout).trim()
+      assert.equal(code, 0, code)
+      assert.equal(stderr, '', stderr)
+      assert.equal(chalk.stripColor(stdout).trim()
         , expectedReport.replace(/%dirname%/g, __dirname).trim()
-        , result.stdout)
+        , stdout)
       done()
     })
   })
 
   it('should use empty config if working directory does not contain .stylperjaderc', function (done) {
-    var expectedReport = fs.readFileSync(fixturesPath + 'expected-unused.txt', 'utf-8')
+    var args = [ '-C', __dirname, '**/test.css', '**/test*.jade' ]
+      , expectedReport = fs.readFileSync(fixturesPath + 'expected-unused.txt', 'utf-8')
 
-    run('-C ' + __dirname + ' **/test.css **/test*.jade', function (err, result) {
+    run(args, function (err, code, stdout, stderr) {
       assert(!err, err)
-      assert(result.err)
-      assert.equal(result.stdout, '')
-      assert.equal(chalk.stripColor(result.stderr).trim()
+      assert.equal(code, 2, code)
+      assert.equal(stdout, '', stdout)
+      assert.equal(chalk.stripColor(stderr).trim()
         , expectedReport.replace(/%dirname%/g, __dirname).trim()
-        , result.stderr)
+        , stderr)
       done()
     })
   })
 
   it('should report the locations of unused CSS classes from all files', function (done) {
-    var expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
+    var args = [ '-v', '-c', fixturesPath + '.stylperjaderc', '**/test.css', '**/test*.jade' ]
+      , expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
 
-    run('-v -c ' + fixturesPath + '.stylperjaderc **/test.css **/test*.jade', function (err, result) {
+    run(args, function (err, code, stdout, stderr) {
       assert(!err, err)
-      assert(!result.err, result.err)
-      assert.equal(result.stderr, '')
-      assert.equal(chalk.stripColor(result.stdout).trim()
+      assert.equal(code, 0, code)
+      assert.equal(stderr, '', stderr)
+      assert.equal(chalk.stripColor(stdout).trim()
         , expectedReport.replace(/%dirname%/g, __dirname).trim()
-        , result.stdout)
+        , stdout)
       done()
     })
   })
 
   it('should report the locations of unused CSS classes using external sourcemap', function (done) {
-    var expectedReport = fs.readFileSync(fixturesPath + 'expected-sourcemap.txt', 'utf-8')
+    var args = [ '**/test-sourcemap.css', '**/test*.jade' ]
+      , expectedReport = fs.readFileSync(fixturesPath + 'expected-sourcemap.txt', 'utf-8')
 
-    run('**/test-sourcemap.css **/test*.jade', function (err, result) {
+    run(args, function (err, code, stdout, stderr) {
       assert(!err, err)
-      assert(result.err)
-      assert.equal(result.stdout, '')
-      assert.equal(chalk.stripColor(result.stderr).trim()
+      assert.equal(code, 2, code)
+      assert.equal(stdout, '', stdout)
+      assert.equal(chalk.stripColor(stderr).trim()
         , expectedReport.replace(/%dirname%/g, __dirname).trim()
-        , result.stderr)
+        , stderr)
       done()
     })
   })
 
   it('should report the locations of unused CSS classes using inline sourcemap', function (done) {
-    var expectedReport = fs.readFileSync(fixturesPath + 'expected-sourcemap.txt', 'utf-8')
+    var args = [ '**/test-sourcemap-inline.css', '**/test*.jade' ]
+      , expectedReport = fs.readFileSync(fixturesPath + 'expected-sourcemap.txt', 'utf-8')
 
-    run('**/test-sourcemap-inline.css **/test*.jade', function (err, result) {
+    run(args, function (err, code, stdout, stderr) {
       assert(!err, err)
-      assert(result.err)
-      assert.equal(result.stdout, '')
-      assert.equal(chalk.stripColor(result.stderr).trim()
+      assert.equal(code, 2, code)
+      assert.equal(stdout, '', stdout)
+      assert.equal(chalk.stripColor(stderr).trim()
         , expectedReport.replace(/%dirname%/g, __dirname).trim()
-        , result.stderr)
+        , stderr)
       done()
     })
   })
 
   it('should output silently by default', function (done) {
-    run('-c ' + fixturesPath + '.stylperjaderc **/test.css **/test*.jade', function (err, result) {
+    var args = [ '-c', fixturesPath + '.stylperjaderc', '**/test.css', '**/test*.jade' ]
+
+    run(args, function (err, code, stdout, stderr) {
       assert(!err, err)
-      assert(!result.err, result.err)
-      assert.equal(result.stderr, '')
-      assert.equal(result.stdout, '')
+      assert.equal(code, 0, code)
+      assert.equal(stdout, '', stdout)
+      assert.equal(stderr, '', stderr)
       done()
     })
   })
