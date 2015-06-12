@@ -1,8 +1,10 @@
 /* istanbul ignore next */
 module.exports = tasks
 
+/* istanbul ignore next */
 var glob = require('glob')
 
+/* istanbul ignore next */
 function tasks(pliers) {
 
   // Load pliers plugins

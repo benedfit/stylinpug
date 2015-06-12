@@ -1,3 +1,12 @@
+## v1.2.3 / 2005-06-08
+
+### Highlights
+* Having a .stylperjaderc file in the working directory is now optional
+* Improved performance of main `process` function
+
+### Changes
+[v1.2.2...v1.2.3](https://github.com/benedfit/stylperjade/compare/v1.2.2...v1.2.3)
+
 ## v1.2.2 / 2005-06-08
 
 ### Highlights
