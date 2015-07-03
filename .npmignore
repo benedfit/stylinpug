@@ -1,6 +1,7 @@
 coverage
 pliers*
 test
+.editorconfig
 .jscsrc
 .jshintignore
 .jshintrc
