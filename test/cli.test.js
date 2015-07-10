@@ -37,10 +37,6 @@ describe('cli', function () {
     return child
   }
 
-  it('should do something', function (done) {
-    done()
-  })
-
   it('should output the current version number', function (done) {
     var args = [ '-V' ]
 
