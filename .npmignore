@@ -9,4 +9,5 @@ test
 .stylperjaderc
 .travis.yml
 CHANGELOG.md
+CONTRIBUTING.md
 example-report.png
