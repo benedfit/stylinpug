@@ -27,7 +27,7 @@ If you fixed or added something useful to the project, you can send a pull-reque
 ### Before submitting a PR
 
 1. Please review our suggested [commit message format](#commit-message-format).
-1. Make sure you have tests for your modifications (we use [Mocha](http://mochajs.org/) and [Assert](http://nodejs.org/api/assert.html)).
+1. Make sure you have tests for your modifications (we use [Mocha](http://mochajs.org/) and [Assert](https://nodejs.org/api/assert.html)).
 1. Run `npm test` locally to catch any JSHint and JSCS errors, and to confirm that 100% code coverage has been maintained.
 
 ### Why did you close my pull request or issue?
