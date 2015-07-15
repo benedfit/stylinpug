@@ -6,7 +6,7 @@ Thanks for wanting to contribute! This document describes some points about the 
 1. [Pull requests](#pull-requests)
   * [Before submitting a PR](#before-submitting-a-pr)
   * [Why did you close my PR or Issue?](#why-did-you-close-my-pull-request-or-issue)
-  * [PR/Issue closing criteria](#pr-issue-closing-criteria)
+  * [PR/Issue closing criteria](#prissue-closing-criteria)
 1. [Filing bugs](#filing-bugs)
 1. [Proposing features](#proposing-features)
 1. [Implementing features](#implementing-features)
