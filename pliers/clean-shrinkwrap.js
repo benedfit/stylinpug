@@ -2,6 +2,6 @@
 module.exports = task
 
 /* istanbul ignore next */
-function task(pliers) {
+function task (pliers) {
   pliers('cleanShrinkwrap', require('pliers-clean-shrinkwrap')(pliers))
 }

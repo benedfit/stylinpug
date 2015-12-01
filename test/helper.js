@@ -9,6 +9,8 @@ var fs = require('fs')
 before(function (done) {
 
   glob('test*.styl', { cwd: fixturesPath }, function (err, files) {
+    if (err) done(err)
+
     files.forEach(function (file) {
       var style = setStylus(fixturesPath + file)
         , baseName = path.basename(file, '.styl')
@@ -24,7 +26,7 @@ before(function (done) {
       renderStylus(style, fixturesPath + baseName + '-sourcemap-inline.css')
     })
 
-    function renderStylus(style, file) {
+    function renderStylus (style, file) {
 
       style.render(function (err, output) {
         if (err) done(err)
@@ -44,7 +46,7 @@ before(function (done) {
 
     }
 
-    function setStylus(filename) {
+    function setStylus (filename) {
 
       var input = fs.readFileSync(filename, 'utf8')
 
