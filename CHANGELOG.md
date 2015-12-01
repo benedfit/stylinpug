@@ -1,3 +1,11 @@
+## v1.2.4 / 2015-12-01
+
+### Highlights
+* Update dependencies to make use of new jade-lexer structure
+
+### Changes
+[v1.2.3...v1.2.4](https://github.com/benedfit/stylperjade/compare/v1.2.3...v1.2.4)
+
 ## v1.2.3 / 2015-06-08
 
 ### Highlights
