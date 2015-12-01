@@ -29,14 +29,13 @@
     "stylperjade": "./bin/stylperjade"
   },
   "scripts": {
-    "wrap": "rm -f npm-shrinkwrap.json; npm prune && npm install && npm shrinkwrap && pliers cleanShrinkwrap",
-    "test": "./node_modules/.bin/istanbul --include-all-sources cover ./node_modules/.bin/_mocha -- -R spec",
-    "posttest": "./node_modules/.bin/istanbul check-coverage && rm -rf coverage",
-    "postversion": "npm run wrap",
-    "prepublish": "npm test"
     "lint": "eslint -f unix .",
     "inspect": "jsinspect",
+    "coverage": "istanbul cover ./node_modules/.bin/_mocha test",
+    "wrap": "npm prune && npm shrinkwrap && pliers cleanShrinkwrap",
     "pretest": "npm run lint && npm run inspect",
+    "test": "npm run coverage",
+    "posttest": "(istanbul check-coverage --statements 90 --branches 90 --functions 100 --lines 90 && rm -rf coverage) || echo Look at 'coverage/lcov-report/index.html' to find out more"
   },
   "engines": {
     "node": ">=0.10.0"

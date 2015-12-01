@@ -1,13 +1,7 @@
 coverage
 pliers*
 test
-.editorconfig
-.jscsrc
-.jshintignore
-.jshintrc
-.npmignore
-.stylperjaderc
-.travis.yml
+.*
 CHANGELOG.md
 CONTRIBUTING.md
 example-report.png
