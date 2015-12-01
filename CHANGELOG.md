@@ -1,4 +1,4 @@
-## v1.2.3 / 2005-06-08
+## v1.2.3 / 2015-06-08
 
 ### Highlights
 * Having a .stylperjaderc file in the working directory is now optional
@@ -7,7 +7,7 @@
 ### Changes
 [v1.2.2...v1.2.3](https://github.com/benedfit/stylperjade/compare/v1.2.2...v1.2.3)
 
-## v1.2.2 / 2005-06-08
+## v1.2.2 / 2015-06-08
 
 ### Highlights
 * Return correct status code when unused or blacklisted classes are found via CLI
@@ -15,7 +15,7 @@
 ### Changes
 [v1.2.1...v1.2.1](https://github.com/benedfit/stylperjade/compare/v1.2.1...v1.2.2)
 
-## v1.2.1 / 2005-06-08
+## v1.2.1 / 2015-06-08
 
 ### Highlights
 * Tidied up package using `.npmignore`
@@ -23,7 +23,7 @@
 ### Changes
 [v1.2.0...v1.2.1](https://github.com/benedfit/stylperjade/compare/v1.2.0...v1.2.1)
 
-## v1.2.0 / 2005-06-08
+## v1.2.0 / 2015-06-08
 
 ### Highlights
 * Added support for directives via comments in CSS and Jade files
@@ -32,7 +32,7 @@
 ### Changes
 [v1.1.0...v1.2.0](https://github.com/benedfit/stylperjade/compare/v1.1.0...v1.2.0)
 
-## v1.1.0 / 2005-06-05
+## v1.1.0 / 2015-06-05
 
 ### Highlights
 * CLI not supports a catch all argument e.g. `stylperjade .` to find all CSS and Jade files in the current working directory
@@ -44,7 +44,7 @@
 ### Changes
 [v1.0.0...v1.1.0](https://github.com/benedfit/stylperjade/compare/v1.0.0...v1.1.0)
 
-## v1.0.0 / 2005-05-21
+## v1.0.0 / 2015-05-21
 
 ### Highlights
 * File name patterns can now be added to `options.ignoreFiles` to whitelist all classes found in those files
