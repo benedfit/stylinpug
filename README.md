@@ -2,8 +2,6 @@
 
 Pronounced: /[stʌɪl](//ssl.gstatic.com/dictionary/static/sounds/de/0/style.mp3) [pəˈreɪd](//ssl.gstatic.com/dictionary/static/sounds/de/0/parade.mp3)/ - Checks Jade against CSS, and vice versa, for unused and blacklisted classes.
 
-> Now with CLI support for better testing!
-
 [![build status](https://img.shields.io/travis/benedfit/stylperjade/master.svg)](https://travis-ci.org/benedfit/stylperjade)
 [![coverage status](https://img.shields.io/coveralls/benedfit/stylperjade/master.svg)](https://coveralls.io/github/benedfit/stylperjade)
 [![dependency status](https://img.shields.io/david/benedfit/stylperjade.svg)](https://david-dm.org/benedfit/stylperjade)
