@@ -162,24 +162,6 @@
         }
       }
     },
-    "jade-parser": {
-      "version": "0.0.9",
-      "from": "jade-parser@>=0.0.9 <0.0.10",
-      "dependencies": {
-        "jade-error": {
-          "version": "1.2.0",
-          "from": "jade-error@>=1.0.0 <2.0.0"
-        },
-        "token-stream": {
-          "version": "0.0.1",
-          "from": "token-stream@0.0.1"
-        }
-      }
-    },
-    "jade-walk": {
-      "version": "0.0.3",
-      "from": "jade-walk@>=0.0.3 <0.0.4"
-    },
     "jsonminify": {
       "version": "0.2.3",
       "from": "jsonminify@>=0.2.3 <0.3.0"
