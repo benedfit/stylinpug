@@ -1,3 +1,12 @@
+## v1.2.5 / 2015-12-09
+
+### Highlights
+* Refactored to remove unneeded Jade dependencies
+
+### Changes
+[v1.2.4...v1.2.5](https://github.com/benedfit/stylperjade/compare/v1.2.4...v1.2.5)
+
+
 ## v1.2.4 / 2015-12-01
 
 ### Highlights
