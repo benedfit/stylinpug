@@ -31,7 +31,7 @@
   "scripts": {
     "lint": "eslint -f unix .",
     "inspect": "jsinspect",
-    "depcheck": "david",
+    "depcheck": "david -i lodash",
     "coverage": "istanbul cover ./node_modules/.bin/_mocha test",
     "pretest": "npm run lint && npm run inspect && npm run depcheck",
     "test": "npm run coverage",
