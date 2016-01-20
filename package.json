@@ -33,7 +33,6 @@
     "inspect": "jsinspect",
     "depcheck": "david",
     "coverage": "istanbul cover ./node_modules/.bin/_mocha test",
-    "wrap": "npm prune && npm shrinkwrap && pliers cleanShrinkwrap",
     "pretest": "npm run lint && npm run inspect && npm run depcheck",
     "test": "npm run coverage",
     "posttest": "(istanbul check-coverage --statements 90 --branches 90 --functions 100 --lines 90 && rm -rf coverage) || echo Look at 'coverage/lcov-report/index.html' to find out more"
@@ -66,7 +65,6 @@
     "jsinspect": "^0.7.0",
     "mocha": "^2.2.5",
     "pliers": "^1.2.1",
-    "pliers-clean-shrinkwrap": "^1.0.1",
     "stylus": "^0.52.4"
   }
 }
