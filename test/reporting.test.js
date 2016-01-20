@@ -243,4 +243,22 @@ describe('reporting', function () {
     })
   })
 
+  it.skip('should report any Jade classes found in Array and object attribute notation', function (done) {
+    var cssFiles = [ fixturesPath + 'test-class-attributes.css' ]
+      , jadeFiles = [ fixturesPath + 'test-class-attributes.jade' ]
+      , expectedReport = fs.readFileSync(fixturesPath + 'expected-class-attributes.txt', 'utf-8')
+
+    stylperjade(cssFiles, jadeFiles, {}, function (err, results) {
+      assert(!err, err)
+      console.log(results.report)
+      assert.equal(results.unusedTotal, 0)
+      assert.equal(results.unusedCssCount, 0)
+      assert.equal(results.unusedJadeCount, 0)
+      assert.equal(chalk.stripColor(results.report)
+        , expectedReport.replace(/%dirname%/g, __dirname)
+        , results.report)
+      done()
+    })
+  })
+
 })
