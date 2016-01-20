@@ -1,3 +1,11 @@
+## v1.2.6 / 2016-01-20
+
+### Highlights
+* Remove shrinkwrap
+
+### Changes
+[v1.2.5...v1.2.6](https://github.com/benedfit/stylperjade/compare/v1.2.5...v1.2.6)
+
 ## v1.2.5 / 2015-12-09
 
 ### Highlights
