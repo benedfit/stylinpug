@@ -1,11 +1,11 @@
 
 ✘ 5 blacklisted classes found
 
-2 blacklisted classes found in CSS files:
+2 blacklisted classes found in Stylus files:
 - delta
-  %dirname%/fixtures/test.css:11
+  %dirname%/fixtures/test.styl:12:1
 - delta--modifier
-  %dirname%/fixtures/test.css:14
+  %dirname%/fixtures/test.styl:16:1
 
 3 blacklisted classes found in Jade files:
 - js-alpha

@@ -2,13 +2,13 @@
   [ "coverage"
   , "node_modules/**"
   ]
-, "cssWhitelist":
+, "stylusWhitelist":
   [
   ]
 , "jadeWhitelist":
   [
   ]
-, "cssBlacklist":
+, "stylusBlacklist":
   [
   ]
 , "jadeBlacklist":

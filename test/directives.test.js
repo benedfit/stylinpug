@@ -6,122 +6,122 @@ var _ = require('lodash')
 
 describe('directives', function () {
 
-  it('should whitelist CSS classes found in directives', function (done) {
-    var cssFiles = [ fixturesPath + 'test.css', fixturesPath + 'test-directives-csswhitelist.css' ]
+  it('should whitelist Stylus classes found in directives', function (done) {
+    var stylusFiles = [ fixturesPath + 'test*.styl', fixturesPath + 'directives-styluswhitelist.styl' ]
       , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
 
-    stylperjade(cssFiles, jadeFiles, function (err, results) {
+    stylperjade(stylusFiles, jadeFiles, function (err, results) {
       assert(!err, err)
       assert.equal(results.unusedTotal, 17)
-      assert.equal(results.unusedCssCount, 5)
+      assert.equal(results.unusedStylusCount, 5)
       assert.equal(results.unusedJadeCount, 12)
       assert.equal(results.blacklistedTotal, 0)
-      assert.equal(results.blacklistedCssCount, 0)
+      assert.equal(results.blacklistedStylusCount, 0)
       assert.equal(results.blacklistedJadeCount, 0)
-      assert.equal(_.findIndex(results.unusedCssClasses, 'name', 'delta--modifier') === -1, true)
+      assert.equal(_.findIndex(results.unusedStylusClasses, [ 'name', 'delta--modifier' ]) === -1, true)
       done()
     })
   })
 
   it('should whitelist Jade classes found in directives', function (done) {
-    var cssFiles = [ fixturesPath + 'test.css', fixturesPath + 'test-directives-jadewhitelist.css' ]
+    var stylusFiles = [ fixturesPath + 'test*.styl', fixturesPath + 'directives-jadewhitelist.styl' ]
       , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
 
-    stylperjade(cssFiles, jadeFiles, function (err, results) {
+    stylperjade(stylusFiles, jadeFiles, function (err, results) {
       assert(!err, err)
       assert.equal(results.unusedTotal, 17)
-      assert.equal(results.unusedCssCount, 6)
+      assert.equal(results.unusedStylusCount, 6)
       assert.equal(results.unusedJadeCount, 11)
       assert.equal(results.blacklistedTotal, 0)
-      assert.equal(results.blacklistedCssCount, 0)
+      assert.equal(results.blacklistedStylusCount, 0)
       assert.equal(results.blacklistedJadeCount, 0)
-      assert.equal(_.findIndex(results.unusedJadeClasses, 'name', 'epsilon') === -1, true)
+      assert.equal(_.findIndex(results.unusedJadeClasses, [ 'name', 'epsilon' ]) === -1, true)
       done()
     })
   })
 
-  it('should whitelist both CSS and Jade classes found in directives', function (done) {
-    var cssFiles = [ fixturesPath + 'test.css', fixturesPath + 'test-directives-whitelist.css' ]
+  it('should whitelist both Stylus and Jade classes found in directives', function (done) {
+    var stylusFiles = [ fixturesPath + 'test*.styl', fixturesPath + 'directives-whitelist.styl' ]
       , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
 
-    stylperjade(cssFiles, jadeFiles, function (err, results) {
+    stylperjade(stylusFiles, jadeFiles, function (err, results) {
       assert(!err, err)
       assert.equal(results.unusedTotal, 0)
-      assert.equal(results.unusedCssCount, 0)
+      assert.equal(results.unusedStylusCount, 0)
       assert.equal(results.unusedJadeCount, 0)
       assert.equal(results.blacklistedTotal, 0)
-      assert.equal(results.blacklistedCssCount, 0)
+      assert.equal(results.blacklistedStylusCount, 0)
       assert.equal(results.blacklistedJadeCount, 0)
       done()
     })
   })
 
-  it('should blacklist CSS classes found in directives', function (done) {
-    var cssFiles = [ fixturesPath + 'test.css', fixturesPath + 'test-directives-cssblacklist.css' ]
+  it('should blacklist Stylus classes found in directives', function (done) {
+    var stylusFiles = [ fixturesPath + 'test*.styl', fixturesPath + 'directives-stylusblacklist.styl' ]
       , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
 
-    stylperjade(cssFiles, jadeFiles, function (err, results) {
+    stylperjade(stylusFiles, jadeFiles, function (err, results) {
       assert(!err, err)
       assert.equal(results.unusedTotal, 18)
-      assert.equal(results.unusedCssCount, 6)
+      assert.equal(results.unusedStylusCount, 6)
       assert.equal(results.unusedJadeCount, 12)
       assert.equal(results.blacklistedTotal, 1)
-      assert.equal(results.blacklistedCssCount, 1)
+      assert.equal(results.blacklistedStylusCount, 1)
       assert.equal(results.blacklistedJadeCount, 0)
-      assert.equal(_.findIndex(results.blacklistedCssClasses, 'name', 'nu') !== -1, true)
+      assert.equal(_.findIndex(results.blacklistedStylusClasses, [ 'name', 'nu' ]) !== -1, true)
       done()
     })
   })
 
   it('should blacklist Jade classes found in directives', function (done) {
-    var cssFiles = [ fixturesPath + 'test.css', fixturesPath + 'test-directives-jadeblacklist.css' ]
+    var stylusFiles = [ fixturesPath + 'test*.styl', fixturesPath + 'directives-jadeblacklist.styl' ]
       , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
 
-    stylperjade(cssFiles, jadeFiles, function (err, results) {
+    stylperjade(stylusFiles, jadeFiles, function (err, results) {
       assert(!err, err)
       assert.equal(results.unusedTotal, 18)
-      assert.equal(results.unusedCssCount, 6)
+      assert.equal(results.unusedStylusCount, 6)
       assert.equal(results.unusedJadeCount, 12)
       assert.equal(results.blacklistedTotal, 1)
-      assert.equal(results.blacklistedCssCount, 0)
+      assert.equal(results.blacklistedStylusCount, 0)
       assert.equal(results.blacklistedJadeCount, 1)
-      assert.equal(_.findIndex(results.blacklistedJadeClasses, 'name', 'rho') !== -1, true)
+      assert.equal(_.findIndex(results.blacklistedJadeClasses, [ 'name', 'rho' ]) !== -1, true)
       done()
     })
   })
 
-  it('should blacklist both CSS and Jade classes found in directives', function (done) {
-    var cssFiles = [ fixturesPath + 'test.css', fixturesPath + 'test-directives-blacklist.css' ]
+  it('should blacklist both Stylus and Jade classes found in directives', function (done) {
+    var stylusFiles = [ fixturesPath + 'test*.styl', fixturesPath + 'directives-blacklist.styl' ]
       , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
 
-    stylperjade(cssFiles, jadeFiles, function (err, results) {
+    stylperjade(stylusFiles, jadeFiles, function (err, results) {
       assert(!err, err)
       assert.equal(results.unusedTotal, 18)
-      assert.equal(results.unusedCssCount, 6)
+      assert.equal(results.unusedStylusCount, 6)
       assert.equal(results.unusedJadeCount, 12)
       assert.equal(results.blacklistedTotal, 2)
-      assert.equal(results.blacklistedCssCount, 1)
+      assert.equal(results.blacklistedStylusCount, 1)
       assert.equal(results.blacklistedJadeCount, 1)
-      assert.equal(_.findIndex(results.blacklistedCssClasses, 'name', 'alpha') !== -1, true)
-      assert.equal(_.findIndex(results.blacklistedJadeClasses, 'name', 'alpha') !== -1, true)
+      assert.equal(_.findIndex(results.blacklistedStylusClasses, [ 'name', 'alpha' ]) !== -1, true)
+      assert.equal(_.findIndex(results.blacklistedJadeClasses, [ 'name', 'alpha' ]) !== -1, true)
       done()
     })
   })
 
   it('should ignore invalid directives', function (done) {
-    var cssFiles = [ fixturesPath + 'test.css' ]
+    var stylusFiles = [ fixturesPath + 'test*.styl' ]
       , jadeFiles =
         [ fixturesPath + 'test.jade'
         , fixturesPath + 'test-include.jade'
-        , fixturesPath + 'test-directives.jade' ]
+        , fixturesPath + 'directives.jade' ]
 
-    stylperjade(cssFiles, jadeFiles, function (err, results) {
+    stylperjade(stylusFiles, jadeFiles, function (err, results) {
       assert(!err, err)
       assert.equal(results.unusedTotal, 18)
-      assert.equal(results.unusedCssCount, 6)
+      assert.equal(results.unusedStylusCount, 6)
       assert.equal(results.unusedJadeCount, 12)
       assert.equal(results.blacklistedTotal, 0)
-      assert.equal(results.blacklistedCssCount, 0)
+      assert.equal(results.blacklistedStylusCount, 0)
       assert.equal(results.blacklistedJadeCount, 0)
       done()
     })
