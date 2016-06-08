@@ -2,16 +2,16 @@
 { "ignoreFiles":
   [ "coverage"
   , "node_modules/**"
-  , "**/invalid.*"
-  , "**/test-*.css"
+  , "class-*"
+  , "directives-*"
   ]
-, "cssWhitelist":
+, "stylusWhitelist":
   [ "*"
   ]
 , "jadeWhitelist":
   [ "*"
   ]
-, "cssBlacklist":
+, "stylusBlacklist":
   [
   ]
 , "jadeBlacklist":

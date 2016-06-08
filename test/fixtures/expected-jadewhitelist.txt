@@ -1,24 +1,25 @@
 
 ✘ 15 unused classes found
 
-6 unused classes found in CSS files:
+6 unused classes found in Stylus files:
 - delta--modifier
-  %dirname%/fixtures/test.css:14
+  %dirname%/fixtures/test.styl:16:1
 - kappa
-  %dirname%/fixtures/test.css:17
+  %dirname%/fixtures/test.styl:19:1
 - nu
-  %dirname%/fixtures/test.css:32
-  %dirname%/fixtures/test.css:38
-  %dirname%/fixtures/test.css:44
-  %dirname%/fixtures/test.css:47
-  %dirname%/fixtures/test.css:57:3
+  %dirname%/fixtures/test-import.styl:4:1
+  %dirname%/fixtures/test-import.styl:10:3
+  %dirname%/fixtures/test-import.styl:13:1
+  %dirname%/fixtures/test.styl:35:1
+  %dirname%/fixtures/test.styl:36:3
+  %dirname%/fixtures/test.styl:42:3
 - omega
-  %dirname%/fixtures/test.css:26
+  %dirname%/fixtures/test.styl:29:3
 - omicron
-  %dirname%/fixtures/test.css:53
+  %dirname%/fixtures/test-import.styl:19:1
 - pi
-  %dirname%/fixtures/test.css:35
-  %dirname%/fixtures/test.css:50
+  %dirname%/fixtures/test-import.styl:1:1
+  %dirname%/fixtures/test-import.styl:16:1
 
 9 unused classes found in Jade files:
 - epsilon
