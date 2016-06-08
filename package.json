@@ -49,6 +49,7 @@
     "lodash": "^4.13.1",
     "minimatch": "^3.0.0",
     "multi-glob": "^1.0.1",
+    "pug-lexer": "^2.0.2",
     "strip-json-comments": "^2.0.1",
     "stylus": "^0.54.5"
   },
