@@ -1,5 +1,27 @@
-{ "extends": "clock"
-, "env":
-  { "es6": false
+{
+  "extends": [ "standard" ],
+  "globals": {
+    "describe": true,
+    "it": true,
+    "before": true,
+    "beforeEach": true,
+    "after": true,
+    "afterEach": true
+  },
+  "rules": {
+    "camelcase": [ 2, { "properties": "always" } ],
+    "comma-style": [ 2, "first" ],
+    "complexity": [ 2, 6 ],
+    "curly": [ 2, "multi-line" ],
+    "indent": 0,
+    "max-len": [ 2, 120, 2 ],
+    "max-nested-callbacks": [ 2, 10 ],
+    "max-params": [ 2, 7 ],
+    "max-statements": [ 2, 25 ],
+    "no-path-concat": 0,
+    "no-unused-vars": [ 2, "all" ],
+    "one-var": [ 2, "always" ],
+    "padded-blocks": 0,
+    "space-before-function-paren": [ 2, "always" ]
   }
 }
