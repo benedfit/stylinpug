@@ -1,7 +1,7 @@
 {
   "name": "stylperjade",
   "version": "1.2.6",
-  "description": "Checks Jade against Stylus, and vice versa, for unused and blacklisted classes",
+  "description": "Checks Pug against Stylus, and vice versa, for unused and blacklisted classes",
   "author": "Ben Edwards <hello@benedfit.com>",
   "license": "ISC",
   "keywords": [
@@ -46,7 +46,6 @@
     "async": "^1.2.0",
     "chalk": "^1.0.0",
     "commander": "^2.8.1",
-    "jade-lexer": "^0.0.9",
     "lodash": "^4.13.1",
     "minimatch": "^3.0.0",
     "multi-glob": "^1.0.1",
