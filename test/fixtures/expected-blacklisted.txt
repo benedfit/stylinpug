@@ -7,10 +7,10 @@
 - delta--modifier
   %dirname%/fixtures/test.styl:16:1
 
-3 blacklisted classes found in Jade files:
+3 blacklisted classes found in Pug files:
 - js-alpha
-  %dirname%/fixtures/test-include.jade:1
+  %dirname%/fixtures/test-include.pug:1
 - js-beta-delta
-  %dirname%/fixtures/test-include.jade:3
+  %dirname%/fixtures/test-include.pug:3
 - js-mu
-  %dirname%/fixtures/test-include.jade:2
+  %dirname%/fixtures/test-include.pug:2

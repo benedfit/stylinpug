@@ -1,7 +1,21 @@
 
-✘ 16 unused classes found
+✘ 3 blacklisted classes found
 
-4 unused classes found in Stylus files:
+3 blacklisted classes found in Pug files:
+- js-alpha
+  %dirname%/fixtures/test-include.pug:1
+- js-beta-delta
+  %dirname%/fixtures/test-include.pug:3
+- js-mu
+  %dirname%/fixtures/test-include.pug:2
+
+✘ 18 unused classes found
+
+6 unused classes found in Stylus files:
+- delta--modifier
+  %dirname%/fixtures/test.styl:16:1
+- kappa
+  %dirname%/fixtures/test.styl:19:1
 - nu
   %dirname%/fixtures/test-import.styl:4:1
   %dirname%/fixtures/test-import.styl:10:3

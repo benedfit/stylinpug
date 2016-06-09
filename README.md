@@ -136,7 +136,7 @@ Type: `object`
 
 ## Configuration file
 
-Options can be specified in a `.stylperjaderc` file ([see example](.stylperjaderc)). If no options have been specified, Stylperjade checks the current working directory to see if there is a `.stylperjaderc` file present. This can be overridden by setting `options.stylperjaderc` to the path of the desired configuration file:
+Options can be specified in a `.stylperjaderc` file ([see example](.stylperjaderc)). If no options have been specified, Stylperjade checks the current working directory to see if there is a `.stylperjaderc` file present. This can be overridden by setting `options.config` to the path of the desired configuration file:
 
 ```js
 var options = { stylperjaderc: '/path/to/.stylperjaderc' }

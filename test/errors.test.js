@@ -1,5 +1,5 @@
 var assert = require('assert')
-  , stylperjade = require('../lib/stylperjade')
+  , reporter = require('../lib/reporter')
 
   , fixturesPath = __dirname + '/fixtures/'
 
@@ -7,10 +7,10 @@ describe('error handling', function () {
 
   it('should error if no Stylus files specified', function (done) {
     var stylusFiles = []
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , pugFiles = [ fixturesPath + 'test.pug' ]
 
     assert.throws(function () {
-      stylperjade(stylusFiles, jadeFiles, function (err, results) {
+      reporter(stylusFiles, pugFiles, function (err, results) {
         assert(err)
         assert.equal(results, null)
       })
@@ -19,26 +19,26 @@ describe('error handling', function () {
     done()
   })
 
-  it('should error if no Jade files specified', function (done) {
+  it('should error if no Pug files specified', function (done) {
     var stylusFiles = [ fixturesPath + 'test.styl' ]
-      , jadeFiles = []
+      , pugFiles = []
 
     assert.throws(function () {
-      stylperjade(stylusFiles, jadeFiles, function (err, results) {
+      reporter(stylusFiles, pugFiles, function (err, results) {
         assert(err)
         assert.equal(results, null)
       })
     }
-    , /No Jade files specified/)
+    , /No Pug files specified/)
     done()
   })
 
   it('should error if no callback specified', function (done) {
     var stylusFiles = [ fixturesPath + 'test.styl' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , pugFiles = [ fixturesPath + 'test.pug' ]
 
     assert.throws(function () {
-      stylperjade(stylusFiles, jadeFiles)
+      reporter(stylusFiles, pugFiles)
     }
     , /Expected a callback/)
     done()
@@ -46,9 +46,9 @@ describe('error handling', function () {
 
   it('should error if no Stylus files found', function (done) {
     var stylusFiles = [ 'nonexistent' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , pugFiles = [ fixturesPath + 'test.pug' ]
 
-    stylperjade(stylusFiles, jadeFiles, function (err, results) {
+    reporter(stylusFiles, pugFiles, function (err, results) {
       assert(err)
       assert.equal(err, 'No Stylus files found')
       assert.equal(results, null)
@@ -56,13 +56,13 @@ describe('error handling', function () {
     })
   })
 
-  it('should error if no Jade files found', function (done) {
+  it('should error if no Pug files found', function (done) {
     var stylusFiles = [ fixturesPath + 'test.styl' ]
-      , jadeFiles = [ 'nonexistent' ]
+      , pugFiles = [ 'nonexistent' ]
 
-    stylperjade(stylusFiles, jadeFiles, function (err, results) {
+    reporter(stylusFiles, pugFiles, function (err, results) {
       assert(err)
-      assert.equal(err, 'No Jade files found')
+      assert.equal(err, 'No Pug files found')
       assert.equal(results, null)
       done()
     })
@@ -70,9 +70,9 @@ describe('error handling', function () {
 
   it('should error if Stylus files are invalid', function (done) {
     var stylusFiles = [ fixturesPath + 'invalid.txt' ]
-      , jadeFiles = [ fixturesPath + 'test.jade' ]
+      , pugFiles = [ fixturesPath + 'test.pug' ]
 
-    stylperjade(stylusFiles, jadeFiles, function (err, results) {
+    reporter(stylusFiles, pugFiles, function (err, results) {
       assert(err)
       assert.equal(err.indexOf('Stylus file \'' + stylusFiles[0] + '\' error - ') !== -1, true)
       assert.equal(results, null)
@@ -80,13 +80,13 @@ describe('error handling', function () {
     })
   })
 
-  it('should error if Jade files are invalid', function (done) {
+  it('should error if Pug files are invalid', function (done) {
     var stylusFiles = [ fixturesPath + 'test.styl' ]
-      , jadeFiles = [ fixturesPath + 'invalid.txt' ]
+      , pugFiles = [ fixturesPath + 'invalid.txt' ]
 
-    stylperjade(stylusFiles, jadeFiles, function (err, results) {
+    reporter(stylusFiles, pugFiles, function (err, results) {
       assert(err)
-      assert.equal(err.indexOf('Jade file \'' + jadeFiles[0] + '\' error - ') !== -1, true)
+      assert.equal(err.indexOf('Pug file \'' + pugFiles[0] + '\' error - ') !== -1, true)
       assert.equal(results, null)
       done()
     })
