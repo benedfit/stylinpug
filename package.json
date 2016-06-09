@@ -1,7 +1,7 @@
 {
   "name": "stylperjade",
   "version": "1.2.6",
-  "description": "Checks Jade against Stylus, and vice versa, for unused and blacklisted classes",
+  "description": "Checks Pug against Stylus, and vice versa, for unused and blacklisted classes",
   "author": "Ben Edwards <hello@benedfit.com>",
   "license": "ISC",
   "keywords": [
@@ -16,6 +16,7 @@
     "css",
     "stylus",
     "jade",
+    "pug",
     "html"
   ],
   "repository": {
@@ -25,7 +26,7 @@
   "publishConfig": {
     "registry": "http://registry.npmjs.org"
   },
-  "main": "./lib/stylperjade",
+  "main": "./lib/reporter",
   "bin": {
     "stylperjade": "./bin/stylperjade"
   },
@@ -33,7 +34,7 @@
     "lint": "eslint -f unix .",
     "inspect": "jsinspect",
     "depcheck": "david --dev",
-    "coverage": "istanbul cover ./node_modules/.bin/_mocha test",
+    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha test",
     "pretest": "npm run lint && npm run inspect && npm run depcheck",
     "test": "npm run coverage",
     "posttest": "(istanbul check-coverage --statements 90 --branches 90 --functions 100 --lines 90 && rimraf coverage) || echo Look at 'coverage/lcov-report/index.html' to find out more"
@@ -45,10 +46,10 @@
     "async": "^1.2.0",
     "chalk": "^1.0.0",
     "commander": "^2.8.1",
-    "jade-lexer": "^0.0.9",
     "lodash": "^4.13.1",
     "minimatch": "^3.0.0",
     "multi-glob": "^1.0.1",
+    "pug-lexer": "^2.0.2",
     "strip-json-comments": "^2.0.1",
     "stylus": "^0.54.5"
   },

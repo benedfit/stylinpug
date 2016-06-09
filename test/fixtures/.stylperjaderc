@@ -8,13 +8,13 @@
 , "stylusWhitelist":
   [ "*"
   ]
-, "jadeWhitelist":
+, "pugWhitelist":
   [ "*"
   ]
 , "stylusBlacklist":
   [
   ]
-, "jadeBlacklist":
+, "pugBlacklist":
   [
   ]
 }

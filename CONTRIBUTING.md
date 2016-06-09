@@ -1,6 +1,6 @@
 # Contribution guide
 
-Thanks for wanting to contribute! This document describes some points about the contribution process for Stylperjade.
+Thanks for wanting to contribute! This document describes some points about the contribution process for this project.
 
 1. [Maintainers](#maintainers)
 1. [Pull requests](#pull-requests)
@@ -56,8 +56,8 @@ When it comes to bugs, the more details you provide, the easier it is to reprodu
 Some helpful points to provide (if you can):
 
 1. A failing test would be amazing
-1. Code snippets that make Stylperjade exhibit the issue
-1. The version of Stylperjade that you're using
+1. Code snippets that exhibit the issue
+1. The version that you're using
 1. Your operating system (Windows, Mac, or Linux)
 1. Screen-shots
 
@@ -69,9 +69,9 @@ If you've got an idea for a new feature, file an issue providing some details on
 
 ## Implementing features
 
-It's likely that you'll have to implement feature requests or enhancements on your own. To do that, you'll need to be comfortable with JavaScript, Node.js, and familiar with [Jade's abstract syntax tree format](https://github.com/jadejs/jade-parser).
+It's likely that you'll have to implement feature requests or enhancements on your own. To do that, you'll need to be comfortable with JavaScript, Node.js, and familiar with [Stylus'](https://github.com/stylus/stylus) and [Pug's](https://github.com/pugjs/pug-lexer) abstract syntax tree format.
 
-To understand how Stylperjade works, the best place to start is in the `lib/` directory: starting with `lib/cli.js` (to see the processing flow when `stylperjade` is invoked in the terminal) then going to `lib/stylperjade.js` for understanding how Stylperjade checks files.
+To understand how the project works, the best place to start is in the `lib/` directory: starting with `lib/cli.js` (to see the processing flow when `stylperjade` is invoked in the terminal) then going to `lib/report.js` for understanding how files are checked.
 
 If you cannot implement the feature, but you feel that it would be helpful to others, you can create an issue on GitHub. If the maintainers feel that the issue satisfies our [criteria for closing issues](#prissue-closing-criteria), your issue will be closed with a genuine thank you and an explanation for the closure.
 

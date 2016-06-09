@@ -2,33 +2,33 @@ var _ = require('lodash')
   , assert = require('assert')
   , chalk = require('chalk')
   , fs = require('fs')
-  , stylperjade = require('../lib/stylperjade')
+  , reporter = require('../lib/reporter')
 
   , fixturesPath = __dirname + '/fixtures/'
 
 describe('reporting', function () {
 
-  it('should report unused Stylus and Jade classes', function (done) {
+  it('should report unused Stylus and Pug classes', function (done) {
     var stylusFiles = [ fixturesPath + 'test.styl', fixturesPath + 'test-import.styl' ]
-      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
+      , pugFiles = [ fixturesPath + 'test.pug', fixturesPath + 'test-include.pug' ]
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-unused.txt', 'utf-8')
 
-    stylperjade(stylusFiles, jadeFiles, function (err, results) {
+    reporter(stylusFiles, pugFiles, function (err, results) {
       assert(!err, err)
       assert.equal(results.unusedTotal, 18)
       assert.equal(results.unusedStylusCount, 6)
-      assert.equal(results.unusedJadeCount, 12)
+      assert.equal(results.unusedPugCount, 12)
       assert.equal(results.blacklistedTotal, 0)
       assert.equal(results.blacklistedStylusCount, 0)
-      assert.equal(results.blacklistedJadeCount, 0)
+      assert.equal(results.blacklistedPugCount, 0)
       assert.equal(_.findIndex(results.unusedStylusClasses, [ 'name', 'delta--modifier' ]) !== -1, true)
       assert.equal(_.findIndex(results.unusedStylusClasses, [ 'name', 'kappa' ]) !== -1, true)
       assert.equal(_.findIndex(results.unusedStylusClasses, [ 'name', 'pi' ]) !== -1, true)
       assert.equal(_.findIndex(results.unusedStylusClasses, [ 'name', 'beta' ]) === -1, true)
-      assert.equal(_.findIndex(results.unusedJadeClasses, [ 'name', 'fieldset' ]) === -1, true)
-      assert.equal(_.findIndex(results.unusedJadeClasses, [ 'name', 'epsilon' ]) !== -1, true)
-      assert.equal(_.findIndex(results.unusedJadeClasses, [ 'name', 'js-alpha' ]) !== -1, true)
-      assert.equal(_.findIndex(results.unusedJadeClasses, [ 'name', 'beta' ]) === -1, true)
+      assert.equal(_.findIndex(results.unusedPugClasses, [ 'name', 'fieldset' ]) === -1, true)
+      assert.equal(_.findIndex(results.unusedPugClasses, [ 'name', 'epsilon' ]) !== -1, true)
+      assert.equal(_.findIndex(results.unusedPugClasses, [ 'name', 'js-alpha' ]) !== -1, true)
+      assert.equal(_.findIndex(results.unusedPugClasses, [ 'name', 'beta' ]) === -1, true)
       assert.equal(chalk.stripColor(results.report)
         , expectedReport.replace(/%dirname%/g, __dirname)
         , results.report)
@@ -38,68 +38,68 @@ describe('reporting', function () {
 
   it('should not report the locations of unused Stylus for whitelisted files', function (done) {
     var stylusFiles = [ fixturesPath + 'test.styl', fixturesPath + 'test-import.styl' ]
-      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
+      , pugFiles = [ fixturesPath + 'test.pug', fixturesPath + 'test-include.pug' ]
       , options =
       { stylusWhitelist: [ 'test-import.styl' ]
-      , jadeWhitelist: [ 'test-include.jade' ]
+      , pugWhitelist: [ 'test-include.pug' ]
       }
 
-    stylperjade(stylusFiles, jadeFiles, options, function (err, results) {
+    reporter(stylusFiles, pugFiles, options, function (err, results) {
       assert(!err, err)
       assert.equal(results.unusedTotal, 9)
       assert.equal(results.unusedStylusCount, 4)
-      assert.equal(results.unusedJadeCount, 5)
+      assert.equal(results.unusedPugCount, 5)
       assert.equal(_.findIndex(results.unusedStylusClasses, [ 'name', 'nu' ]) !== -1, true)
       assert.equal(_.findIndex(results.unusedStylusClasses, [ 'name', 'pi' ]) === -1, true)
-      assert.equal(_.findIndex(results.unusedJadeClasses, [ 'name', 'epsilon' ]) !== -1, true)
-      assert.equal(_.findIndex(results.unusedJadeClasses, [ 'name', 'theta' ]) === -1, true)
+      assert.equal(_.findIndex(results.unusedPugClasses, [ 'name', 'epsilon' ]) !== -1, true)
+      assert.equal(_.findIndex(results.unusedPugClasses, [ 'name', 'theta' ]) === -1, true)
       assert.equal(results.report.indexOf('test-import.styl') === -1, true, results.report)
-      assert.equal(results.report.indexOf('test-include.jade') === -1, true, results.report)
+      assert.equal(results.report.indexOf('test-include.pug') === -1, true, results.report)
       done()
     })
   })
 
   it('should not report the locations of unused Stylus for ignored files', function (done) {
     var stylusFiles = [ fixturesPath + 'test.styl', fixturesPath + 'test-import.styl' ]
-      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
+      , pugFiles = [ fixturesPath + 'test.pug', fixturesPath + 'test-include.pug' ]
       , options =
-      { ignoreFiles: [ '**/test-import.styl', '**/test-include.jade' ]
+      { ignoreFiles: [ '**/test-import.styl', '**/test-include.pug' ]
       }
 
-    stylperjade(stylusFiles, jadeFiles, options, function (err, results) {
+    reporter(stylusFiles, pugFiles, options, function (err, results) {
       assert(!err, err)
       assert.equal(results.unusedTotal, 9)
       assert.equal(results.unusedStylusCount, 4)
-      assert.equal(results.unusedJadeCount, 5)
+      assert.equal(results.unusedPugCount, 5)
       assert.equal(_.findIndex(results.unusedStylusClasses, [ 'name', 'nu' ]) !== -1, true)
       assert.equal(_.findIndex(results.unusedStylusClasses, [ 'name', 'pi' ]) === -1, true)
-      assert.equal(_.findIndex(results.unusedJadeClasses, [ 'name', 'epsilon' ]) !== -1, true)
-      assert.equal(_.findIndex(results.unusedJadeClasses, [ 'name', 'theta' ]) === -1, true)
+      assert.equal(_.findIndex(results.unusedPugClasses, [ 'name', 'epsilon' ]) !== -1, true)
+      assert.equal(_.findIndex(results.unusedPugClasses, [ 'name', 'theta' ]) === -1, true)
       assert.equal(results.report.indexOf('test-import.styl') === -1, true, results.report)
-      assert.equal(results.report.indexOf('test-include.jade') === -1, true, results.report)
+      assert.equal(results.report.indexOf('test-include.pug') === -1, true, results.report)
       done()
     })
   })
 
-  it('should report blacklisted Stylus and Jade classes', function (done) {
+  it('should report blacklisted Stylus and Pug classes', function (done) {
     var stylusFiles = [ fixturesPath + 'test.styl', fixturesPath + 'test-import.styl' ]
-      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
+      , pugFiles = [ fixturesPath + 'test.pug', fixturesPath + 'test-include.pug' ]
       , options =
         { stylusWhitelist: [ '*' ]
-        , jadeWhitelist: [ '*' ]
+        , pugWhitelist: [ '*' ]
         , stylusBlacklist: [ 'delta*' ]
-        , jadeBlacklist: [ 'js-*' ]
+        , pugBlacklist: [ 'js-*' ]
         }
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-blacklisted.txt', 'utf-8')
 
-    stylperjade(stylusFiles, jadeFiles, options, function (err, results) {
+    reporter(stylusFiles, pugFiles, options, function (err, results) {
       assert(!err, err)
       assert.equal(results.unusedTotal, 0)
       assert.equal(results.unusedStylusCount, 0)
-      assert.equal(results.unusedJadeCount, 0)
+      assert.equal(results.unusedPugCount, 0)
       assert.equal(results.blacklistedTotal, 5)
       assert.equal(results.blacklistedStylusCount, 2)
-      assert.equal(results.blacklistedJadeCount, 3)
+      assert.equal(results.blacklistedPugCount, 3)
       assert.equal(chalk.stripColor(results.report)
       , expectedReport.replace(/%dirname%/g, __dirname)
       , results.report)
@@ -107,24 +107,24 @@ describe('reporting', function () {
     })
   })
 
-  it('should report no unused and no blacklisted Stylus and Jade classes', function (done) {
+  it('should report no unused and no blacklisted Stylus and Pug classes', function (done) {
     var stylusFiles = [ fixturesPath + 'test.styl', fixturesPath + 'test-import.styl' ]
-      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
+      , pugFiles = [ fixturesPath + 'test.pug', fixturesPath + 'test-include.pug' ]
       , options =
         { stylusWhitelist: [ '*' ]
-        , jadeWhitelist: [ '*' ]
+        , pugWhitelist: [ '*' ]
         , verbose: true
         }
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
 
-    stylperjade(stylusFiles, jadeFiles, options, function (err, results) {
+    reporter(stylusFiles, pugFiles, options, function (err, results) {
       assert(!err, err)
       assert.equal(results.unusedTotal, 0)
       assert.equal(results.unusedStylusCount, 0)
-      assert.equal(results.unusedJadeCount, 0)
+      assert.equal(results.unusedPugCount, 0)
       assert.equal(results.blacklistedTotal, 0)
       assert.equal(results.blacklistedStylusCount, 0)
-      assert.equal(results.blacklistedJadeCount, 0)
+      assert.equal(results.blacklistedPugCount, 0)
       assert.equal(chalk.stripColor(results.report)
       , expectedReport.replace(/%dirname%/g, __dirname)
       , results.report)
@@ -134,15 +134,15 @@ describe('reporting', function () {
 
   it('should filter out Stylus classes using options.stylusWhitelist', function (done) {
     var stylusFiles = [ fixturesPath + 'test.styl', fixturesPath + 'test-import.styl' ]
-      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
+      , pugFiles = [ fixturesPath + 'test.pug', fixturesPath + 'test-include.pug' ]
       , options = { stylusWhitelist: [ 'delta*', 'kappa' ] }
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-styluswhitelist.txt', 'utf-8')
 
-    stylperjade(stylusFiles, jadeFiles, options, function (err, results) {
+    reporter(stylusFiles, pugFiles, options, function (err, results) {
       assert(!err, err)
       assert.equal(results.unusedTotal, 16)
       assert.equal(results.unusedStylusCount, 4)
-      assert.equal(results.unusedJadeCount, 12)
+      assert.equal(results.unusedPugCount, 12)
       assert.equal(_.findIndex(results.unusedStylusClasses, [ 'name', 'delta--modifier' ]) === -1, true)
       assert.equal(_.findIndex(results.unusedStylusClasses, [ 'name', 'kappa' ]) === -1, true)
       assert.equal(chalk.stripColor(results.report)
@@ -152,20 +152,20 @@ describe('reporting', function () {
     })
   })
 
-  it('should filter out Jade classes using options.jadeWhitelist', function (done) {
+  it('should filter out Pug classes using options.pugWhitelist', function (done) {
     var stylusFiles = [ fixturesPath + 'test.styl', fixturesPath + 'test-import.styl' ]
-      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
-      , options = { jadeWhitelist: [ 'js-*' ] }
-      , expectedReport = fs.readFileSync(fixturesPath + 'expected-jadewhitelist.txt', 'utf-8')
+      , pugFiles = [ fixturesPath + 'test.pug', fixturesPath + 'test-include.pug' ]
+      , options = { pugWhitelist: [ 'js-*' ] }
+      , expectedReport = fs.readFileSync(fixturesPath + 'expected-pugwhitelist.txt', 'utf-8')
 
-    stylperjade(stylusFiles, jadeFiles, options, function (err, results) {
+    reporter(stylusFiles, pugFiles, options, function (err, results) {
       assert(!err, err)
       assert.equal(results.unusedTotal, 15)
       assert.equal(results.unusedStylusCount, 6)
-      assert.equal(results.unusedJadeCount, 9)
-      assert.equal(_.findIndex(results.unusedJadeClasses, [ 'name', 'js-alpha' ]) === -1, true)
-      assert.equal(_.findIndex(results.unusedJadeClasses, [ 'name', 'js-beta-delta' ]) === -1, true)
-      assert.equal(_.findIndex(results.unusedJadeClasses, [ 'name', 'js-mu' ]) === -1, true)
+      assert.equal(results.unusedPugCount, 9)
+      assert.equal(_.findIndex(results.unusedPugClasses, [ 'name', 'js-alpha' ]) === -1, true)
+      assert.equal(_.findIndex(results.unusedPugClasses, [ 'name', 'js-beta-delta' ]) === -1, true)
+      assert.equal(_.findIndex(results.unusedPugClasses, [ 'name', 'js-mu' ]) === -1, true)
       assert.equal(chalk.stripColor(results.report)
         , expectedReport.replace(/%dirname%/g, __dirname)
         , results.report)
@@ -175,15 +175,15 @@ describe('reporting', function () {
 
   it('should report any Stylus classes matching options.stylusBlacklist', function (done) {
     var stylusFiles = [ fixturesPath + 'test.styl', fixturesPath + 'test-import.styl' ]
-      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
+      , pugFiles = [ fixturesPath + 'test.pug', fixturesPath + 'test-include.pug' ]
       , options = { stylusBlacklist: [ 'delta*', 'kappa' ] }
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-stylusblacklist.txt', 'utf-8')
 
-    stylperjade(stylusFiles, jadeFiles, options, function (err, results) {
+    reporter(stylusFiles, pugFiles, options, function (err, results) {
       assert(!err, err)
       assert.equal(results.blacklistedTotal, 3)
       assert.equal(results.blacklistedStylusCount, 3)
-      assert.equal(results.blacklistedJadeCount, 0)
+      assert.equal(results.blacklistedPugCount, 0)
       assert.equal(_.findIndex(results.blacklistedStylusClasses, [ 'name', 'delta' ]) !== -1, true)
       assert.equal(_.findIndex(results.blacklistedStylusClasses, [ 'name', 'delta--modifier' ]) !== -1, true)
       assert.equal(_.findIndex(results.blacklistedStylusClasses, [ 'name', 'kappa' ]) !== -1, true)
@@ -194,20 +194,20 @@ describe('reporting', function () {
     })
   })
 
-  it('should report any Jade classes matching options.jadeBlacklist', function (done) {
+  it('should report any Pug classes matching options.pugBlacklist', function (done) {
     var stylusFiles = [ fixturesPath + 'test.styl', fixturesPath + 'test-import.styl' ]
-      , jadeFiles = [ fixturesPath + 'test.jade', fixturesPath + 'test-include.jade' ]
-      , options = { jadeBlacklist: [ 'js-*' ] }
-      , expectedReport = fs.readFileSync(fixturesPath + 'expected-jadeblacklist.txt', 'utf-8')
+      , pugFiles = [ fixturesPath + 'test.pug', fixturesPath + 'test-include.pug' ]
+      , options = { pugBlacklist: [ 'js-*' ] }
+      , expectedReport = fs.readFileSync(fixturesPath + 'expected-pugblacklist.txt', 'utf-8')
 
-    stylperjade(stylusFiles, jadeFiles, options, function (err, results) {
+    reporter(stylusFiles, pugFiles, options, function (err, results) {
       assert(!err, err)
       assert.equal(results.blacklistedTotal, 3)
       assert.equal(results.blacklistedStylusCount, 0)
-      assert.equal(results.blacklistedJadeCount, 3)
-      assert.equal(_.findIndex(results.blacklistedJadeClasses, [ 'name', 'js-alpha' ]) !== -1, true)
-      assert.equal(_.findIndex(results.blacklistedJadeClasses, [ 'name', 'js-beta-delta' ]) !== -1, true)
-      assert.equal(_.findIndex(results.blacklistedJadeClasses, [ 'name', 'js-mu' ]) !== -1, true)
+      assert.equal(results.blacklistedPugCount, 3)
+      assert.equal(_.findIndex(results.blacklistedPugClasses, [ 'name', 'js-alpha' ]) !== -1, true)
+      assert.equal(_.findIndex(results.blacklistedPugClasses, [ 'name', 'js-beta-delta' ]) !== -1, true)
+      assert.equal(_.findIndex(results.blacklistedPugClasses, [ 'name', 'js-mu' ]) !== -1, true)
       assert.equal(chalk.stripColor(results.report)
         , expectedReport.replace(/%dirname%/g, __dirname)
         , results.report)
@@ -215,16 +215,16 @@ describe('reporting', function () {
     })
   })
 
-  it.skip('should report any Jade classes found in Array and object attribute notation', function (done) {
+  it.skip('should report any Pug classes found in Array and object attribute notation', function (done) {
     var stylusFiles = [ fixturesPath + 'class-attributes.styl' ]
-      , jadeFiles = [ fixturesPath + 'class-attributes.jade' ]
+      , pugFiles = [ fixturesPath + 'class-attributes.pug' ]
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-class-attributes.txt', 'utf-8')
 
-    stylperjade(stylusFiles, jadeFiles, {}, function (err, results) {
+    reporter(stylusFiles, pugFiles, {}, function (err, results) {
       assert(!err, err)
       assert.equal(results.unusedTotal, 0)
       assert.equal(results.unusedStylusCount, 0)
-      assert.equal(results.unusedJadeCount, 0)
+      assert.equal(results.unusedPugCount, 0)
       assert.equal(chalk.stripColor(results.report)
         , expectedReport.replace(/%dirname%/g, __dirname)
         , results.report)

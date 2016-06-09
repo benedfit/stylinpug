@@ -1,10 +1,11 @@
 var assert = require('assert')
-  , bin = require.resolve('../bin/stylperjade')
   , chalk = require('chalk')
   , fs = require('fs')
   , packageDetails = require('../package.json')
   , spawn = require('child_process').spawn
+  , utils = require('../lib/utils')
 
+  , bin = require.resolve('.' + packageDetails.bin[packageDetails.name])
   , fixturesPath = __dirname + '/fixtures/'
 
 describe('cli', function () {
@@ -51,7 +52,7 @@ describe('cli', function () {
 
   it('should output help', function (done) {
     var args = [ '-h' ]
-      , message = 'Usage: stylperjade [options] <stylusFiles ...> <jadeFiles ...>'
+      , message = 'Usage: ' + packageDetails.name + ' [options] <stylusFiles ...> <pugFiles ...>'
 
     run(args, function (err, code, stdout, stderr) {
       assert(!err, err)
@@ -65,7 +66,7 @@ describe('cli', function () {
 
   it('should output help if no Stylus files specified', function (done) {
     var args = [ '' ]
-      , message = 'Usage: stylperjade [options] <stylusFiles ...> <jadeFiles ...>'
+      , message = 'Usage: ' + packageDetails.name + ' [options] <stylusFiles ...> <pugFiles ...>'
 
     run(args, function (err, code, stdout, stderr) {
       assert(!err, err)
@@ -77,9 +78,9 @@ describe('cli', function () {
     })
   })
 
-  it('should output help if no Jade files specified', function (done) {
+  it('should output help if no Pug files specified', function (done) {
     var args = [ '**/*.styl' ]
-      , message = 'Usage: stylperjade [options] <stylusFiles ...> <jadeFiles ...>'
+      , message = 'Usage: ' + packageDetails.name + ' [options] <stylusFiles ...> <pugFiles ...>'
 
     run(args, function (err, code, stdout, stderr) {
       assert(!err, err)
@@ -92,7 +93,7 @@ describe('cli', function () {
   })
 
   it('should error if no Stylus files found', function (done) {
-    var args = [ 'nonexistent', '**/test*.jade' ]
+    var args = [ 'nonexistent', '**/test*.pug' ]
       , errorMessage = 'No Stylus files found'
 
     run(args, function (err, code, stdout, stderr) {
@@ -104,9 +105,9 @@ describe('cli', function () {
     })
   })
 
-  it('should error if no Jade files found', function (done) {
+  it('should error if no Pug files found', function (done) {
     var args = [ '**/test*.styl', 'nonexistent' ]
-      , errorMessage = 'No Jade files found'
+      , errorMessage = 'No Pug files found'
 
     run(args, function (err, code, stdout, stderr) {
       assert(!err, err)
@@ -119,7 +120,7 @@ describe('cli', function () {
 
   it('should error if Stylus files are invalid', function (done) {
     var stylusFile = 'invalid.txt'
-      , args = [ '**/' + stylusFile, '**/test*.jade' ]
+      , args = [ '**/' + stylusFile, '**/test*.pug' ]
       , errorMessage = 'Stylus file \'' + fixturesPath + stylusFile + '\' error - '
 
     run(args, function (err, code, stdout, stderr) {
@@ -131,10 +132,10 @@ describe('cli', function () {
     })
   })
 
-  it('should error if Jade files are invalid', function (done) {
-    var jadeFile = 'invalid.txt'
-      , args = [ '**/test*.styl', '**/' + jadeFile ]
-      , errorMessage = 'Jade file \'' + fixturesPath + jadeFile + '\' error - '
+  it('should error if Pug files are invalid', function (done) {
+    var pugFile = 'invalid.txt'
+      , args = [ '**/test*.styl', '**/' + pugFile ]
+      , errorMessage = 'Pug file \'' + fixturesPath + pugFile + '\' error - '
 
     run(args, function (err, code, stdout, stderr) {
       assert(!err, err)
@@ -145,7 +146,7 @@ describe('cli', function () {
     })
   })
 
-  it('should handle catch-all argument for Stylus and Jade files', function (done) {
+  it('should handle catch-all argument for Stylus and Pug files', function (done) {
     var args = [ '-v', '-C', fixturesPath, '.' ]
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
 
@@ -160,9 +161,9 @@ describe('cli', function () {
     })
   })
 
-  it('should error if options.stylperjaderc is not found', function (done) {
-    var args = [ '-c', 'nonexistent', '**/test*.styl', '**/test*.jade' ]
-      , errorMessage = '.stylperjaderc not found'
+  it('should error if options.config is not found', function (done) {
+    var args = [ '-c', 'nonexistent', '**/test*.styl', '**/test*.pug' ]
+      , errorMessage = utils.configPath + ' not found'
 
     run(args, function (err, code, stdout, stderr) {
       assert(!err, err)
@@ -173,9 +174,9 @@ describe('cli', function () {
     })
   })
 
-  it('should error if options.stylperjaderc is invalid', function (done) {
-    var args = [ '-v', '-c', fixturesPath + 'invalid.txt', '**/test*.styl', '**/test*.jade' ]
-      , errorMessage = '.stylperjaderc is invalid JSON'
+  it('should error if options.config is invalid', function (done) {
+    var args = [ '-v', '-c', fixturesPath + 'invalid.txt', '**/test*.styl', '**/test*.pug' ]
+      , errorMessage = utils.configPath + ' is invalid JSON'
 
     run(args, function (err, code, stdout, stderr) {
       assert(!err, err)
@@ -186,8 +187,8 @@ describe('cli', function () {
     })
   })
 
-  it('should load config from options.stylperjaderc', function (done) {
-    var args = [ '-v', '-c', fixturesPath + '.stylperjaderc', '**/test*.styl', '**/test*.jade' ]
+  it('should load config from options.config', function (done) {
+    var args = [ '-v', '-c', fixturesPath + utils.configPath, '**/test*.styl', '**/test*.pug' ]
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
 
     run(args, function (err, code, stdout, stderr) {
@@ -201,8 +202,8 @@ describe('cli', function () {
     })
   })
 
-  it('should load config from .stylperjaderc in project root if no options are set', function (done) {
-    var args = [ '**/test*.styl', '**/test*.jade' ]
+  it('should load config from config file in project root if no options are set', function (done) {
+    var args = [ '**/test*.styl', '**/test*.pug' ]
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-unused.txt', 'utf-8')
 
     run(args, function (err, code, stdout, stderr) {
@@ -216,8 +217,8 @@ describe('cli', function () {
     })
   })
 
-  it('should load config from the .stylperjaderc in working directory when set in options', function (done) {
-    var args = [ '-v', '-C', fixturesPath, 'test*.styl', 'test*.jade' ]
+  it('should load config from the config file in working directory when set in options', function (done) {
+    var args = [ '-v', '-C', fixturesPath, 'test*.styl', 'test*.pug' ]
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
 
     run(args, function (err, code, stdout, stderr) {
@@ -231,8 +232,8 @@ describe('cli', function () {
     })
   })
 
-  it('should use empty config if working directory does not contain .stylperjaderc', function (done) {
-    var args = [ '-C', __dirname, '**/test*.styl', '**/test*.jade' ]
+  it('should use empty config if working directory does not contain config file', function (done) {
+    var args = [ '-C', __dirname, '**/test*.styl', '**/test*.pug' ]
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-unused.txt', 'utf-8')
 
     run(args, function (err, code, stdout, stderr) {
@@ -247,7 +248,7 @@ describe('cli', function () {
   })
 
   it('should report the locations of unused Stylus classes from all files', function (done) {
-    var args = [ '-v', '-c', fixturesPath + '.stylperjaderc', '**/test*.styl', '**/test*.jade' ]
+    var args = [ '-v', '-c', fixturesPath + utils.configPath, '**/test*.styl', '**/test*.pug' ]
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
 
     run(args, function (err, code, stdout, stderr) {
@@ -262,7 +263,7 @@ describe('cli', function () {
   })
 
   it('should output silently by default', function (done) {
-    var args = [ '-c', fixturesPath + '.stylperjaderc', '**/test*.styl', '**/test*.jade' ]
+    var args = [ '-c', fixturesPath + utils.configPath, '**/test*.styl', '**/test*.pug' ]
 
     run(args, function (err, code, stdout, stderr) {
       assert(!err, err)

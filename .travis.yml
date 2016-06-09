@@ -7,8 +7,8 @@ node_js:
   - "6"
 after_success:
   - npm run coverage
-  - npm i coveralls
-  - cat ./coverage/lcov.info | coveralls
+  - npm i codecov
+  - codecov -f ./coverage/lcov.info
 notifications:
   email:
     on_success: never
