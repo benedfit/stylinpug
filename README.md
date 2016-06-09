@@ -3,7 +3,7 @@
 Checks Pug against Stylus, and vice versa, for unused and blacklisted classes.
 
 [![build status](https://img.shields.io/travis/benedfit/stylperjade/master.svg)](https://travis-ci.org/benedfit/stylperjade)
-[![coverage status](https://img.shields.io/coveralls/benedfit/stylperjade/master.svg)](https://coveralls.io/github/benedfit/stylperjade)
+[![coverage status](https://img.shields.io/codecov/c/github/benedfit/stylperjade/master.svg)](https://codecov.io/gh/benedfit/stylperjade)
 [![dependency status](https://img.shields.io/david/benedfit/stylperjade.svg)](https://david-dm.org/benedfit/stylperjade)
 [![npm](https://img.shields.io/npm/v/stylperjade.svg)](https://www.npmjs.com/package/stylperjade)
 
