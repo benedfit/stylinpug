@@ -1,6 +1,6 @@
 # Stylperjade
 
-Pronounced: /[stʌɪl](//ssl.gstatic.com/dictionary/static/sounds/de/0/style.mp3) [pəˈreɪd](//ssl.gstatic.com/dictionary/static/sounds/de/0/parade.mp3)/ - Checks Pug against Stylus, and vice versa, for unused and blacklisted classes.
+Checks Pug against Stylus, and vice versa, for unused and blacklisted classes.
 
 [![build status](https://img.shields.io/travis/benedfit/stylperjade/master.svg)](https://travis-ci.org/benedfit/stylperjade)
 [![coverage status](https://img.shields.io/coveralls/benedfit/stylperjade/master.svg)](https://coveralls.io/github/benedfit/stylperjade)
@@ -34,7 +34,7 @@ $ stylperjade [options] .
 * `-V, --version`: output the version number
 * `-v, --verbose`: displays the full [visual representation](#user-content-example-report) of blacklisted and unused classes
 * `-C, --chdir <path>`: change the working directory
-* `-c, --config <path>`: set path to load options from. Defaults to [./.stylperjaderc](#user-content-configuration-file)
+* `-c, --config <path>`: set path to load config file from. Defaults to [./.stylperjaderc](#user-content-configuration-file)
 
 ## API
 
@@ -88,11 +88,11 @@ Type: `object`
 | --- | --- | --- |
 | cwd | `string` | The alternative path to the current working directory |
 | verbose | `boolean` | Displays the full [visual representation](#user-content-example-report) of blacklisted and unused classes |
-| ignoreFiles | `Array` | An array of patterns for file names to ignore when they exist in `.styl` files, `.pug` files, or source map sources |
-| stylusBlacklist | `Array` | An array of patterns for classes that should never exist in `.stylus` files or source map sources |
-| stylusWhitelist | `Array` | An array patterns for classes to ignore when they exist in `.stylus` files or source maps sources but not in `.pug` files |
+| ignoreFiles | `Array` | An array of patterns for file names to ignore when they exist in `.styl` files, `.pug` files |
+| stylusBlacklist | `Array` | An array of patterns for classes that should never exist in `.stylus` files |
+| stylusWhitelist | `Array` | An array patterns for classes to ignore when they exist in `.stylus` files but not in `.pug` files |
 | pugBlacklist | `Array` | An array of patterns for classes that should never exist in `.pug` files |
-| pugWhitelist | `Array` | An array of patterns for classes to ignore when they exist in `.pug` files but not in `.stylus` files or source map sources |
+| pugWhitelist | `Array` | An array of patterns for classes to ignore when they exist in `.pug` files but not in `.stylus` files |
 | config | `string` | The alternative path to a config file to load options from |
 
 #### callback(error, results)
