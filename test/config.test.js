@@ -3,6 +3,7 @@ var _ = require('lodash')
   , chalk = require('chalk')
   , fs = require('fs')
   , reporter = require('../lib/reporter')
+  , utils = require('../lib/utils')
 
   , fixturesPath = __dirname + '/fixtures/'
 
@@ -15,7 +16,7 @@ describe('config', function () {
 
     reporter(stylusFiles, pugFiles, options, function (err, results) {
       assert(err)
-      assert.equal(err, '.stylperjaderc not found')
+      assert.equal(err, utils.configPath + ' not found')
       assert.equal(results, null)
       done()
     })
@@ -28,7 +29,7 @@ describe('config', function () {
 
     reporter(stylusFiles, pugFiles, options, function (err, results) {
       assert(err)
-      assert.equal(err, '.stylperjaderc is invalid JSON')
+      assert.equal(err, utils.configPath + ' is invalid JSON')
       assert.equal(results, null)
       done()
     })
@@ -37,7 +38,7 @@ describe('config', function () {
   it('should load config from options.config', function (done) {
     var stylusFiles = [ fixturesPath + 'test.styl', fixturesPath + 'test-import.styl' ]
       , pugFiles = [ fixturesPath + 'test.pug', fixturesPath + 'test-include.pug' ]
-      , options = { config: fixturesPath + '.stylperjaderc', verbose: true }
+      , options = { config: fixturesPath + utils.configPath, verbose: true }
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
 
     reporter(stylusFiles, pugFiles, options, function (err, results) {
