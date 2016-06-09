@@ -3,11 +3,11 @@
 
 3 blacklisted classes found in Pug files:
 - js-alpha
-  %dirname%/fixtures/test-include.pug:1
+  %dirname%/fixtures/test-include.pug:1:1
 - js-beta-delta
-  %dirname%/fixtures/test-include.pug:3
+  %dirname%/fixtures/test-include.pug:3:1
 - js-mu
-  %dirname%/fixtures/test-include.pug:2
+  %dirname%/fixtures/test-include.pug:2:1
 
 ✘ 18 unused classes found
 
@@ -33,32 +33,32 @@
 
 12 unused classes found in Pug files:
 - epsilon
-  %dirname%/fixtures/test-include.pug:3
-  %dirname%/fixtures/test.pug:2
-  %dirname%/fixtures/test.pug:14
+  %dirname%/fixtures/test-include.pug:3:15
+  %dirname%/fixtures/test.pug:2:7
+  %dirname%/fixtures/test.pug:14:31
 - eta--modifier
-  %dirname%/fixtures/test-include.pug:1
+  %dirname%/fixtures/test-include.pug:1:11
 - eta--modifier-beta
-  %dirname%/fixtures/test-include.pug:1
+  %dirname%/fixtures/test-include.pug:1:11
 - gamma
-  %dirname%/fixtures/test.pug:3
+  %dirname%/fixtures/test.pug:3:30
 - js-alpha
-  %dirname%/fixtures/test-include.pug:1
+  %dirname%/fixtures/test-include.pug:1:1
 - js-beta-delta
-  %dirname%/fixtures/test-include.pug:3
+  %dirname%/fixtures/test-include.pug:3:1
 - js-mu
-  %dirname%/fixtures/test-include.pug:2
+  %dirname%/fixtures/test-include.pug:2:1
 - lambda__element
-  %dirname%/fixtures/test.pug:4
+  %dirname%/fixtures/test.pug:4:7
 - rho
-  %dirname%/fixtures/test.pug:14
-  %dirname%/fixtures/test.pug:15
-  %dirname%/fixtures/test.pug:16
+  %dirname%/fixtures/test.pug:14:16
+  %dirname%/fixtures/test.pug:15:6
+  %dirname%/fixtures/test.pug:16:16
 - rho--modifier
-  %dirname%/fixtures/test.pug:14
-  %dirname%/fixtures/test.pug:15
-  %dirname%/fixtures/test.pug:16
+  %dirname%/fixtures/test.pug:14:31
+  %dirname%/fixtures/test.pug:15:21
+  %dirname%/fixtures/test.pug:16:31
 - theta
-  %dirname%/fixtures/test-include.pug:2
+  %dirname%/fixtures/test-include.pug:2:8
 - theta--modifier
-  %dirname%/fixtures/test-include.pug:2
+  %dirname%/fixtures/test-include.pug:2:8

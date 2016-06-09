@@ -9,8 +9,8 @@
 
 3 blacklisted classes found in Pug files:
 - js-alpha
-  %dirname%/fixtures/test-include.pug:1
+  %dirname%/fixtures/test-include.pug:1:1
 - js-beta-delta
-  %dirname%/fixtures/test-include.pug:3
+  %dirname%/fixtures/test-include.pug:3:1
 - js-mu
-  %dirname%/fixtures/test-include.pug:2
+  %dirname%/fixtures/test-include.pug:2:1
