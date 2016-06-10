@@ -1,31 +1,31 @@
-# Stylperjade
+# Stylin' Pug
 
-Checks Pug against Stylus, and vice versa, for unused and blacklisted classes.
+Check Stylus against Pug, and vice versa, for unused and blacklisted classes.
 
-[![build status](https://img.shields.io/travis/benedfit/stylperjade/master.svg)](https://travis-ci.org/benedfit/stylperjade)
-[![coverage status](https://img.shields.io/codecov/c/github/benedfit/stylperjade/master.svg)](https://codecov.io/gh/benedfit/stylperjade)
-[![dependency status](https://img.shields.io/david/benedfit/stylperjade.svg)](https://david-dm.org/benedfit/stylperjade)
-[![npm](https://img.shields.io/npm/v/stylperjade.svg)](https://www.npmjs.com/package/stylperjade)
+[![build status](https://img.shields.io/travis/benedfit/stylinpug/master.svg)](https://travis-ci.org/benedfit/stylinpug)
+[![coverage status](https://img.shields.io/codecov/c/github/benedfit/stylinpug/master.svg)](https://codecov.io/gh/benedfit/stylinpug)
+[![dependency status](https://img.shields.io/david/benedfit/stylinpug.svg)](https://david-dm.org/benedfit/stylinpug)
+[![npm](https://img.shields.io/npm/v/stylinpug.svg)](https://www.npmjs.com/package/stylinpug)
 
 ## CLI
 
 ## Installation
 
 ```shell
-$ npm install stylperjade -g
+$ npm install stylinpug -g
 ```
 
 ## Usage
 
 ```shell
-$ stylperjade [options] <stylusFiles...> <pugFiles...>
+$ stylinpug [options] <stylusFiles...> <pugFiles...>
 
 ```
 
 OR to find all Stylus and Pug files in current working directory
 
 ```
-$ stylperjade [options] .
+$ stylinpug [options] .
 ```
 
 ### options
@@ -34,20 +34,20 @@ $ stylperjade [options] .
 * `-V, --version`: output the version number
 * `-v, --verbose`: displays the full [visual representation](#user-content-example-report) of blacklisted and unused classes
 * `-C, --chdir <path>`: change the working directory
-* `-c, --config <path>`: set path to load config file from. Defaults to [./.stylperjaderc](#user-content-configuration-file)
+* `-c, --config <path>`: set path to load config file from. Defaults to [./.stylinpugrc](#user-content-configuration-file)
 
 ## API
 
 ### Installation
 
 ```shell
-$ npm install stylperjade --save
+$ npm install stylinpug --save
 ```
 
 ### Usage
 
 ```js
-var stylperjade = require('stylperjade')
+var stylinpug = require('stylinpug')
 
   , stylusFiles = [ 'index.styl', '**/index*.styl' ]
   , pugFiles = [ 'default.pug', 'includes/header.pug' ]
@@ -59,12 +59,12 @@ var stylperjade = require('stylperjade')
     , pugBlacklist: []
     }
 
-stylperjade(stylusFiles, pugFiles, options, function (err, results) {
+stylinpug(stylusFiles, pugFiles, options, function (err, results) {
   console.log(results.report)
 })
 ```
 
-### stylperjade(stylusFiles, pugFiles, [options,] callback)
+### stylinpug(stylusFiles, pugFiles, [options,] callback)
 
 #### stylusFiles
 
@@ -135,61 +135,61 @@ Type: `object`
 
 ## Configuration file
 
-Options can be specified in a config file ([see example](.stylperjaderc)). If no options have been specified, Stylperjade checks the current working directory to see if there is a `.stylperjaderc` file present. This can be overridden by setting `options.config` to the path of the desired configuration file:
+Options can be specified in a config file ([see example](.stylinpugrc)). If no options have been specified, the current working directory is checked to see if there is a `.stylinpugrc` file present. This can be overridden by setting `options.config` to the path of the desired configuration file:
 
 ```js
-var options = { config: '/path/to/.stylperjaderc' }
+var options = { config: '/path/to/.stylinpugrc' }
 
-stylperjade(stylusFiles, pugFiles, options, function (err, results) {
+stylinpug(stylusFiles, pugFiles, options, function (err, results) {
   console.log(results.report)
 })
 ```
 
 ## Directives
 
-The following configuration directives as supported by Stylperjade:
+The following configuration directives as supported:
 
 ### styluswhitelist
 
 Adds the specified pattern to [`options.stylusWhitelist`](#options-1)
 
-* Stylus usage: `/* stylperjade styluswhitelist: <pattern> */`
-* Pug usage: `//- stylperjade styluswhitelist: <pattern>`
+* Stylus usage: `/* stylinpug styluswhitelist: <pattern> */`
+* Pug usage: `//- stylinpug styluswhitelist: <pattern>`
 
 ### pugwhitelist
 
 Adds the specified pattern to [`options.pugWhitelist`](#options-1)
 
-* Stylus usage: `/* stylperjade pugwhitelist: <pattern> */`
-* Pug usage: `//- stylperjade pugwhitelist: <pattern>`
+* Stylus usage: `/* stylinpug pugwhitelist: <pattern> */`
+* Pug usage: `//- stylinpug pugwhitelist: <pattern>`
 
 ### whitelist
 
 Adds the specified pattern to both [`options.stylusWhitelist`](#options-1) and [`options.pugWhitelist`](#options-1)
 
-* Stylus usage: `/* stylperjade whitelist: <pattern> */`
-* Pug usage: `//- stylperjade whitelist: <pattern>`
+* Stylus usage: `/* stylinpug whitelist: <pattern> */`
+* Pug usage: `//- stylinpug whitelist: <pattern>`
 
 ### stylusblacklist
 
 Adds the specified pattern to [`options.stylusBlacklist`](#options-1)
 
-* Stylus usage: `/* stylperjade stylusblacklist: <pattern> */`
-* Pug usage: `//- stylperjade stylusblacklist: <pattern>`
+* Stylus usage: `/* stylinpug stylusblacklist: <pattern> */`
+* Pug usage: `//- stylinpug stylusblacklist: <pattern>`
 
 ### pugblacklist
 
 Adds the specified pattern to [`options.pugBlacklist`](#options-1)
 
-* Stylus usage: `/* stylperjade pugblacklist: <pattern> */`
-* Pug usage: `//- stylperjade pugblacklist: <pattern>`
+* Stylus usage: `/* stylinpug pugblacklist: <pattern> */`
+* Pug usage: `//- stylinpug pugblacklist: <pattern>`
 
 ### blacklist
 
 Adds the specified pattern to both [`options.stylusBlacklist`](#options-1) and [`options.pugBlacklist`](#options-1)
 
-* Stylus usage: `/* stylperjade blacklist: <pattern> */`
-* Pug usage: `//- stylperjade blacklist: <pattern>`
+* Stylus usage: `/* stylinpug blacklist: <pattern> */`
+* Pug usage: `//- stylinpug blacklist: <pattern>`
 
 ## Licence
 ISC © [Ben Edwards](https://github.com/benedfit/)

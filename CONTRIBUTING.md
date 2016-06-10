@@ -49,7 +49,7 @@ Please do not take offence if your ticket is closed. We're only trying to keep t
 
 ## Filing bugs
 
-If you found an error, typo, or any other flaw in the project, please report it using [GitHub Issues](https://github.com/benedfit/stylperjade/issues). Try searching the issues to see if there is an existing report of your bug or feature request.
+If you found an error, typo, or any other flaw in the project, please report it using [GitHub Issues](https://github.com/benedfit/stylinpug/issues). Try searching the issues to see if there is an existing report of your bug or feature request.
 
 When it comes to bugs, the more details you provide, the easier it is to reproduce the issue and the faster it could be fixed.
 
@@ -71,7 +71,7 @@ If you've got an idea for a new feature, file an issue providing some details on
 
 It's likely that you'll have to implement feature requests or enhancements on your own. To do that, you'll need to be comfortable with JavaScript, Node.js, and familiar with [Stylus'](https://github.com/stylus/stylus) and [Pug's](https://github.com/pugjs/pug-lexer) abstract syntax tree format.
 
-To understand how the project works, the best place to start is in the `lib/` directory: starting with `lib/cli.js` (to see the processing flow when `stylperjade` is invoked in the terminal) then going to `lib/report.js` for understanding how files are checked.
+To understand how the project works, the best place to start is in the `lib/` directory: starting with `lib/cli.js` (to see the processing flow when `stylinpug` is invoked in the terminal) then going to `lib/report.js` for understanding how files are checked.
 
 If you cannot implement the feature, but you feel that it would be helpful to others, you can create an issue on GitHub. If the maintainers feel that the issue satisfies our [criteria for closing issues](#prissue-closing-criteria), your issue will be closed with a genuine thank you and an explanation for the closure.
 
