@@ -1,34 +1,28 @@
 {
-  "name": "stylperjade",
+  "name": "stylinpug",
   "version": "1.2.6",
-  "description": "Checks Pug against Stylus, and vice versa, for unused and blacklisted classes",
+  "description": "Check Stylus against Pug, and vice versa, for unused and blacklisted classes",
   "author": "Ben Edwards <hello@benedfit.com>",
   "license": "ISC",
   "keywords": [
-    "uncss",
-    "unusedcss",
-    "unusedstylus",
     "optimize",
     "optimise",
     "unused",
     "selector",
-    "sourcemap",
-    "css",
     "stylus",
-    "jade",
     "pug",
     "html"
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:benedfit/stylperjade"
+    "url": "git@github.com:benedfit/stylinpug"
   },
   "publishConfig": {
     "registry": "http://registry.npmjs.org"
   },
   "main": "./lib/reporter",
   "bin": {
-    "stylperjade": "./bin/stylperjade"
+    "stylinpug": "./bin/stylinpug"
   },
   "scripts": {
     "lint": "eslint -f unix .",
