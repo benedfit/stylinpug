@@ -1,3 +1,11 @@
+## v2.0.1 / 2016-06-12
+
+### Highlights
+* Adds `node_modules` as default to `options.ignoreFiles`
+
+### Changes
+[v2.0.0...v2.0.1](https://github.com/benedfit/stylinpug/compare/v2.0.0...v2.0.1)
+
 ## v2.0.0 / 2016-06-12
 
 ### Highlights

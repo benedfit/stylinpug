@@ -1,6 +1,6 @@
 {
   "name": "stylinpug",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Check Stylus against Pug, and vice versa, for unused and blacklisted classes",
   "author": "Ben Edwards <hello@benedfit.com>",
   "license": "ISC",
