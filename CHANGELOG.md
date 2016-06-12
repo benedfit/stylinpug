@@ -1,3 +1,13 @@
+## v2.0.0 / 2016-06-12
+
+### Highlights
+* Checks Stylus directly rather than the CSS it creates
+* Replaced Jade with Pug
+* Reports column numbers for locations found in Pug
+
+### Changes
+[v1.2.6...v2.0.0](https://github.com/benedfit/stylinpug/compare/v1.2.6...v2.0.0)
+
 ## v1.2.6 / 2016-01-20
 
 ### Highlights
