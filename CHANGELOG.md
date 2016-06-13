@@ -1,3 +1,11 @@
+## v2.0.2 / 2016-06-13
+
+### Highlights
+* Fixes error caused by Literal nodes in Stylus
+
+### Changes
+[v2.0.1...v2.0.2](https://github.com/benedfit/stylinpug/compare/v2.0.1...v2.0.2)
+
 ## v2.0.1 / 2016-06-12
 
 ### Highlights
