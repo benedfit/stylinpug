@@ -7,6 +7,7 @@ var assert = require('assert')
 
   , bin = require.resolve('.' + packageDetails.bin[packageDetails.name])
   , fixturesPath = __dirname + '/fixtures/'
+  , helpMessage = 'Usage: ' + packageDetails.name + ' [options] <paths ...>'
 
 describe('cli', function () {
 
@@ -52,41 +53,25 @@ describe('cli', function () {
 
   it('should output help', function (done) {
     var args = [ '-h' ]
-      , message = 'Usage: ' + packageDetails.name + ' [options] <stylusFiles ...> <pugFiles ...>'
 
     run(args, function (err, code, stdout, stderr) {
       assert(!err, err)
       assert.equal(code, 0, code)
       assert.equal(stderr, '', stderr)
-      assert.equal(stdout.indexOf(message) !== -1, true, stdout)
+      assert.equal(stdout.indexOf(helpMessage) !== -1, true, stdout)
       assert.equal(stdout.indexOf(packageDetails.description) !== -1, true, stdout)
       done()
     })
   })
 
-  it('should output help if no Stylus files specified', function (done) {
-    var args = [ '' ]
-      , message = 'Usage: ' + packageDetails.name + ' [options] <stylusFiles ...> <pugFiles ...>'
+  it('should output help if no arguments specified', function (done) {
+    var args = []
 
     run(args, function (err, code, stdout, stderr) {
       assert(!err, err)
       assert.equal(code, 0, code)
       assert.equal(stderr, '', stderr)
-      assert.equal(stdout.indexOf(message) !== -1, true, stdout)
-      assert.equal(stdout.indexOf(packageDetails.description) !== -1, true, stdout)
-      done()
-    })
-  })
-
-  it('should output help if no Pug files specified', function (done) {
-    var args = [ '**/*.styl' ]
-      , message = 'Usage: ' + packageDetails.name + ' [options] <stylusFiles ...> <pugFiles ...>'
-
-    run(args, function (err, code, stdout, stderr) {
-      assert(!err, err)
-      assert.equal(code, 0, code)
-      assert.equal(stderr, '', stderr)
-      assert.equal(stdout.indexOf(message) !== -1, true, stdout)
+      assert.equal(stdout.indexOf(helpMessage) !== -1, true, stdout)
       assert.equal(stdout.indexOf(packageDetails.description) !== -1, true, stdout)
       done()
     })
@@ -119,7 +104,7 @@ describe('cli', function () {
   })
 
   it('should error if Stylus files are invalid', function (done) {
-    var stylusFile = 'invalid.txt'
+    var stylusFile = 'invalid.styl'
       , args = [ '**/' + stylusFile, '**/test*.pug' ]
       , errorMessage = 'Stylus file \'' + fixturesPath + stylusFile + '\' error - '
 
@@ -133,7 +118,7 @@ describe('cli', function () {
   })
 
   it('should error if Pug files are invalid', function (done) {
-    var pugFile = 'invalid.txt'
+    var pugFile = 'invalid.pug'
       , args = [ '**/test*.styl', '**/' + pugFile ]
       , errorMessage = 'Pug file \'' + fixturesPath + pugFile + '\' error - '
 
@@ -142,21 +127,6 @@ describe('cli', function () {
       assert.equal(code, 1, code)
       assert.equal(stdout, '', stdout)
       assert.equal(stderr.indexOf(errorMessage) !== -1, true, stderr)
-      done()
-    })
-  })
-
-  it('should handle catch-all argument for Stylus and Pug files', function (done) {
-    var args = [ '-v', '-C', fixturesPath, '.' ]
-      , expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
-
-    run(args, function (err, code, stdout, stderr) {
-      assert(!err, err)
-      assert.equal(code, 0, code)
-      assert.equal(stderr, '', stderr)
-      assert.equal(chalk.stripColor(stdout).trim()
-        , expectedReport.replace(/%dirname%/g, __dirname).trim()
-        , stdout)
       done()
     })
   })
@@ -175,7 +145,7 @@ describe('cli', function () {
   })
 
   it('should error if options.config is invalid', function (done) {
-    var args = [ '-v', '-c', fixturesPath + 'invalid.txt', '**/test*.styl', '**/test*.pug' ]
+    var args = [ '-v', '-c', fixturesPath + 'invalid.json', '**/test*.styl', '**/test*.pug' ]
       , errorMessage = utils.configPath + ' is invalid JSON'
 
     run(args, function (err, code, stdout, stderr) {

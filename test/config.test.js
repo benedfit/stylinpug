@@ -10,11 +10,15 @@ var _ = require('lodash')
 describe('config', function () {
 
   it('should error if options.config is not found', function (done) {
-    var stylusFiles = [ fixturesPath + 'test.styl', fixturesPath + 'test-import.styl' ]
-      , pugFiles = [ fixturesPath + 'test.pug', fixturesPath + 'test-include.pug' ]
+    var paths =
+        [ fixturesPath + 'test.styl'
+        , fixturesPath + 'test-import.styl'
+        , fixturesPath + 'test.pug'
+        , fixturesPath + 'test-include.pug'
+        ]
       , options = { config: 'nonexistent' }
 
-    reporter(stylusFiles, pugFiles, options, function (err, results) {
+    reporter(paths, options, function (err, results) {
       assert(err)
       assert.equal(err, utils.configPath + ' not found')
       assert.equal(results, null)
@@ -23,11 +27,15 @@ describe('config', function () {
   })
 
   it('should error if options.config is invalid', function (done) {
-    var stylusFiles = [ fixturesPath + 'test.styl', fixturesPath + 'test-import.styl' ]
-      , pugFiles = [ fixturesPath + 'test.pug', fixturesPath + 'test-include.pug' ]
-      , options = { config: fixturesPath + 'invalid.txt' }
+    var paths =
+        [ fixturesPath + 'test.styl'
+        , fixturesPath + 'test-import.styl'
+        , fixturesPath + 'test.pug'
+        , fixturesPath + 'test-include.pug'
+        ]
+      , options = { config: fixturesPath + 'invalid.json' }
 
-    reporter(stylusFiles, pugFiles, options, function (err, results) {
+    reporter(paths, options, function (err, results) {
       assert(err)
       assert.equal(err, utils.configPath + ' is invalid JSON')
       assert.equal(results, null)
@@ -36,12 +44,16 @@ describe('config', function () {
   })
 
   it('should load config from options.config', function (done) {
-    var stylusFiles = [ fixturesPath + 'test.styl', fixturesPath + 'test-import.styl' ]
-      , pugFiles = [ fixturesPath + 'test.pug', fixturesPath + 'test-include.pug' ]
+    var paths =
+        [ fixturesPath + 'test.styl'
+        , fixturesPath + 'test-import.styl'
+        , fixturesPath + 'test.pug'
+        , fixturesPath + 'test-include.pug'
+        ]
       , options = { config: fixturesPath + utils.configPath, verbose: true }
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
 
-    reporter(stylusFiles, pugFiles, options, function (err, results) {
+    reporter(paths, options, function (err, results) {
       assert(!err, err)
       assert.equal(results.unusedTotal, 0)
       assert.equal(results.unusedStylusCount, 0)
@@ -57,11 +69,15 @@ describe('config', function () {
   })
 
   it('should load config from config file in project root if no options are set', function (done) {
-    var stylusFiles = [ fixturesPath + 'test.styl', fixturesPath + 'test-import.styl' ]
-      , pugFiles = [ fixturesPath + 'test.pug', fixturesPath + 'test-include.pug' ]
+    var paths =
+        [ fixturesPath + 'test.styl'
+        , fixturesPath + 'test-import.styl'
+        , fixturesPath + 'test.pug'
+        , fixturesPath + 'test-include.pug'
+        ]
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-unused.txt', 'utf-8')
 
-    reporter(stylusFiles, pugFiles, function (err, results) {
+    reporter(paths, function (err, results) {
       assert(!err, err)
       assert.equal(results.unusedTotal, 18)
       assert.equal(results.unusedStylusCount, 6)
@@ -85,12 +101,14 @@ describe('config', function () {
   })
 
   it('should load config from the config file in working directory when set in options', function (done) {
-    var stylusFiles = [ 'test*.styl' ]
-      , pugFiles = [ 'test*.pug' ]
+    var paths =
+        [ 'test*.styl'
+        , 'test*.pug'
+        ]
       , options = { cwd: fixturesPath, verbose: true }
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-none.txt', 'utf-8')
 
-    reporter(stylusFiles, pugFiles, options, function (err, results) {
+    reporter(paths, options, function (err, results) {
       assert(!err, err)
       assert.equal(results.unusedTotal, 0)
       assert.equal(results.unusedStylusCount, 0)
@@ -106,12 +124,14 @@ describe('config', function () {
   })
 
   it('should use empty config if working directory does not contain config file', function (done) {
-    var stylusFiles = [ '**/test*.styl' ]
-      , pugFiles = [ '**/test*.pug' ]
+    var paths =
+        [ '**/test*.styl'
+        , '**/test*.pug'
+        ]
       , options = { cwd: __dirname }
       , expectedReport = fs.readFileSync(fixturesPath + 'expected-unused.txt', 'utf-8')
 
-    reporter(stylusFiles, pugFiles, options, function (err, results) {
+    reporter(paths, options, function (err, results) {
       assert(!err, err)
       assert.equal(results.unusedTotal, 18)
       assert.equal(results.unusedStylusCount, 6)

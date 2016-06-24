@@ -7,10 +7,14 @@ var _ = require('lodash')
 describe('directives', function () {
 
   it('should whitelist Stylus classes found in directives', function (done) {
-    var stylusFiles = [ fixturesPath + 'test*.styl', fixturesPath + 'directives-styluswhitelist.styl' ]
-      , pugFiles = [ fixturesPath + 'test.pug', fixturesPath + 'test-include.pug' ]
+    var paths =
+        [ fixturesPath + 'test*.styl'
+        , fixturesPath + 'directives-styluswhitelist.styl'
+        , fixturesPath + 'test.pug'
+        , fixturesPath + 'test-include.pug'
+        ]
 
-    reporter(stylusFiles, pugFiles, function (err, results) {
+    reporter(paths, function (err, results) {
       assert(!err, err)
       assert.equal(results.unusedTotal, 17)
       assert.equal(results.unusedStylusCount, 5)
@@ -24,10 +28,14 @@ describe('directives', function () {
   })
 
   it('should whitelist Pug classes found in directives', function (done) {
-    var stylusFiles = [ fixturesPath + 'test*.styl', fixturesPath + 'directives-pugwhitelist.styl' ]
-      , pugFiles = [ fixturesPath + 'test.pug', fixturesPath + 'test-include.pug' ]
+    var paths =
+        [ fixturesPath + 'test*.styl'
+        , fixturesPath + 'directives-pugwhitelist.styl'
+        , fixturesPath + 'test.pug'
+        , fixturesPath + 'test-include.pug'
+        ]
 
-    reporter(stylusFiles, pugFiles, function (err, results) {
+    reporter(paths, function (err, results) {
       assert(!err, err)
       assert.equal(results.unusedTotal, 17)
       assert.equal(results.unusedStylusCount, 6)
@@ -41,10 +49,14 @@ describe('directives', function () {
   })
 
   it('should whitelist both Stylus and Pug classes found in directives', function (done) {
-    var stylusFiles = [ fixturesPath + 'test*.styl', fixturesPath + 'directives-whitelist.styl' ]
-      , pugFiles = [ fixturesPath + 'test.pug', fixturesPath + 'test-include.pug' ]
+    var paths =
+        [ fixturesPath + 'test*.styl'
+        , fixturesPath + 'directives-whitelist.styl'
+        , fixturesPath + 'test.pug'
+        , fixturesPath + 'test-include.pug'
+        ]
 
-    reporter(stylusFiles, pugFiles, function (err, results) {
+    reporter(paths, function (err, results) {
       assert(!err, err)
       assert.equal(results.unusedTotal, 0)
       assert.equal(results.unusedStylusCount, 0)
@@ -57,10 +69,14 @@ describe('directives', function () {
   })
 
   it('should blacklist Stylus classes found in directives', function (done) {
-    var stylusFiles = [ fixturesPath + 'test*.styl', fixturesPath + 'directives-stylusblacklist.styl' ]
-      , pugFiles = [ fixturesPath + 'test.pug', fixturesPath + 'test-include.pug' ]
+    var paths =
+        [ fixturesPath + 'test*.styl'
+        , fixturesPath + 'directives-stylusblacklist.styl'
+        , fixturesPath + 'test.pug'
+        , fixturesPath + 'test-include.pug'
+        ]
 
-    reporter(stylusFiles, pugFiles, function (err, results) {
+    reporter(paths, function (err, results) {
       assert(!err, err)
       assert.equal(results.unusedTotal, 18)
       assert.equal(results.unusedStylusCount, 6)
@@ -74,10 +90,14 @@ describe('directives', function () {
   })
 
   it('should blacklist Pug classes found in directives', function (done) {
-    var stylusFiles = [ fixturesPath + 'test*.styl', fixturesPath + 'directives-pugblacklist.styl' ]
-      , pugFiles = [ fixturesPath + 'test.pug', fixturesPath + 'test-include.pug' ]
+    var paths =
+        [ fixturesPath + 'test*.styl'
+        , fixturesPath + 'directives-pugblacklist.styl'
+        , fixturesPath + 'test.pug'
+        , fixturesPath + 'test-include.pug'
+        ]
 
-    reporter(stylusFiles, pugFiles, function (err, results) {
+    reporter(paths, function (err, results) {
       assert(!err, err)
       assert.equal(results.unusedTotal, 18)
       assert.equal(results.unusedStylusCount, 6)
@@ -91,10 +111,14 @@ describe('directives', function () {
   })
 
   it('should blacklist both Stylus and Pug classes found in directives', function (done) {
-    var stylusFiles = [ fixturesPath + 'test*.styl', fixturesPath + 'directives-blacklist.styl' ]
-      , pugFiles = [ fixturesPath + 'test.pug', fixturesPath + 'test-include.pug' ]
+    var paths =
+        [ fixturesPath + 'test*.styl'
+        , fixturesPath + 'directives-blacklist.styl'
+        , fixturesPath + 'test.pug'
+        , fixturesPath + 'test-include.pug'
+        ]
 
-    reporter(stylusFiles, pugFiles, function (err, results) {
+    reporter(paths, function (err, results) {
       assert(!err, err)
       assert.equal(results.unusedTotal, 18)
       assert.equal(results.unusedStylusCount, 6)
@@ -109,13 +133,14 @@ describe('directives', function () {
   })
 
   it('should ignore invalid directives', function (done) {
-    var stylusFiles = [ fixturesPath + 'test*.styl' ]
-      , pugFiles =
-        [ fixturesPath + 'test.pug'
+    var paths =
+        [ fixturesPath + 'test*.styl'
+        , fixturesPath + 'test.pug'
         , fixturesPath + 'test-include.pug'
-        , fixturesPath + 'directives.pug' ]
+        , fixturesPath + 'directives.pug'
+        ]
 
-    reporter(stylusFiles, pugFiles, function (err, results) {
+    reporter(paths, function (err, results) {
       assert(!err, err)
       assert.equal(results.unusedTotal, 18)
       assert.equal(results.unusedStylusCount, 6)

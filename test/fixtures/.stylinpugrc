@@ -4,6 +4,7 @@
   , "node_modules/**"
   , "class-*"
   , "directives-*"
+  , "invalid.*"
   ]
 , "stylusWhitelist":
   [ "*"
