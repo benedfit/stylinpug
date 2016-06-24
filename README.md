@@ -18,14 +18,8 @@ $ npm install stylinpug -g
 ## Usage
 
 ```shell
-$ stylinpug [options] <stylusFiles...> <pugFiles...>
+$ stylinpug [options] <paths ...>
 
-```
-
-OR to find all Stylus and Pug files in current working directory
-
-```
-$ stylinpug [options] .
 ```
 
 ### options
@@ -49,8 +43,12 @@ $ npm install stylinpug --save
 ```js
 var stylinpug = require('stylinpug')
 
-  , stylusFiles = [ 'index.styl', '**/index*.styl' ]
-  , pugFiles = [ 'default.pug', 'includes/header.pug' ]
+  , paths =
+    [ 'index.styl'
+    , '**/component*.styl'
+    , 'default.pug'
+    , 'includes'
+    ]
   , options =
     { ignoreFiles: [ '**/footer.styl', '**/header.pug' ]
     , stylusWhitelist: [ 'js', 'no-svg', 'icon--*', 'is-*' ]
@@ -59,26 +57,19 @@ var stylinpug = require('stylinpug')
     , pugBlacklist: []
     }
 
-stylinpug(stylusFiles, pugFiles, options, function (err, results) {
+stylinpug(paths, options, function (err, results) {
   console.log(results.report)
 })
 ```
 
-### stylinpug(stylusFiles, pugFiles, [options,] callback)
+### stylinpug(paths, [options,] callback)
 
-#### stylusFiles
-
-*Required*
-Type: `Array`
-
-An array of `.styl` file name patterns.
-
-#### pugFiles
+#### paths
 
 *Required*
 Type: `Array`
 
-An array of `.pug` file name patterns.
+An array of file names, glob patterns, or directories.
 
 #### options
 
@@ -140,7 +131,7 @@ Options can be specified in a config file ([see example](.stylinpugrc)). If no o
 ```js
 var options = { config: '/path/to/.stylinpugrc' }
 
-stylinpug(stylusFiles, pugFiles, options, function (err, results) {
+stylinpug(paths, options, function (err, results) {
   console.log(results.report)
 })
 ```

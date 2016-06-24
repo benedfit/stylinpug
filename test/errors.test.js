@@ -6,49 +6,38 @@ var assert = require('assert')
 describe('error handling', function () {
 
   it('should error if no Stylus files specified', function (done) {
-    var stylusFiles = []
-      , pugFiles = [ fixturesPath + 'test.pug' ]
+    var paths = []
 
     assert.throws(function () {
-      reporter(stylusFiles, pugFiles, function (err, results) {
+      reporter(paths, function (err, results) {
         assert(err)
         assert.equal(results, null)
       })
     }
-    , /No Stylus files specified/)
-    done()
-  })
-
-  it('should error if no Pug files specified', function (done) {
-    var stylusFiles = [ fixturesPath + 'test.styl' ]
-      , pugFiles = []
-
-    assert.throws(function () {
-      reporter(stylusFiles, pugFiles, function (err, results) {
-        assert(err)
-        assert.equal(results, null)
-      })
-    }
-    , /No Pug files specified/)
+    , /No paths specified/)
     done()
   })
 
   it('should error if no callback specified', function (done) {
-    var stylusFiles = [ fixturesPath + 'test.styl' ]
-      , pugFiles = [ fixturesPath + 'test.pug' ]
+    var paths =
+        [ fixturesPath + 'test.styl'
+        , fixturesPath + 'test.pug'
+        ]
 
     assert.throws(function () {
-      reporter(stylusFiles, pugFiles)
+      reporter(paths)
     }
     , /Expected a callback/)
     done()
   })
 
   it('should error if no Stylus files found', function (done) {
-    var stylusFiles = [ 'nonexistent' ]
-      , pugFiles = [ fixturesPath + 'test.pug' ]
+    var paths =
+        [ 'nonexistent.styl'
+        , fixturesPath + 'test.pug'
+        ]
 
-    reporter(stylusFiles, pugFiles, function (err, results) {
+    reporter(paths, function (err, results) {
       assert(err)
       assert.equal(err, 'No Stylus files found')
       assert.equal(results, null)
@@ -57,10 +46,12 @@ describe('error handling', function () {
   })
 
   it('should error if no Pug files found', function (done) {
-    var stylusFiles = [ fixturesPath + 'test.styl' ]
-      , pugFiles = [ 'nonexistent' ]
+    var paths =
+        [ fixturesPath + 'test.styl'
+        , 'nonexistent.pug'
+        ]
 
-    reporter(stylusFiles, pugFiles, function (err, results) {
+    reporter(paths, function (err, results) {
       assert(err)
       assert.equal(err, 'No Pug files found')
       assert.equal(results, null)
@@ -69,24 +60,28 @@ describe('error handling', function () {
   })
 
   it('should error if Stylus files are invalid', function (done) {
-    var stylusFiles = [ fixturesPath + 'invalid.txt' ]
-      , pugFiles = [ fixturesPath + 'test.pug' ]
+    var paths =
+        [ fixturesPath + 'invalid.styl'
+        , fixturesPath + 'test.pug'
+        ]
 
-    reporter(stylusFiles, pugFiles, function (err, results) {
+    reporter(paths, function (err, results) {
       assert(err)
-      assert.equal(err.indexOf('Stylus file \'' + stylusFiles[0] + '\' error - ') !== -1, true)
+      assert.equal(err.indexOf('Stylus file \'' + paths[0] + '\' error - ') !== -1, true)
       assert.equal(results, null)
       done()
     })
   })
 
   it('should error if Pug files are invalid', function (done) {
-    var stylusFiles = [ fixturesPath + 'test.styl' ]
-      , pugFiles = [ fixturesPath + 'invalid.txt' ]
+    var paths =
+        [ fixturesPath + 'test.styl'
+        , fixturesPath + 'invalid.pug'
+        ]
 
-    reporter(stylusFiles, pugFiles, function (err, results) {
+    reporter(paths, function (err, results) {
       assert(err)
-      assert.equal(err.indexOf('Pug file \'' + pugFiles[0] + '\' error - ') !== -1, true)
+      assert.equal(err.indexOf('Pug file \'' + paths[1] + '\' error - ') !== -1, true)
       assert.equal(results, null)
       done()
     })
