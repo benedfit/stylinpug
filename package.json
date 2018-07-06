@@ -31,7 +31,9 @@
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha test",
     "pretest": "npm run lint && npm run inspect && npm run depcheck",
     "test": "npm run coverage",
-    "posttest": "(istanbul check-coverage --statements 90 --branches 90 --functions 100 --lines 90 && rimraf coverage) || echo Look at 'coverage/lcov-report/index.html' to find out more"
+    "posttest": "(istanbul check-coverage --statements 90 --branches 90 --functions 100 --lines 90 && rimraf coverage) || echo Look at 'coverage/lcov-report/index.html' to find out more",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "engines": {
     "node": ">=0.10.0"
@@ -45,7 +47,8 @@
     "multi-glob": "^1.0.1",
     "pug-lexer": "^2.0.2",
     "strip-json-comments": "^2.0.1",
-    "stylus": "^0.54.5"
+    "stylus": "^0.54.5",
+    "snyk": "^1.88.1"
   },
   "devDependencies": {
     "david": "^7.0.0",
@@ -58,5 +61,6 @@
     "jsinspect": "^0.8.0",
     "mocha": "^2.2.5",
     "rimraf": "^2.5.2"
-  }
+  },
+  "snyk": true
 }
