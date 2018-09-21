@@ -1,3 +1,5 @@
+NOT UNDER ACTIVE DEVELOPMENT
+
 # Stylin' Pug
 
 Check Stylus against Pug, and vice versa, for unused and blacklisted classes.
