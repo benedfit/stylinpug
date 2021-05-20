@@ -29,7 +29,7 @@
     "inspect": "jsinspect",
     "depcheck": "david --dev",
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha test",
-    "pretest": "npm run lint && npm run inspect && npm run depcheck",
+    "pretest": "npm run lint && npm run inspect",
     "test": "npm run coverage",
     "posttest": "(istanbul check-coverage --statements 90 --branches 90 --functions 100 --lines 90 && rimraf coverage) || echo Look at 'coverage/lcov-report/index.html' to find out more"
   },
